@@ -42,7 +42,7 @@ First, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result of the project.
 
 ## Design Credits
 
@@ -50,3 +50,5 @@ Design inspiration from:
 
 - [EcoTraining](https://www.ecotraining.co.za/)
 - Various Dribbble and Behance designs as referenced in the project brief
+
+
