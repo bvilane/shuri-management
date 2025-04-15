@@ -22,11 +22,13 @@ export default function Header() {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-card/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+        scrolled 
+          ? 'bg-card/95 backdrop-blur-md shadow-md py-2' 
+          : 'bg-gradient-to-b from-black/40 to-transparent backdrop-blur-[1px] py-4'
       }`}
     >
-      <div className="container flex items-center justify-between py-4">
-        <Link href="/" className="font-serif text-2xl font-bold">
+      <div className="container flex items-center justify-between">
+        <Link href="/" className="font-serif text-2xl font-bold text-white text-shadow-sm">
           Shuri
         </Link>
 
@@ -37,7 +39,7 @@ export default function Header() {
           <NavLink href="#lodges">Our Lodges</NavLink>
           <NavLink href="#testimonials">Testimonials</NavLink>
           <NavLink href="#contact">Contact</NavLink>
-          <button className="px-6 py-2 bg-primary text-white rounded hover:bg-primary/90 transition duration-300">
+          <button className="px-6 py-2 bg-primary text-white rounded hover:bg-primary/90 transition duration-300 shadow-md">
             Book a Call
           </button>
         </nav>
@@ -46,25 +48,25 @@ export default function Header() {
         <button
           className="md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
         >
-          <span className="sr-only">Toggle menu</span>
           <div
             className={`w-6 h-5 flex flex-col justify-between relative ${
               mobileMenuOpen ? 'transform' : ''
             }`}
           >
             <span
-              className={`block h-0.5 w-full bg-foreground transition-all duration-300 ${
+              className={`block h-0.5 w-full bg-white shadow-sm transition-all duration-300 ${
                 mobileMenuOpen ? 'rotate-45 absolute top-2' : ''
               }`}
             ></span>
             <span
-              className={`block h-0.5 w-full bg-foreground transition-all duration-300 ${
+              className={`block h-0.5 w-full bg-white shadow-sm transition-all duration-300 ${
                 mobileMenuOpen ? 'opacity-0' : ''
               }`}
             ></span>
             <span
-              className={`block h-0.5 w-full bg-foreground transition-all duration-300 ${
+              className={`block h-0.5 w-full bg-white shadow-sm transition-all duration-300 ${
                 mobileMenuOpen ? '-rotate-45 absolute top-2' : ''
               }`}
             ></span>
@@ -76,7 +78,7 @@ export default function Header() {
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${
           mobileMenuOpen
-            ? 'max-h-screen bg-card/95 backdrop-blur-sm'
+            ? 'max-h-screen bg-card/95 backdrop-blur-md'
             : 'max-h-0'
         }`}
       >
@@ -108,7 +110,7 @@ export default function Header() {
           >
             Contact
           </MobileNavLink>
-          <button className="mt-2 py-3 bg-primary text-white rounded hover:bg-primary/90 transition duration-300">
+          <button className="mt-2 py-3 bg-primary text-white rounded hover:bg-primary/90 transition duration-300 shadow-md">
             Book a Call
           </button>
         </nav>
@@ -127,7 +129,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="text-foreground/80 hover:text-foreground transition duration-300"
+      className="text-white/85 hover:text-white font-medium text-shadow-sm transition duration-300 hover:underline underline-offset-4 decoration-2 decoration-primary/50"
     >
       {children}
     </Link>
@@ -147,7 +149,7 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="py-2 text-lg border-b border-border/30"
+      className="py-2 text-lg border-b border-border/30 text-foreground/90 hover:text-foreground transition duration-300"
     >
       {children}
     </Link>

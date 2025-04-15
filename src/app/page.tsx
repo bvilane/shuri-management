@@ -9,6 +9,9 @@ import Process from '@/components/sections/Process';
 import Contact from '@/components/sections/Contact';
 import Newsletter from '@/components/sections/Newsletter';
 import { NewsletterPopup } from '@/components/sections/Newsletter';
+import Resources from '@/components/sections/Resources';
+import Lodges from '@/components/sections/Lodges';
+import Testimonials from '@/components/sections/Testimonials';
 
 export default function Home() {
   return (
@@ -18,8 +21,11 @@ export default function Home() {
       <About />
       <Services />
       <WhyShuri />
+      <Lodges />
+      <Testimonials />
       <Team />
       <Process />
+      <Resources />
       <Contact />
       <Newsletter useSubstack={true} />
       <NewsletterPopup />

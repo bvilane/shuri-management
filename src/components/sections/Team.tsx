@@ -1,6 +1,7 @@
 'use client';
 
 import Animation from '@/components/ui/Animation';
+import GetStartedButton from '@/components/ui/GetStartedButton';
 
 export default function Team() {
   return (
@@ -66,9 +67,7 @@ export default function Team() {
 
           <Animation type="fade-up" delay={300}>
             <div className="mt-12 flex justify-center">
-              <button className="px-8 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium">
-                Get Started
-              </button>
+              <GetStartedButton />
             </div>
           </Animation>
         </div>

@@ -12,8 +12,7 @@ export default function Footer() {
               Shuri
             </Link>
             <p className="mt-4 max-w-sm text-foreground/80">
-              Premium safari lodge management services delivering unforgettable
-              experiences in the heart of the African wilderness.
+              "It takes a village to run a legendary lodge. Welcome to that village."
             </p>
             <div className="mt-6 flex gap-4">
               <SocialIcon
@@ -49,6 +48,7 @@ export default function Footer() {
               <FooterLink href="#why-shuri">Why Shuri</FooterLink>
               <FooterLink href="#team">Our Team</FooterLink>
               <FooterLink href="#process">How It Works</FooterLink>
+              <FooterLink href="#resources">Resources</FooterLink>
               <FooterLink href="#contact">Contact</FooterLink>
             </ul>
           </div>

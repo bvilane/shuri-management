@@ -59,9 +59,6 @@ export default function Process() {
 
         <div className="mt-16 max-w-4xl mx-auto">
           <div className="relative">
-            {/* Vertical line connecting the process steps */}
-            <div className="absolute left-8 md:left-12 top-0 bottom-0 w-0.5 bg-primary/20 z-0 hidden md:block"></div>
-
             {/* Process steps */}
             <div className="space-y-12">
               {steps.map((step, index) => (
@@ -80,7 +77,6 @@ export default function Process() {
     </section>
   );
 }
-
 interface ProcessStepProps {
   number: number;
   title: string;
@@ -105,3 +101,4 @@ function ProcessStep({ number, title, description }: ProcessStepProps) {
     </div>
   );
 }
+

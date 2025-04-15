@@ -27,8 +27,15 @@ export default function About() {
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <Animation type="slide-in-left">
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
-              {/* Placeholder for an actual image */}
-              <div className="absolute inset-0 bg-[url('/images/hero-bg-placeholder.jpg')] bg-cover bg-center"></div>
+              {/* Giraffe image */}
+              <Image 
+                src="/images/giraffe.jpg" 
+                alt="Giraffe in African safari" 
+                fill 
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent"></div>
             </div>
           </Animation>
