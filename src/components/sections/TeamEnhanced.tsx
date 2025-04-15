@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Animation from '@/components/ui/Animation';
 import Button from '@/components/ui/Button';
 
@@ -123,9 +124,11 @@ export default function TeamEnhanced() {
                 hospitality operations, digital marketing, and hospitality tech.
               </p>
               <div className="mt-6">
-                <Button href="/careers" variant="primary" size="lg">
-                  View Openings
-                </Button>
+                <Link href="/careers">
+                  <Button variant="primary" size="lg">
+                    View Openings
+                  </Button>
+                </Link>
               </div>
             </div>
             </div>
