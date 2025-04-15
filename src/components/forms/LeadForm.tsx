@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Animation from '@/components/ui/Animation';
 import Image from 'next/image';
 
@@ -39,8 +38,6 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
     // Step 4: Timeline
     timeline: '',
   });
-
-  const router = useRouter();
 
   const handleAreaChange = (area: string) => {
     setFormData({

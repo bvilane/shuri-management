@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Animation from '@/components/ui/Animation';
 import GetStartedButton from '@/components/ui/GetStartedButton';
@@ -384,19 +384,5 @@ export default function Services() {
         </div>
       </div>
     </section>
-  );
-}
-
-interface ServiceItemProps {
-  title: string;
-  description: string;
-}
-
-function ServiceItem({ title, description }: ServiceItemProps) {
-  return (
-    <div className="group">
-      <h4 className="font-medium text-lg mb-2 group-hover:text-primary transition-colors duration-300">{title}</h4>
-      <p className="text-foreground/70 text-sm">{description}</p>
-    </div>
   );
 }

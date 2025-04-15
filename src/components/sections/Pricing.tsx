@@ -1,7 +1,6 @@
 'use client';
 
 import Animation from '@/components/ui/Animation';
-import Card from '@/components/ui/Card';
 
 export default function Pricing() {
   return (

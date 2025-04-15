@@ -4,8 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Animation from '@/components/ui/Animation';
 import GetStartedButton from '@/components/ui/GetStartedButton';
-import Button from '@/components/ui/Button';
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Enhanced lodge data
 const lodges = [
@@ -47,7 +45,6 @@ const lodges = [
 export default function Lodges() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [cardHoverIndex, setCardHoverIndex] = useState<number | null>(null);
 
   const nextLodge = () => {
     setActiveIndex((prevIndex) => (prevIndex === lodges.length - 1 ? 0 : prevIndex + 1));
@@ -55,14 +52,6 @@ export default function Lodges() {
 
   const prevLodge = () => {
     setActiveIndex((prevIndex) => (prevIndex === 0 ? lodges.length - 1 : prevIndex - 1));
-  };
-
-  const goToPrevLodge = () => {
-    setActiveIndex((prev) => (prev === 0 ? lodges.length - 1 : prev - 1));
-  };
-
-  const goToNextLodge = () => {
-    setActiveIndex((prev) => (prev === lodges.length - 1 ? 0 : prev + 1));
   };
 
   return (
