@@ -23,7 +23,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden">
+    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Static Hero Image Background with Overlay and Parallax */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full overflow-hidden">
@@ -51,10 +51,9 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 text-white">
-        <div className="max-w-3xl relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-transparent blur-md rounded-lg"></div>
-          <div className="relative p-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white flex justify-center">
+        <div className="max-w-3xl text-center">
+          <div className="relative p-4 sm:p-6 md:p-8">
             <span 
               className={`inline-block px-4 py-1 mb-4 rounded-full bg-primary text-white text-sm font-medium transition-all duration-700 shadow-md ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
@@ -64,7 +63,7 @@ export default function Hero() {
             </span>
             
             <h1
-              className={`text-4xl md:text-5xl lg:text-7xl font-serif font-bold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-all duration-1000 ${
+              className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-all duration-1000 ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
@@ -73,7 +72,7 @@ export default function Hero() {
             </h1>
 
             <p
-              className={`mt-6 text-lg md:text-xl max-w-xl text-white font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] transition-all duration-1000 delay-100 ${
+              className={`mt-6 mx-auto text-lg md:text-xl max-w-2xl text-white font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] transition-all duration-1000 delay-100 ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
@@ -82,7 +81,7 @@ export default function Hero() {
             </p>
 
             <div
-              className={`mt-10 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-200 ${
+              className={`mt-10 flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-200 ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >

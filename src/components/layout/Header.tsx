@@ -29,10 +29,10 @@ export default function Header() {
           : 'bg-background/20 backdrop-blur-[2px] py-4'
       }`}
     >
-      <div className="container flex items-center justify-between">
-        <Link href="/" className="inline-block">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <Link href="/" className="inline-flex items-center">
           <div className="flex items-center">
-            <div className={`relative h-10 w-10 mr-3 transition-all duration-300 ${scrolled ? 'scale-90' : ''}`}>
+            <div className={`relative h-9 w-9 sm:h-10 sm:w-10 mr-2 sm:mr-3 transition-all duration-300 ${scrolled ? 'scale-90' : ''}`}>
               <Image 
                 src="/images/logo.jpeg" 
                 alt="Shuri Logo" 
@@ -42,12 +42,12 @@ export default function Header() {
                 priority
               />
             </div>
-            <span className={`font-serif text-2xl font-bold ${scrolled ? 'text-foreground' : 'text-white'}`}>Shuri</span>
+            <span className={`font-serif text-xl sm:text-2xl font-bold hidden sm:inline ${scrolled ? 'text-foreground' : 'text-white'}`}>Shuri</span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
           <NavLink href="#about" light={!scrolled}>About</NavLink>
           <NavLink href="#services" light={!scrolled}>Services</NavLink>
           <NavLink href="#lodges" light={!scrolled}>Our Lodges</NavLink>
@@ -55,7 +55,7 @@ export default function Header() {
           <NavLink href="#team" light={!scrolled}>Our Team</NavLink>
           <NavLink href="#resources" light={!scrolled}>Resources</NavLink>
           <NavLink href="#contact" light={!scrolled}>Contact</NavLink>
-          <GetStartedButton className="whitespace-nowrap shadow-md">
+          <GetStartedButton className="whitespace-nowrap shadow-md ml-1">
             Book a Call
           </GetStartedButton>
         </nav>
