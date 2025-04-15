@@ -164,7 +164,7 @@ export default function Lodges() {
           ))}
         </div>
 
-        <Animation type="fade-up" delay={400}>
+        <Animation type="fade-up">
           <div className="mt-12 text-center">
             <p className="text-foreground/80 max-w-3xl mx-auto">
               Each lodge is selected for its exceptional quality, location, and commitment to sustainable tourism. 
