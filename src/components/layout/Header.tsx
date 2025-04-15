@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import GetStartedButton from '@/components/ui/GetStartedButton';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,25 +25,39 @@ export default function Header() {
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-card/95 backdrop-blur-md shadow-md py-2' 
-          : 'bg-gradient-to-b from-black/40 to-transparent backdrop-blur-[1px] py-4'
+          ? 'bg-background/90 backdrop-blur-sm shadow-md py-2' 
+          : 'bg-background/20 backdrop-blur-[2px] py-4'
       }`}
     >
       <div className="container flex items-center justify-between">
-        <Link href="/" className="font-serif text-2xl font-bold text-white text-shadow-sm">
-          Shuri
+        <Link href="/" className="inline-block">
+          <div className="flex items-center">
+            <div className={`relative h-10 w-10 mr-3 transition-all duration-300 ${scrolled ? 'scale-90' : ''}`}>
+              <Image 
+                src="/images/logo.jpeg" 
+                alt="Shuri Logo" 
+                width={40} 
+                height={40} 
+                className="object-contain rounded-md shadow-sm"
+                priority
+              />
+            </div>
+            <span className={`font-serif text-2xl font-bold ${scrolled ? 'text-foreground' : 'text-white'}`}>Shuri</span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <NavLink href="#about">About</NavLink>
-          <NavLink href="#services">Services</NavLink>
-          <NavLink href="#lodges">Our Lodges</NavLink>
-          <NavLink href="#testimonials">Testimonials</NavLink>
-          <NavLink href="#contact">Contact</NavLink>
-          <button className="px-6 py-2 bg-primary text-white rounded hover:bg-primary/90 transition duration-300 shadow-md">
+          <NavLink href="#about" light={!scrolled}>About</NavLink>
+          <NavLink href="#services" light={!scrolled}>Services</NavLink>
+          <NavLink href="#lodges" light={!scrolled}>Our Lodges</NavLink>
+          <NavLink href="#testimonials" light={!scrolled}>Testimonials</NavLink>
+          <NavLink href="#team" light={!scrolled}>Our Team</NavLink>
+          <NavLink href="#resources" light={!scrolled}>Resources</NavLink>
+          <NavLink href="#contact" light={!scrolled}>Contact</NavLink>
+          <GetStartedButton className="whitespace-nowrap shadow-md">
             Book a Call
-          </button>
+          </GetStartedButton>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -56,17 +72,17 @@ export default function Header() {
             }`}
           >
             <span
-              className={`block h-0.5 w-full bg-white shadow-sm transition-all duration-300 ${
+              className={`block h-0.5 w-full ${scrolled ? 'bg-foreground' : 'bg-white'} transition-all duration-300 ${
                 mobileMenuOpen ? 'rotate-45 absolute top-2' : ''
               }`}
             ></span>
             <span
-              className={`block h-0.5 w-full bg-white shadow-sm transition-all duration-300 ${
+              className={`block h-0.5 w-full ${scrolled ? 'bg-foreground' : 'bg-white'} transition-all duration-300 ${
                 mobileMenuOpen ? 'opacity-0' : ''
               }`}
             ></span>
             <span
-              className={`block h-0.5 w-full bg-white shadow-sm transition-all duration-300 ${
+              className={`block h-0.5 w-full ${scrolled ? 'bg-foreground' : 'bg-white'} transition-all duration-300 ${
                 mobileMenuOpen ? '-rotate-45 absolute top-2' : ''
               }`}
             ></span>
@@ -76,13 +92,13 @@ export default function Header() {
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
+        className={`md:hidden overflow-hidden transition-all duration-300 absolute w-full ${
           mobileMenuOpen
-            ? 'max-h-screen bg-card/95 backdrop-blur-md'
+            ? 'max-h-[500px] bg-background/95 backdrop-blur-sm shadow-md'
             : 'max-h-0'
         }`}
       >
-        <nav className="container flex flex-col py-4 gap-4">
+        <nav className="container flex flex-col py-6 gap-5">
           <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)}>
             About
           </MobileNavLink>
@@ -105,14 +121,28 @@ export default function Header() {
             Testimonials
           </MobileNavLink>
           <MobileNavLink
+            href="#team"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Our Team
+          </MobileNavLink>
+          <MobileNavLink
+            href="#resources"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Resources
+          </MobileNavLink>
+          <MobileNavLink
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact
           </MobileNavLink>
-          <button className="mt-2 py-3 bg-primary text-white rounded hover:bg-primary/90 transition duration-300 shadow-md">
-            Book a Call
-          </button>
+          <div className="mt-2">
+            <GetStartedButton className="w-full py-3 text-center">
+              Book a Call
+            </GetStartedButton>
+          </div>
         </nav>
       </div>
     </header>
@@ -122,14 +152,20 @@ export default function Header() {
 function NavLink({
   href,
   children,
+  light = false,
 }: {
   href: string;
   children: React.ReactNode;
+  light?: boolean;
 }) {
   return (
     <Link
       href={href}
-      className="text-white/85 hover:text-white font-medium text-shadow-sm transition duration-300 hover:underline underline-offset-4 decoration-2 decoration-primary/50"
+      className={`font-medium transition duration-300 hover:underline underline-offset-4 decoration-2 decoration-primary/50 ${
+        light 
+          ? 'text-white hover:text-white/90' 
+          : 'text-foreground hover:text-primary'
+      }`}
     >
       {children}
     </Link>
@@ -149,7 +185,7 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="py-2 text-lg border-b border-border/30 text-foreground/90 hover:text-foreground transition duration-300"
+      className="py-2 text-lg border-b border-border/20 text-foreground hover:text-primary transition duration-300"
     >
       {children}
     </Link>
