@@ -9,6 +9,13 @@
   --muted: #f5f5f0;
   --card: #ffffff;
   --border: #e5e5e5;
+  
+  /* New alternating section background colors */
+  --bg-primary: #fcfcfa;       /* Light cream/ivory */
+  --bg-secondary: #f7f4ed;     /* Soft warm beige */
+  --bg-tertiary: #f9f6f1;      /* Warm eggshell */
+  --bg-accent: #f5f2e8;        /* Sandy tan */
+  --bg-highlight: #f8f5ea;     /* Light khaki */
 }
 
 @theme inline {
@@ -22,19 +29,6 @@
   --color-border: var(--border);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #c9a887;
-    --secondary: #b89f84;
-    --accent: #e5c488;
-    --muted: #1a1a1a;
-    --card: #121212;
-    --border: #2a2a2a;
-  }
 }
 
 body {
@@ -93,4 +87,189 @@ h6 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/* Section background classes */
+.bg-section-1 {
+  background-color: var(--bg-primary);
+}
+
+.bg-section-2 {
+  background-color: var(--bg-secondary);
+}
+
+.bg-section-3 {
+  background-color: var(--bg-tertiary);
+}
+
+.bg-section-4 {
+  background-color: var(--bg-accent);
+}
+
+.bg-section-5 {
+  background-color: var(--bg-highlight);
+}
+
+/* Textured section backgrounds */
+.bg-section-textured-1 {
+  background-color: var(--bg-primary);
+  background-image: url('/images/texture-bg.png');
+  background-blend-mode: soft-light;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bg-section-textured-2 {
+  background-color: var(--bg-secondary);
+  background-image: url('/images/texture-bg.png');
+  background-blend-mode: soft-light;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Modern Pattern Decorations */
+
+/* Subtle Diagonal Lines */
+.pattern-diagonal-lines {
+  background-color: var(--background);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--primary) 0,
+    var(--primary) 1px,
+    transparent 0,
+    transparent 10px
+  );
+  background-size: 15px 15px;
+  background-repeat: repeat;
+  opacity: 0.05;
+}
+
+/* Dots Pattern */
+.pattern-dots {
+  background-color: transparent;
+  background-image: radial-gradient(
+    var(--primary) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+/* Safari Stripes */
+.pattern-safari-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--secondary) 0,
+    var(--secondary) 1px, 
+    transparent 1px,
+    transparent 6px
+  );
+  opacity: 0.06;
+}
+
+/* Hexagon Grid Pattern */
+.pattern-hexagons {
+  background-color: transparent;
+  background-image: 
+    linear-gradient(30deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
+    linear-gradient(150deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
+    linear-gradient(30deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
+    linear-gradient(150deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
+    linear-gradient(60deg, rgba(225, 177, 103, 0.25) 25%, transparent 25.5%, transparent 75%, rgba(225, 177, 103, 0.25) 75%, rgba(225, 177, 103, 0.25)),
+    linear-gradient(60deg, rgba(225, 177, 103, 0.25) 25%, transparent 25.5%, transparent 75%, rgba(225, 177, 103, 0.25) 75%, rgba(225, 177, 103, 0.25));
+  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+  background-size: 40px 70px;
+  opacity: 0.05;
+}
+
+/* Crosses Pattern */
+.pattern-crosses {
+  background-color: transparent;
+  background-image: 
+    linear-gradient(var(--primary) 1px, transparent 1px),
+    linear-gradient(to right, var(--primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+/* Safari Pattern - Animal Tracks */
+.pattern-animal-tracks {
+  background-color: transparent;
+  background-image: radial-gradient(
+    var(--primary) 2px,
+    transparent 2px
+  );
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.04;
+}
+
+/* Modern Wave Pattern */
+.pattern-waves {
+  background: linear-gradient(
+    45deg, 
+    transparent 48%, 
+    var(--primary) 49%, 
+    var(--primary) 51%, 
+    transparent 52%
+  );
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+/* Decorative corner patterns */
+.corner-pattern {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+}
+
+.corner-pattern-top-right {
+  top: 0;
+  right: 0;
+  background-image: radial-gradient(circle at top right, var(--primary) 2px, transparent 2px);
+  background-size: 30px 30px;
+  opacity: 0.07;
+  mask-image: linear-gradient(135deg, transparent 50%, black 50%);
+}
+
+.corner-pattern-bottom-left {
+  bottom: 0;
+  left: 0;
+  background-image: radial-gradient(circle at bottom left, var(--accent) 2px, transparent 2px);
+  background-size: 30px 30px;
+  opacity: 0.07;
+  mask-image: linear-gradient(315deg, transparent 50%, black 50%);
+}
+
+/* Horizontal line decorations */
+.line-pattern-horizontal {
+  position: relative;
+}
+
+.line-pattern-horizontal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+}
+
+.line-pattern-horizontal::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
 }

@@ -18,10 +18,11 @@ export const metadata: Metadata = {
   title: 'Shuri Safari Lodge Management',
   description:
     'Premium safari lodge management services for an unforgettable experience',
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
+  icons: [
+    { rel: 'icon', url: '/images/logo.jpeg' },
+    { rel: 'apple-touch-icon', url: '/images/logo.jpeg' },
+    { rel: 'shortcut icon', url: '/images/logo.jpeg' }
+  ]
 };
 
 interface RootLayoutProps {
@@ -30,10 +31,11 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/logo.jpeg" />
+        <link rel="shortcut icon" href="/images/logo.jpeg" />
+        <link rel="apple-touch-icon" href="/images/logo.jpeg" />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <LeadFormProvider>

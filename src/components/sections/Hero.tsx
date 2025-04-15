@@ -33,9 +33,13 @@ export default function Hero() {
             alt="Safari lodge landscape" 
             fill 
             priority
+            quality={90}
             className="object-cover object-center transform scale-110"
-            sizes="100vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
             style={{ transform: `translateY(${scrollPosition}px) scale(1.05)` }}
+            loading="eager"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQIGAwAAAAAAAAAAAAABAgMABAUGESEHEhNBUf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AslsYxJZRw3d3oGmYAoiqMKvgAAADsrjkW7SMsjGyMNwUGlEf/9k="
           />
           
           {/* Enhanced gradient overlay for text contrast */}

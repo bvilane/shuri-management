@@ -66,7 +66,7 @@ export default function About() {
 
         <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <Animation type="slide-in-left">
-            <div className="relative h-[500px] rounded-xl overflow-hidden shadow-xl group">
+            <div className="relative h-[300px] sm:h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl group">
               {/* Image gallery with two images */}
               <div className="absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100 group-hover:opacity-0">
                 <Image 
@@ -92,9 +92,9 @@ export default function About() {
               </div>
               
               {/* Image caption */}
-              <div className="absolute bottom-0 left-0 w-full p-6 z-10">
-                <h4 className="text-white text-xl font-serif font-semibold">African Wilderness & Luxury</h4>
-                <p className="text-white/80 text-sm mt-1">The perfect balance we help our clients achieve</p>
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 z-10">
+                <h4 className="text-white text-lg sm:text-xl font-serif font-semibold">African Wilderness & Luxury</h4>
+                <p className="text-white/80 text-xs sm:text-sm mt-1">The perfect balance we help our clients achieve</p>
               </div>
             </div>
           </Animation>
@@ -143,30 +143,33 @@ export default function About() {
         </div>
         
         {/* Timeline section */}
-        <div className="mt-24">
+        <div className="mt-16 sm:mt-24">
           <Animation type="fade-up">
-            <h3 className="text-2xl font-serif font-bold text-center mb-10">Our Journey</h3>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-center mb-6 sm:mb-10">Our Journey</h3>
             <div className="relative max-w-4xl mx-auto">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-primary/30"></div>
+              {/* Timeline line - hidden on mobile, shown on larger screens */}
+              <div className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-primary/30"></div>
               
-              {/* Timeline items */}
-              <div className="space-y-16">
+              {/* Timeline items - stacked on mobile, side-by-side on larger screens */}
+              <div className="space-y-8 sm:space-y-16">
                 {timeline.map((item, index) => (
                   <Animation key={item.year} type="fade-up" delay={100 * (index + 1)}>
-                    <div className={`relative flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                      <div className="flex-1"></div>
+                    <div className={`relative flex flex-col sm:flex-row ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
+                      <div className="hidden sm:block sm:flex-1"></div>
                       
-                      {/* Timeline node */}
-                      <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-10 h-10 rounded-full bg-primary flex items-center justify-center z-10">
-                        <span className="text-white font-bold text-xs">{item.year}</span>
+                      {/* Timeline node - positioned differently on mobile */}
+                      <div className="flex items-center mb-3 sm:mb-0 sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:-translate-y-1/3">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center z-10">
+                          <span className="text-white font-bold text-xs">{item.year}</span>
+                        </div>
+                        <div className="sm:hidden h-0.5 flex-grow ml-3 bg-primary/30"></div>
                       </div>
                       
-                      {/* Content */}
-                      <div className="flex-1 px-6">
-                        <div className={`bg-card/70 backdrop-blur-sm p-6 rounded-xl border border-border/10 shadow-sm ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                          <h4 className="font-serif font-bold text-lg">{item.title}</h4>
-                          <p className="text-foreground/80 mt-2">{item.description}</p>
+                      {/* Content - full width on mobile */}
+                      <div className="sm:flex-1 sm:px-6">
+                        <div className={`bg-card/70 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-border/10 shadow-sm text-left ${index % 2 === 0 ? 'sm:text-right' : 'sm:text-left'}`}>
+                          <h4 className="font-serif font-bold text-base sm:text-lg">{item.title}</h4>
+                          <p className="text-sm sm:text-base text-foreground/80 mt-2">{item.description}</p>
                         </div>
                       </div>
                     </div>
@@ -178,31 +181,31 @@ export default function About() {
         </div>
         
         {/* Value stats section */}
-        <div className="mt-24">
+        <div className="mt-16 sm:mt-24">
           <Animation type="fade-up">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-4xl font-bold mb-2">25+</div>
-                <h4 className="font-medium mb-2">Years Experience</h4>
-                <p className="text-sm text-foreground/70">Combined expertise in African safari lodge management</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+              <div className="bg-card/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
+                <div className="text-primary text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">25+</div>
+                <h4 className="font-medium text-sm sm:text-base mb-1 sm:mb-2">Years Experience</h4>
+                <p className="text-xs sm:text-sm text-foreground/70">Combined expertise in African safari lodge management</p>
               </div>
               
-              <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-4xl font-bold mb-2">12</div>
-                <h4 className="font-medium mb-2">Countries</h4>
-                <p className="text-sm text-foreground/70">Operations across major safari destinations in Africa</p>
+              <div className="bg-card/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
+                <div className="text-primary text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">12</div>
+                <h4 className="font-medium text-sm sm:text-base mb-1 sm:mb-2">Countries</h4>
+                <p className="text-xs sm:text-sm text-foreground/70">Operations across major safari destinations in Africa</p>
               </div>
               
-              <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-4xl font-bold mb-2">35+</div>
-                <h4 className="font-medium mb-2">Lodges Managed</h4>
-                <p className="text-sm text-foreground/70">From boutique camps to luxury safari properties</p>
+              <div className="bg-card/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
+                <div className="text-primary text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">35+</div>
+                <h4 className="font-medium text-sm sm:text-base mb-1 sm:mb-2">Lodges Managed</h4>
+                <p className="text-xs sm:text-sm text-foreground/70">From boutique camps to luxury safari properties</p>
               </div>
               
-              <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-4xl font-bold mb-2">92%</div>
-                <h4 className="font-medium mb-2">Occupancy Increase</h4>
-                <p className="text-sm text-foreground/70">Average improvement for our client properties</p>
+              <div className="bg-card/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
+                <div className="text-primary text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">1.5M+</div>
+                <h4 className="font-medium text-sm sm:text-base mb-1 sm:mb-2">Happy Guests</h4>
+                <p className="text-xs sm:text-sm text-foreground/70">Unforgettable safari experiences delivered globally</p>
               </div>
             </div>
           </Animation>

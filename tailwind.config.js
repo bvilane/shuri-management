@@ -5,6 +5,8 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // Setting darkMode to 'class' and not using it - site will always use light theme
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
