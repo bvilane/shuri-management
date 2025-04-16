@@ -94,10 +94,10 @@ export default function Header() {
       >
         <div className="h-full flex flex-col">
           {/* Mobile menu header with logo */}
-          <div className="border-b border-primary/20 py-6 px-6 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
+          <div className="border-b border-primary/20 py-4 px-4 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="relative h-12 w-12 mr-3">
+                <div className="relative h-10 w-10 mr-3">
                   <div className="absolute inset-0 bg-primary/10 rounded-md blur-md transform -rotate-3"></div>
                   <Image 
                     src="/images/logo.jpeg" 
@@ -111,10 +111,10 @@ export default function Header() {
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-full bg-white/80 hover:bg-primary/10 active:bg-primary/20 transition-all duration-300 shadow-md hover:shadow-lg"
+                className="p-2.5 rounded-full bg-primary shadow-md hover:shadow-lg transition-all duration-300"
                 aria-label="Close menu"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -123,8 +123,8 @@ export default function Header() {
           </div>
           
           {/* Mobile menu links */}
-          <nav className="flex-1 overflow-y-auto py-6 px-4 bg-white">
-            <div className="flex flex-col gap-4">
+          <nav className="flex-1 overflow-y-auto py-4 px-4 bg-white">
+            <div className="flex flex-col gap-3">
               <div className="py-1.5 px-2 font-medium text-sm uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
               <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)} icon="info">
                 About
@@ -139,7 +139,7 @@ export default function Header() {
                 Testimonials
               </MobileNavLink>
               
-              <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent my-3"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent my-2"></div>
               <div className="py-1.5 px-2 font-medium text-sm uppercase tracking-wider text-primary/70 font-sans">Company</div>
               
               <MobileNavLink href="#team" onClick={() => setMobileMenuOpen(false)} icon="users">
@@ -155,10 +155,10 @@ export default function Header() {
           </nav>
           
           {/* Mobile menu footer */}
-          <div className="border-t border-primary/20 py-6 px-4 bg-gradient-to-t from-primary/15 via-primary/10 to-white backdrop-blur-md">
+          <div className="border-t border-primary/20 p-4 bg-gradient-to-t from-primary/15 via-primary/10 to-white">
             <div className="mx-auto max-w-md">
-              <p className="text-center text-primary/70 mb-4 font-medium font-sans">Ready to transform your property management?</p>
-              <GetStartedButton className="w-full py-3.5 text-center text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98] mb-safe">
+              <p className="text-center text-primary/70 mb-3 font-medium font-sans">Ready to transform your property management?</p>
+              <GetStartedButton className="w-full py-3 text-center text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
                 Book a Call
               </GetStartedButton>
             </div>
