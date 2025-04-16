@@ -44,12 +44,12 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <Link href="/" className="inline-flex items-center">
           <div className="flex items-center">
-            <div className={`relative h-12 w-12 sm:h-14 sm:w-14 mr-2 sm:mr-3 transition-all duration-300 ${scrolled ? 'scale-95' : ''}`}>
+            <div className={`relative h-11 w-11 sm:h-14 sm:w-14 mr-2 sm:mr-3 transition-all duration-300 ${scrolled ? 'scale-95' : ''}`}>
               <Image 
                 src="/images/logo.jpeg" 
                 alt="Shuri Logo" 
-                width={70} 
-                height={70} 
+                width={45} 
+                height={45} 
                 className="object-contain rounded-md shadow-sm"
                 priority
               />
@@ -74,11 +74,11 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden relative z-[60] transition-all duration-300 p-3 rounded-lg bg-primary shadow-md hover:shadow-lg flex items-center justify-center ${mobileMenuOpen ? 'opacity-0' : ''} ${scrolled ? 'h-12 w-12' : 'h-14 w-14'}`}
+          className={`md:hidden relative z-[60] transition-all duration-300 p-2.5 rounded-lg bg-primary shadow-md hover:shadow-lg flex items-center justify-center ${mobileMenuOpen ? 'opacity-0' : ''} ${scrolled ? 'h-11 w-11' : 'h-11 w-11'}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <div className={`w-7 h-6 flex flex-col justify-between relative transition-all duration-300 ${scrolled ? 'scale-90' : ''}`}>
+          <div className={`w-6 h-5 flex flex-col justify-between relative transition-all duration-300 ${scrolled ? 'scale-90' : ''}`}>
             <span className="block h-0.5 w-full bg-white transition-all duration-300 origin-left"></span>
             <span className="block h-0.5 w-3/4 bg-white transition-all duration-300"></span>
             <span className="block h-0.5 w-1/2 bg-white transition-all duration-300 origin-right ml-auto"></span>
@@ -97,13 +97,13 @@ export default function Header() {
           <div className="border-b border-primary/20 py-4 px-4 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="relative h-14 w-14 mr-3 overflow-visible">
+                <div className="relative h-11 w-11 mr-3 overflow-visible">
                   <div className="absolute inset-0 bg-primary/10 rounded-md blur-md transform -rotate-3 scale-110"></div>
                   <Image 
                     src="/images/logo.jpeg" 
                     alt="Shuri Logo" 
-                    width={65} 
-                    height={65} 
+                    width={45} 
+                    height={45} 
                     className="object-contain rounded-md shadow-sm relative scale-110"
                   />
                 </div>
@@ -111,10 +111,10 @@ export default function Header() {
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-lg bg-primary shadow-md hover:shadow-lg transition-all duration-300 h-14 w-14 flex items-center justify-center"
+                className="p-2.5 rounded-lg bg-primary shadow-md hover:shadow-lg transition-all duration-300 h-11 w-11 flex items-center justify-center"
                 aria-label="Close menu"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
