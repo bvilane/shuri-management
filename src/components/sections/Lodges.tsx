@@ -81,20 +81,20 @@ export default function Lodges() {
         <Animation type="fade-up">
           {/* Premium section title with safari styling */}
           <div className="flex flex-col items-center mb-12">
-            <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">EXPLORE OUR PORTFOLIO</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center max-w-3xl mx-auto leading-tight">
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 sm:mb-4">EXPLORE OUR PORTFOLIO</span>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-center max-w-3xl mx-auto leading-tight">
               Our Premier Safari Lodges
             </h2>
-            <span className="block w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mt-6"></span>
-            <p className="mt-6 text-center max-w-2xl mx-auto text-foreground/70 text-lg">
+            <span className="block w-16 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-primary to-transparent mt-4 sm:mt-6"></span>
+            <p className="mt-4 sm:mt-6 text-center max-w-2xl mx-auto text-foreground/70 text-sm sm:text-lg">
               Discover our handpicked collection of luxury safari lodges, each offering a unique blend of comfort, adventure, and authentic African experiences.
             </p>
           </div>
           
           {/* Featured Lodge - Enhanced with premium effects */}
-          <div className="mt-16 max-w-6xl mx-auto">
+          <div className="mt-8 sm:mt-16 max-w-6xl mx-auto">
             <div className="relative rounded-xl overflow-hidden shadow-xl safari-image group">
-              <div className="aspect-[16/9] relative">
+              <div className="aspect-[16/10] sm:aspect-[16/9] relative">
                 {/* Placeholder gradient that shows while image is loading */}
                 <div className={`absolute inset-0 bg-gradient-to-b from-[#725540] to-[#3a2a1d] transition-opacity duration-500 ${
                   imagesLoaded[activeIndex] ? 'opacity-0' : 'opacity-100'
@@ -120,58 +120,58 @@ export default function Lodges() {
               </div>
               
               {/* Premium rating badge */}
-              <div className="absolute top-4 left-4 flex items-center gap-1 bg-black/30 backdrop-blur-sm py-1.5 px-4 rounded-full border border-white/10">
-                <svg className="w-4 h-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+              <div className="absolute top-2 sm:top-4 left-2 sm:left-4 flex items-center gap-1 bg-black/30 backdrop-blur-sm py-1 sm:py-1.5 px-2 sm:px-4 rounded-full border border-white/10">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="text-white text-sm font-medium">{lodges[activeIndex].rating}</span>
-                <span className="text-white/50 text-sm mx-1">•</span>
-                <span className="text-white/80 text-sm">{lodges[activeIndex].reviewCount} reviews</span>
+                <span className="text-white text-xs sm:text-sm font-medium">{lodges[activeIndex].rating}</span>
+                <span className="text-white/50 text-xs sm:text-sm mx-1 hidden sm:inline">•</span>
+                <span className="text-white/80 text-xs sm:text-sm hidden sm:inline">{lodges[activeIndex].reviewCount} reviews</span>
               </div>
               
               {/* Enhanced navigation arrows */}
               <button 
                 onClick={prevLodge}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110"
                 aria-label="Previous lodge"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
               
               <button 
                 onClick={nextLodge}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110"
                 aria-label="Next lodge"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
               
               {/* Status indicator */}
-              <div className="absolute top-4 right-4 flex items-center gap-1 bg-black/30 backdrop-blur-sm py-1.5 px-4 rounded-full border border-white/10">
-                <span className="text-white text-sm font-medium">{activeIndex + 1}</span>
-                <span className="text-white/50 text-sm">/</span>
-                <span className="text-white/50 text-sm">{lodges.length}</span>
+              <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex items-center gap-1 bg-black/30 backdrop-blur-sm py-1 sm:py-1.5 px-2 sm:px-4 rounded-full border border-white/10">
+                <span className="text-white text-xs sm:text-sm font-medium">{activeIndex + 1}</span>
+                <span className="text-white/50 text-xs sm:text-sm">/</span>
+                <span className="text-white/50 text-xs sm:text-sm">{lodges.length}</span>
               </div>
               
               {/* Enhanced content display */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                <h3 className="text-2xl md:text-4xl font-serif font-bold text-shadow-lg mb-2 reveal-item">
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 md:p-8 text-white">
+                <h3 className="text-xl sm:text-2xl md:text-4xl font-serif font-bold text-shadow-lg mb-1 sm:mb-2 reveal-item">
                   {lodges[activeIndex].name}
                 </h3>
                 <div className="flex items-center reveal-item reveal-delay-1">
-                  <svg className="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
-                  <p className="text-white/90 font-medium text-shadow-sm">
+                  <p className="text-white/90 font-medium text-shadow-sm text-xs sm:text-base">
                     {lodges[activeIndex].location}
                   </p>
                 </div>
-                <p className="mt-3 max-w-2xl text-white/80 text-shadow-sm hidden md:block reveal-item reveal-delay-2">
+                <p className="mt-2 sm:mt-3 max-w-2xl text-white/80 text-shadow-sm text-xs sm:text-sm md:text-base hidden sm:block reveal-item reveal-delay-2">
                   {lodges[activeIndex].description}
                 </p>
                 
