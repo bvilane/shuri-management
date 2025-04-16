@@ -124,7 +124,7 @@ export default function Header() {
           
           {/* Mobile menu links - Reduced spacing */}
           <nav className="flex-1 overflow-y-auto py-2 px-4 bg-white">
-            <div className="flex flex-col gap-1 pb-14">
+            <div className="flex flex-col gap-1 mb-1">
               <div className="py-0.5 px-2 font-medium text-xs uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
               <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)} icon="info">
                 About
@@ -151,15 +151,17 @@ export default function Header() {
               <MobileNavLink href="#contact" onClick={() => setMobileMenuOpen(false)} icon="mail">
                 Contact
               </MobileNavLink>
+              
+              {/* Call to action button - Positioned within scrollable area */}
+              <div className="mt-5 mb-4 px-2">
+                <div className="border-t border-primary/20 pt-4 pb-2">
+                  <GetStartedButton className="w-full py-2.5 text-center text-base shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]">
+                    Book a Call
+                  </GetStartedButton>
+                </div>
+              </div>
             </div>
           </nav>
-          
-          {/* Mobile menu footer - Fixed to bottom */}
-          <div className="border-t border-primary/20 py-2 px-4 bg-white sticky bottom-0 left-0 right-0 shadow-md z-20">
-            <GetStartedButton className="w-full py-2 text-center text-base shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]">
-              Book a Call
-            </GetStartedButton>
-          </div>
         </div>
       </div>
     </header>
@@ -242,29 +244,29 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="group mb-0.5"
+      className="group mb-1"
     >
-      <div className="relative overflow-hidden rounded-lg bg-white/70 border border-primary/10 shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="relative overflow-hidden rounded-lg bg-white/70 border border-primary/10 shadow-md hover:shadow-lg transition-all duration-300">
         
-        <div className="relative p-1 flex items-center gap-2">
+        <div className="relative p-2 flex items-center gap-3">
           {/* Icon container with glow effect */}
           <div className="relative">
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-md transform scale-110"></div>
-            <div className="relative flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
+            <div className="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
               {icons[icon as keyof typeof icons]}
             </div>
           </div>
           
           {/* Text container */}
           <div className="flex flex-col flex-1">
-            <span className="text-sm font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide">
+            <span className="text-base font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide">
               {children}
             </span>
           </div>
           
           {/* Right arrow indicator */}
           <div className="text-primary/40 group-hover:text-primary/70 transition-colors duration-300 transform translate-x-0 group-hover:translate-x-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 18l6-6-6-6"/>
             </svg>
           </div>
