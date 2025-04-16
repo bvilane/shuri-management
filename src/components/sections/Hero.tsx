@@ -66,7 +66,7 @@ export default function Hero() {
         <div className="max-w-3xl text-center">
           <div className="relative p-4 sm:p-6 md:p-8">
             <span 
-              className={`inline-block px-4 py-1 mb-4 rounded-full bg-primary text-white text-sm font-medium transition-all duration-700 shadow-md ${
+              className={`inline-block px-4 py-1 mb-4 rounded-full bg-primary text-white text-xs sm:text-sm font-medium transition-all duration-700 shadow-md ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
@@ -74,7 +74,7 @@ export default function Hero() {
             </span>
             
             <h1
-              className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-all duration-1000 ${
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-all duration-1000 ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
@@ -83,7 +83,7 @@ export default function Hero() {
             </h1>
 
             <p
-              className={`mt-6 mx-auto text-lg md:text-xl max-w-2xl text-white font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] transition-all duration-1000 delay-100 ${
+              className={`mt-6 mx-auto text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl text-white font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] transition-all duration-1000 delay-100 ${
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
@@ -96,12 +96,12 @@ export default function Hero() {
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
-              <GetStartedButton className="shadow-lg hover:shadow-xl text-lg px-8 py-3">
+              <GetStartedButton className="shadow-lg hover:shadow-xl text-base sm:text-lg px-6 sm:px-8 py-2.5 sm:py-3">
                 Book a Call
               </GetStartedButton>
               <a 
                 href="#about" 
-                className="inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white border-2 border-white/30 backdrop-blur-sm rounded-md hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg font-medium text-white border-2 border-white/30 backdrop-blur-sm rounded-md hover:bg-white/10 transition-all duration-300"
               >
                 Learn More
               </a>
@@ -112,14 +112,14 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-white text-sm mb-2 font-medium text-shadow-sm">Explore More</span>
+        <span className="text-white text-xs sm:text-sm mb-2 font-medium text-shadow-sm">Explore More</span>
         <svg
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="stroke-white drop-shadow-lg"
+          className="stroke-white drop-shadow-lg sm:w-6 sm:h-6"
         >
           <path
             d="M12 5L12 19M12 19L5 12M12 19L19 12"

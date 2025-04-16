@@ -2,12 +2,71 @@
 
 import Animation from '@/components/ui/Animation';
 import GetStartedButton from '@/components/ui/GetStartedButton';
+import { CheckCircle2, X, ArrowRight } from 'lucide-react';
+
+// Define key differences
+const keyDifferences = [
+  {
+    id: 1,
+    title: "Results-Based Pricing",
+    description: "Pay when you see actual performance improvements.",
+    traditional: "Fixed monthly retainers regardless of results",
+    shuri: "Performance-based pricing tied to occupancy & revenue",
+    icon: "💰"
+  },
+  {
+    id: 2,
+    title: "All-in-One Solution",
+    description: "One team for all your management and marketing needs.",
+    traditional: "Multiple vendors with fragmented communication",
+    shuri: "Single point of contact for operations, marketing & more",
+    icon: "🔄"
+  },
+  {
+    id: 3,
+    title: "Safari-Specific Expertise",
+    description: "Specialists who understand the unique safari industry.",
+    traditional: "Generic hospitality consultants adapting to safari",
+    shuri: "Team with extensive on-the-ground safari experience",
+    icon: "🦁"
+  },
+  {
+    id: 4,
+    title: "24/7 Responsive Support",
+    description: "Always available when you need us, regardless of time zone.",
+    traditional: "Limited office hours support with delayed responses",
+    shuri: "Round-the-clock support from global team members",
+    icon: "🌍"
+  }
+];
+
+// Define additional benefits
+const additionalBenefits = [
+  {
+    id: 1,
+    title: "Tech-Enabled Solutions",
+    description: "Custom technology that works even in remote areas with limited connectivity",
+    icon: "💻"
+  },
+  {
+    id: 2,
+    title: "Conservation Integration",
+    description: "Strategies that balance commercial success with conservation efforts",
+    icon: "🌿"
+  },
+  {
+    id: 3,
+    title: "Community Development",
+    description: "Programs that uplift surrounding communities while growing your business",
+    icon: "👥"
+  }
+];
 
 export default function WhyShuri() {
   return (
     <section
       id="why-shuri"
-      className="py-24 bg-background relative overflow-hidden"
+      className="py-24 bg-white relative overflow-hidden"
     >
       {/* Background accents */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
@@ -15,134 +74,241 @@ export default function WhyShuri() {
 
       <div className="container relative z-10">
         <Animation type="fade-up">
-          <span className="block text-center text-primary font-medium mb-3">WHY CHOOSE US</span>
+          <div className="flex justify-center">
+            <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">WHY CHOOSE US</span>
+          </div>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-center">
             The Shuri Difference
           </h2>
-          <p className="mt-4 text-xl text-center text-foreground/80 max-w-2xl mx-auto">
-            Our Unique Approach to Safari Lodge Management
-          </p>
-          <p className="mt-6 text-center max-w-3xl mx-auto text-foreground/70">
-            We keep it simple, smart, and tied to results—focusing on what truly matters for your lodge's success.
+          <p className="mt-4 text-lg md:text-xl text-center text-foreground/80 max-w-2xl mx-auto">
+            How We Stand Apart From Traditional Management Companies
           </p>
         </Animation>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Comparison Table Section */}
+        <div className="mt-16 max-w-6xl mx-auto">
           <Animation type="fade-up" delay={100}>
-            <div className="group bg-card border border-border/50 hover:border-primary/20 rounded-xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col">
-              <div className="w-14 h-14 bg-primary/10 rounded-lg mb-6 flex items-center justify-center text-primary">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                  <line x1="9" y1="9" x2="9.01" y2="9" />
-                  <line x1="15" y1="9" x2="15.01" y2="9" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                Pay When You See Results
-              </h3>
-              <p className="text-foreground/70 flex-grow">
-                We structure many of our services with flexible pricing so you're not paying upfront for things that don't deliver. Everything we do ties back to your guest experience, occupancy rates, and profitability.
-              </p>
+            {/* Mobile Comparison Cards - Visible only on small screens */}
+            <div className="block md:hidden space-y-6">
+              {keyDifferences.map((difference, index) => (
+                <div key={difference.id} className="bg-white rounded-xl overflow-hidden shadow-md border border-primary/5">
+                  <div className="bg-primary text-white p-4 flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-xl shrink-0">
+                      {difference.icon}
+                    </div>
+                    <h3 className="font-serif font-bold">{difference.title}</h3>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-sm text-foreground/70 mb-4">{difference.description}</p>
+                    
+                    <div className="space-y-3">
+                      <div className="bg-muted/10 rounded-lg p-3">
+                        <div className="flex items-start gap-2">
+                          <X className="shrink-0 text-red-500 mt-0.5" size={16} />
+                          <div>
+                            <p className="text-xs font-medium text-foreground/60 mb-1">Traditional Approach:</p>
+                            <p className="text-sm">{difference.traditional}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-primary/5 rounded-lg p-3">
+                        <div className="flex items-start gap-2">
+                          <CheckCircle2 className="shrink-0 text-primary mt-0.5" size={16} />
+                          <div>
+                            <p className="text-xs font-medium text-primary/60 mb-1">Shuri Approach:</p>
+                            <p className="text-sm font-medium">{difference.shuri}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          </Animation>
-
-          <Animation type="fade-up" delay={200}>
-            <div className="group bg-card border border-border/50 hover:border-primary/20 rounded-xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col">
-              <div className="w-14 h-14 bg-primary/10 rounded-lg mb-6 flex items-center justify-center text-primary">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
+            
+            {/* Desktop Comparison Table - Hidden on small screens */}
+            <div className="hidden md:block bg-muted/30 rounded-2xl overflow-hidden shadow-lg border border-primary/5">
+              {/* Table Header */}
+              <div className="grid grid-cols-7 bg-primary text-white">
+                <div className="col-span-3 p-6 font-serif text-xl font-medium">Key Differences</div>
+                <div className="col-span-2 p-6 font-serif text-xl font-medium text-center border-l border-white/20">
+                  <div className="flex flex-col items-center">
+                    <span>Traditional</span>
+                    <span className="text-sm font-normal opacity-80">Management Companies</span>
+                  </div>
+                </div>
+                <div className="col-span-2 p-6 font-serif text-xl font-medium text-center bg-primary-dark border-l border-white/20">
+                  <div className="flex flex-col items-center">
+                    <span>Shuri</span>
+                    <span className="text-sm font-normal opacity-80">Our Approach</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                All-in-One Lodge Partner
-              </h3>
-              <p className="text-foreground/70 flex-grow">
-                No more juggling 5 agencies and vendors. We handle operations, marketing, and support under one roof. One team. One dashboard. One point of contact for everything your lodge needs.
-              </p>
-            </div>
-          </Animation>
 
-          <Animation type="fade-up" delay={300}>
-            <div className="group bg-card border border-border/50 hover:border-primary/20 rounded-xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col">
-              <div className="w-14 h-14 bg-primary/10 rounded-lg mb-6 flex items-center justify-center text-primary">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                Built by Lodge Operators
-              </h3>
-              <p className="text-foreground/70 flex-grow">
-                Our team has managed, marketed, and grown some of Africa's most iconic lodges. We know how this industry works because we've lived it, facing the same challenges you do every day.
-              </p>
-            </div>
-          </Animation>
-
-          <Animation type="fade-up" delay={400}>
-            <div className="group bg-card border border-border/50 hover:border-primary/20 rounded-xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col">
-              <div className="w-14 h-14 bg-primary/10 rounded-lg mb-6 flex items-center justify-center text-primary">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                </svg>
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                24/7 Support System
-              </h3>
-              <p className="text-foreground/70 flex-grow">
-                We're hands-on, responsive, and proactive. With teams across multiple time zones, we provide round-the-clock support when issues arise, understanding both local challenges and global standards.
-              </p>
-            </div>
-          </Animation>
-
-          <Animation type="fade-up" delay={500}>
-            <div className="group bg-card border border-border/50 hover:border-primary/20 rounded-xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col">
-              <div className="w-14 h-14 bg-primary/10 rounded-lg mb-6 flex items-center justify-center text-primary">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                Tech-Enabled Solutions
-              </h3>
-              <p className="text-foreground/70 flex-grow">
-                We leverage the latest technology to streamline operations, improve guest experiences, and maximize revenue—while ensuring these solutions work reliably even in remote locations with limited connectivity.
-              </p>
-            </div>
-          </Animation>
-
-          <Animation type="fade-up" delay={600}>
-            <div className="group bg-card border border-border/50 hover:border-primary/20 rounded-xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col">
-              <div className="w-14 h-14 bg-primary/10 rounded-lg mb-6 flex items-center justify-center text-primary">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
-                </svg>
-              </div>
-              <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                Conservation & Community
-              </h3>
-              <p className="text-foreground/70 flex-grow">
-                We help you grow while uplifting surrounding communities through job creation and sustainable initiatives. Our approach balances commercial success with conservation efforts and community development.
-              </p>
+              {/* Table Rows */}
+              {keyDifferences.map((difference, index) => (
+                <div key={difference.id} className={`grid grid-cols-7 ${index % 2 === 0 ? 'bg-white' : 'bg-muted/10'}`}>
+                  <div className="col-span-3 p-6 border-b border-muted/20">
+                    <div className="flex gap-4 items-center">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-2xl shrink-0">
+                        {difference.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-serif font-bold mb-1">{difference.title}</h3>
+                        <p className="text-sm text-foreground/70">{difference.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-2 p-6 flex items-center border-l border-b border-muted/20">
+                    <div className="flex items-start gap-3">
+                      <X className="shrink-0 text-red-500 mt-0.5" size={18} />
+                      <p className="text-sm text-foreground/80">{difference.traditional}</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 p-6 flex items-center border-l border-b border-muted/20 bg-primary/5">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="shrink-0 text-primary mt-0.5" size={18} />
+                      <p className="text-sm font-medium">{difference.shuri}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </Animation>
         </div>
 
-        <Animation type="fade-up" delay={800}>
-          <div className="mt-16 text-center">
-            <h3 className="text-2xl font-serif font-bold mb-4">Ready to elevate your safari lodge?</h3>
-            <p className="mb-8 text-foreground/70 max-w-2xl mx-auto">
-              Book a free consultation to discuss your specific needs and how we can help your property thrive.
-            </p>
-            <GetStartedButton className="shadow-lg hover:shadow-xl text-lg px-10 py-3">
-              Schedule Your Free Consultation
-            </GetStartedButton>
+        {/* Additional Benefits */}
+        <div className="mt-16 md:mt-24 max-w-6xl mx-auto">
+          <Animation type="fade-up" delay={300}>
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-8 md:mb-12">
+              Additional Benefits
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {additionalBenefits.map((benefit) => (
+                <div key={benefit.id} className="group relative overflow-hidden bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full">
+                  {/* Pattern Background */}
+                  <div className="absolute inset-0 opacity-5 bg-[url('/images/pattern-bg.png')] mix-blend-overlay"></div>
+                  {/* Decorative Element */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                  
+                  <div className="relative p-6 md:p-8">
+                    <div className="w-14 h-14 md:w-16 md:h-16 bg-primary/10 rounded-lg mb-4 md:mb-6 flex items-center justify-center text-2xl md:text-3xl">
+                      {benefit.icon}
+                    </div>
+                    <h4 className="text-lg md:text-xl font-serif font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors duration-300">
+                      {benefit.title}
+                    </h4>
+                    <p className="text-sm md:text-base text-foreground/70">
+                      {benefit.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Animation>
+        </div>
+
+        {/* Testimonial Highlight */}
+        <Animation type="fade-up" delay={400}>
+          <div className="mt-16 md:mt-24 max-w-5xl mx-auto bg-primary/5 rounded-2xl p-6 md:p-10 relative overflow-hidden">
+            {/* Quote decorations */}
+            <div className="absolute top-3 left-3 md:top-5 md:left-5 text-primary/20 text-5xl md:text-8xl font-serif">❝</div>
+            <div className="absolute bottom-3 right-3 md:bottom-5 md:right-5 text-primary/20 text-5xl md:text-8xl font-serif">❞</div>
+            
+            <div className="relative">
+              <blockquote className="text-lg md:text-2xl font-serif text-center italic text-foreground/90 mb-4 md:mb-6">
+                "The Shuri team transformed our lodge from struggling with occupancy to consistently booked. Their hands-on approach and safari-specific expertise made all the difference."
+              </blockquote>
+              <div className="text-center">
+                <p className="font-bold">Lodge Owner</p>
+                <p className="text-sm text-foreground/70">Luxury Safari Property</p>
+              </div>
+            </div>
+          </div>
+        </Animation>
+
+        {/* Why Clients Choose Us */}
+        <Animation type="fade-up" delay={500}>
+          <div className="mt-16 md:mt-24 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-6 md:mb-10">
+              Why Lodge Owners Choose Shuri
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-y-8 gap-x-6 md:gap-x-16 w-full">
+              <div className="flex gap-3 md:gap-4 w-full">
+                <div className="shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-base md:text-lg mb-1">Occupancy Focused</h4>
+                  <p className="text-sm text-foreground/70">We know emptier lodges mean lost revenue that can never be recovered</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 md:gap-4 w-full">
+                <div className="shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-base md:text-lg mb-1">Safari Specialists</h4>
+                  <p className="text-sm text-foreground/70">Not generalists trying to adapt—we've lived and breathed safari for decades</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 md:gap-4 w-full">
+                <div className="shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-base md:text-lg mb-1">Owner-Centered Approach</h4>
+                  <p className="text-sm text-foreground/70">We work for you, not for commission-paying booking platforms</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 md:gap-4 w-full">
+                <div className="shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-base md:text-lg mb-1">Transparent Reporting</h4>
+                  <p className="text-sm text-foreground/70">Clear metrics and regular updates, no hidden numbers or surprise fees</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Animation>
+
+        {/* CTA Section */}
+        <Animation type="fade-up" delay={600}>
+          <div className="mt-16 md:mt-24 max-w-5xl mx-auto bg-gradient-to-r from-primary/20 to-primary/5 rounded-2xl p-6 md:p-10">
+            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+              <div className="w-full md:w-2/3">
+                <h3 className="text-xl md:text-3xl font-serif font-bold mb-3 md:mb-4 text-center md:text-left">
+                  Ready to experience the difference?
+                </h3>
+                <p className="mb-4 md:mb-6 text-foreground/80 text-center md:text-left text-sm md:text-base">
+                  Book a free consultation with our team to discuss your lodge's specific needs and discover how our unique approach can transform your business.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                  <GetStartedButton className="w-full sm:w-auto shadow-lg hover:shadow-xl text-base md:text-lg px-6 md:px-8 py-3">
+                    Schedule Free Consultation
+                  </GetStartedButton>
+                  <a 
+                    href="#case-studies"
+                    className="w-full sm:w-auto bg-white/70 hover:bg-white text-primary border border-primary/20 shadow-sm px-6 md:px-8 py-3 rounded-md font-medium transition-all duration-300 text-center"
+                  >
+                    View Success Stories
+                  </a>
+                </div>
+              </div>
+              <div className="md:w-1/3 flex justify-center mt-6 md:mt-0">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary/20 flex items-center justify-center text-4xl md:text-6xl">
+                  🦒
+                </div>
+              </div>
+            </div>
           </div>
         </Animation>
       </div>

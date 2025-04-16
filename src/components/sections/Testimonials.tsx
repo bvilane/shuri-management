@@ -149,7 +149,9 @@ export default function Testimonials() {
       
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
-          <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 mx-auto text-center">HEAR FROM OUR COMMUNITY</span>
+          <div className="flex justify-center">
+            <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">HEAR FROM OUR COMMUNITY</span>
+          </div>
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-center">
             Testimonials
           </h2>

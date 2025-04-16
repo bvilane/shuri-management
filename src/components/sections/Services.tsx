@@ -166,7 +166,9 @@ export default function Services() {
       
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
-          <span className="inline-block px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 mx-auto text-center">OUR EXPERTISE</span>
+          <div className="flex justify-center">
+            <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">OUR EXPERTISE</span>
+          </div>
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-center">
             Services & Solutions
           </h2>
@@ -179,12 +181,12 @@ export default function Services() {
 
         {/* Enhanced Service Category Tabs with Illustrations */}
         <div className="mt-10 md:mt-16 max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full">
             {serviceCategories.map((category) => (
               <Animation key={category.id} type="fade-up" delay={100}>
                 <button 
                   onClick={() => toggleCategory(category.id)}
-                  className={`group flex flex-col items-center text-center p-4 md:p-6 rounded-xl transition-all duration-500 border-2 touch-manipulation ${
+                  className={`w-full group flex flex-col items-center text-center p-4 md:p-6 rounded-xl transition-all duration-500 border-2 touch-manipulation ${
                     expandedCategory === category.id 
                       ? 'bg-primary text-white border-primary/90 shadow-lg shadow-primary/20' 
                       : 'bg-card border-border/20 hover:border-primary/30 hover:shadow-md active:bg-card/80'
