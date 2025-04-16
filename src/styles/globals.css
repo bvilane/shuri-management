@@ -10,12 +10,24 @@
   --card: #ffffff;
   --border: #e5e5e5;
   
-  /* New alternating section background colors */
-  --bg-primary: #fcfcfa;       /* Light cream/ivory */
-  --bg-secondary: #f7f4ed;     /* Soft warm beige */
-  --bg-tertiary: #f9f6f1;      /* Warm eggshell */
-  --bg-accent: #f5f2e8;        /* Sandy tan */
-  --bg-highlight: #f8f5ea;     /* Light khaki */
+  /* Enhanced alternating section background colors with stronger contrasts */
+  --bg-primary-light: #fefdfb;       /* Light cream/ivory - lighter - intensified */
+  --bg-primary-dark: #e1dbc9;        /* Light cream/ivory - darker - intensified */
+  
+  --bg-secondary-light: #faf8f5;     /* Soft warm beige - lighter - intensified */
+  --bg-secondary-mid: #e9dbc3;       /* Soft warm beige - middle tone - intensified */
+  --bg-secondary-dark: #d8c9ac;      /* Soft warm beige - darker - intensified */
+  
+  --bg-tertiary-light: #fcfaf8;      /* Warm eggshell - lighter - intensified */
+  --bg-tertiary-mid: #eeddc9;        /* Warm eggshell - middle tone - intensified */
+  --bg-tertiary-dark: #dfc8ad;       /* Warm eggshell - darker - intensified */
+  
+  --bg-accent-light: #faf7f0;        /* Sandy tan - lighter - intensified */
+  --bg-accent-dark: #d7c19d;         /* Sandy tan - darker - intensified */
+  
+  --bg-highlight-light: #fbfbf5;     /* Light khaki - lighter - intensified */
+  --bg-highlight-mid: #eae5d0;       /* Light khaki - middle tone - intensified */
+  --bg-highlight-dark: #d8d0b2;      /* Light khaki - darker - intensified */
 }
 
 @theme inline {
@@ -89,63 +101,58 @@ h6 {
   background-repeat: no-repeat;
 }
 
-/* Section background classes */
-.bg-section-1 {
-  background-color: var(--bg-primary);
-}
-
-.bg-section-2 {
-  background-color: var(--bg-secondary);
-}
-
-.bg-section-3 {
-  background-color: var(--bg-tertiary);
-}
-
-.bg-section-4 {
-  background-color: var(--bg-accent);
-}
-
-.bg-section-5 {
-  background-color: var(--bg-highlight);
-}
-
-/* Textured section backgrounds */
-.bg-section-textured-1 {
-  background-color: var(--bg-primary);
-  background-image: url('/images/texture-bg.png');
-  background-blend-mode: soft-light;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
+/* Enhanced Section background classes with consistent light-to-dark gradients */
+.bg-section-1,
+.bg-section-2,
+.bg-section-3,
+.bg-section-4,
+.bg-section-5,
+.bg-section-textured-1,
 .bg-section-textured-2 {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.7) 0%, 
+    rgba(229, 217, 199, 0.8) 100%
+  );
+}
+
+.bg-section-textured-1,
+.bg-section-textured-2 {
+  position: relative;
+}
+
+.bg-section-textured-1::after,
+.bg-section-textured-2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: url('/images/texture-bg.png');
   background-blend-mode: soft-light;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Modern Pattern Decorations */
 
-/* Subtle Diagonal Lines */
+/* Subtle Diagonal Lines - Enhanced contrast */
 .pattern-diagonal-lines {
   background-color: var(--background);
   background-image: repeating-linear-gradient(
     45deg,
-    var(--primary) 0,
-    var(--primary) 1px,
+    rgba(130, 92, 64, 0.8) 0,
+    rgba(130, 92, 64, 0.8) 1px,
     transparent 0,
     transparent 10px
   );
   background-size: 15px 15px;
   background-repeat: repeat;
-  opacity: 0.05;
 }
 
 /* Dots Pattern */
@@ -208,17 +215,16 @@ h6 {
   opacity: 0.04;
 }
 
-/* Modern Wave Pattern */
+/* Modern Wave Pattern - Enhanced contrast */
 .pattern-waves {
   background: linear-gradient(
     45deg, 
     transparent 48%, 
-    var(--primary) 49%, 
-    var(--primary) 51%, 
+    rgba(130, 92, 64, 0.9) 49%, 
+    rgba(130, 92, 64, 0.9) 51%, 
     transparent 52%
   );
   background-size: 20px 20px;
-  opacity: 0.05;
 }
 
 /* Decorative corner patterns */
@@ -431,4 +437,24 @@ h6 {
   opacity: 0.1;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Section separators */
+.section-separator {
+  position: relative;
+}
+
+.section-separator::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, 
+    rgba(130, 92, 64, 0) 0%, 
+    rgba(130, 92, 64, 0.3) 50%, 
+    rgba(130, 92, 64, 0) 100%
+  );
+  z-index: 10;
 }

@@ -17,72 +17,89 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
-      <Hero />
       
-      {/* About section - light cream background with gradient */}
-      <div className="bg-gradient-to-b from-section-1/90 to-section-1 relative">
-        <div className="absolute inset-y-0 left-0 w-full sm:w-1/3 pattern-dots opacity-[0.04]"></div>
-        <div className="corner-pattern corner-pattern-top-right"></div>
+      {/* Hero section */}
+      <div className="section-separator">
+        <Hero />
+      </div>
+      
+      {/* About section - with consistent gradient */}
+      <section className="bg-section-1 relative overflow-hidden section-separator">
+        <div className="absolute inset-y-0 left-0 w-full sm:w-1/3 pattern-dots opacity-[0.04] z-0"></div>
+        <div className="corner-pattern corner-pattern-top-right z-0"></div>
         <About />
-      </div>
+      </section>
       
-      {/* Services section - soft beige background with gradient */}
-      <div className="bg-gradient-to-b from-section-2/90 to-section-2 relative">
-        <div className="absolute top-0 inset-x-0 h-24 sm:h-40 pattern-waves"></div>
+      {/* Services section - with same gradient as Lodges section */}
+      <section className="bg-section-3 relative overflow-hidden section-separator">
+        <div className="absolute top-0 inset-x-0 h-32 sm:h-64 pattern-dots opacity-[0.05] z-0"></div>
+        <div className="absolute bottom-0 inset-x-0 h-32 sm:h-64 pattern-safari-stripes opacity-[0.08] z-0"></div>
+        <div className="absolute inset-y-0 left-0 w-1/3 pattern-animal-tracks opacity-[0.04] z-0"></div>
+        <div className="corner-pattern corner-pattern-bottom-left z-0"></div>
         <Services />
-      </div>
+      </section>
       
-      {/* Why Shuri section - textured background with gradient */}
-      <div className="bg-gradient-to-b from-section-textured-1/95 to-section-textured-1 relative">
-        <div className="absolute inset-y-0 right-0 w-full sm:w-1/3 pattern-hexagons"></div>
-        <WhyShuri />
-      </div>
+      {/* Why Shuri section - with consistent gradient and texture */}
+      <section className="bg-section-textured-1 relative overflow-hidden section-separator">
+        <div className="absolute inset-y-0 right-0 w-full sm:w-1/3 pattern-hexagons z-0"></div>
+        <div className="relative z-10">
+          <WhyShuri />
+        </div>
+      </section>
       
-      {/* Lodges section - warm eggshell background with gradient */}
-      <div className="bg-gradient-to-b from-section-3/90 to-section-3 relative">
-        <div className="absolute bottom-0 inset-x-0 h-32 sm:h-64 pattern-safari-stripes"></div>
-        <div className="corner-pattern corner-pattern-bottom-left"></div>
+      {/* Lodges section - with consistent gradient */}
+      <section className="bg-section-3 relative overflow-hidden section-separator">
+        <div className="absolute top-0 inset-x-0 h-32 sm:h-64 pattern-dots opacity-[0.05] z-0"></div>
+        <div className="absolute bottom-0 inset-x-0 h-32 sm:h-64 pattern-safari-stripes opacity-[0.08] z-0"></div>
+        <div className="absolute inset-y-0 left-0 w-1/3 pattern-animal-tracks opacity-[0.04] z-0"></div>
+        <div className="corner-pattern corner-pattern-bottom-left z-0"></div>
         <Lodges />
-      </div>
+      </section>
       
-      {/* Testimonials section - sandy tan background with gradient */}
-      <div className="bg-gradient-to-b from-section-4/90 to-section-4 relative line-pattern-horizontal">
-        <div className="absolute top-1/4 right-1/4 w-32 h-32 sm:w-64 sm:h-64 pattern-animal-tracks rounded-full"></div>
+      {/* Testimonials section - with consistent gradient */}
+      <section className="bg-section-4 relative overflow-hidden section-separator">
+        <div className="absolute top-1/4 right-1/4 w-32 h-32 sm:w-64 sm:h-64 pattern-animal-tracks rounded-full z-0"></div>
         <Testimonials />
-      </div>
+      </section>
       
-      {/* Team section - light khaki background with gradient */}
-      <div className="bg-gradient-to-b from-section-5/90 to-section-5 relative">
-        <div className="absolute top-0 inset-x-0 h-24 sm:h-40 pattern-diagonal-lines"></div>
-        <div className="absolute bottom-0 inset-x-0 h-24 sm:h-40 pattern-diagonal-lines"></div>
+      {/* Team section - with consistent gradient */}
+      <section className="bg-section-5 relative overflow-hidden section-separator">
+        <div className="absolute top-0 inset-x-0 h-32 sm:h-64 pattern-diagonal-lines opacity-[0.07] z-0"></div>
+        <div className="absolute bottom-0 inset-x-0 h-32 sm:h-64 pattern-diagonal-lines opacity-[0.07] z-0"></div>
+        <div className="absolute inset-0 pattern-savanna-dots opacity-[0.03] z-0"></div>
         <Team />
-      </div>
+      </section>
       
-      {/* Process section - textured background with gradient */}
-      <div className="bg-gradient-to-b from-section-textured-2/95 to-section-textured-2 relative">
-        <div className="absolute inset-y-0 left-0 w-1/2 sm:w-1/4 pattern-crosses"></div>
-        <div className="absolute inset-y-0 right-0 w-1/2 sm:w-1/4 pattern-crosses"></div>
-        <Process />
-      </div>
+      {/* Process section - with consistent gradient and texture */}
+      <section className="bg-section-textured-2 relative overflow-hidden section-separator">
+        <div className="absolute inset-y-0 left-0 w-1/2 sm:w-1/4 pattern-crosses z-0"></div>
+        <div className="absolute inset-y-0 right-0 w-1/2 sm:w-1/4 pattern-crosses z-0"></div>
+        <div className="relative z-10">
+          <Process />
+        </div>
+      </section>
       
-      {/* Resources section - back to cream background with gradient */}
-      <div className="bg-gradient-to-b from-section-1/90 to-section-1 relative">
-        <div className="absolute inset-0 pattern-dots opacity-[0.03]"></div>
+      {/* Resources section - with same gradient as Lodges section */}
+      <section className="bg-section-3 relative overflow-hidden section-separator">
+        <div className="absolute top-0 inset-x-0 h-32 sm:h-64 pattern-dots opacity-[0.05] z-0"></div>
+        <div className="absolute bottom-0 inset-x-0 h-32 sm:h-64 pattern-safari-stripes opacity-[0.08] z-0"></div>
+        <div className="absolute inset-y-0 left-0 w-1/3 pattern-animal-tracks opacity-[0.04] z-0"></div>
+        <div className="corner-pattern corner-pattern-bottom-left z-0"></div>
         <Resources />
-      </div>
+      </section>
       
-      {/* Contact section - warm eggshell background with gradient */}
-      <div className="bg-gradient-to-b from-section-3/90 to-section-3 relative line-pattern-horizontal">
-        <div className="corner-pattern corner-pattern-top-right"></div>
-        <div className="corner-pattern corner-pattern-bottom-left"></div>
+      {/* Contact section - with consistent gradient */}
+      <section className="bg-section-3 relative overflow-hidden section-separator">
+        <div className="corner-pattern corner-pattern-top-right z-0"></div>
+        <div className="corner-pattern corner-pattern-bottom-left z-0"></div>
         <Contact />
-      </div>
+      </section>
       
-      {/* Newsletter section - soft beige background with gradient */}
-      <div className="bg-gradient-to-b from-section-2/90 to-section-2 relative">
-        <div className="absolute bottom-0 inset-x-0 h-16 sm:h-24 pattern-waves"></div>
+      {/* Newsletter section - with consistent gradient */}
+      <section className="bg-section-2 relative overflow-hidden">
+        <div className="absolute bottom-0 inset-x-0 h-16 sm:h-24 pattern-waves z-0"></div>
         <Newsletter useSubstack={true} />
-      </div>
+      </section>
       
       <NewsletterPopup />
       <Footer />

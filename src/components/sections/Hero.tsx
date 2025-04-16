@@ -6,6 +6,7 @@ import GetStartedButton from '@/components/ui/GetStartedButton';
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -24,22 +25,32 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Static Hero Image Background with Overlay and Parallax */}
+      {/* Enhanced Hero Image Background with Improved Loading */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full overflow-hidden">
-          {/* Hero image background with parallax effect */}
+          {/* Preloaded placeholder background - shown until image loads */}
+          <div 
+            className={`absolute inset-0 bg-gradient-to-b from-[#5a4029] to-[#2e2116] transition-opacity duration-700 ${
+              imageLoaded ? 'opacity-0' : 'opacity-100'
+            }`}
+          ></div>
+          
+          {/* Hero image with optimized loading */}
           <Image 
             src="/images/hero.jpg" 
             alt="Safari lodge landscape" 
             fill 
-            priority
-            quality={90}
-            className="object-cover object-center transform scale-110"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+            priority={true}
+            quality={85}
+            className={`object-cover object-center transition-opacity duration-700 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            sizes="100vw"
             style={{ transform: `translateY(${scrollPosition}px) scale(1.05)` }}
             loading="eager"
             placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQIGAwAAAAAAAAAAAAABAgMABAUGESEHEhNBUf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AslsYxJZRw3d3oGmYAoiqMKvgAAADsrjkW7SMsjGyMNwUGlEf/9k="
+            blurDataURL="data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAGAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMEAwAAAAAAAAAAAAABAgMABAUGIWEREiIxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AtoGxmNbuIyXvNE0SHjtkVTkdwB3JwM5JAOwcnxU9a1D7hCNxcHAQeHpf/9k="
+            onLoadingComplete={() => setImageLoaded(true)}
           />
           
           {/* Enhanced gradient overlay for text contrast */}

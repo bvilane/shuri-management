@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Animation from '@/components/ui/Animation';
 import GetStartedButton from '@/components/ui/GetStartedButton';
@@ -45,6 +45,7 @@ const lodges = [
 export default function Lodges() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState<{[key: number]: boolean}>({});
 
   const nextLodge = () => {
     setActiveIndex((prevIndex) => (prevIndex === lodges.length - 1 ? 0 : prevIndex + 1));
@@ -53,6 +54,20 @@ export default function Lodges() {
   const prevLodge = () => {
     setActiveIndex((prevIndex) => (prevIndex === 0 ? lodges.length - 1 : prevIndex - 1));
   };
+
+  const handleImageLoaded = (index: number) => {
+    setImagesLoaded(prev => ({...prev, [index]: true}));
+  };
+
+  // Preload all lodge images to prevent transition issues
+  useEffect(() => {
+    // Preload all lodge images
+    lodges.forEach((lodge, index) => {
+      const img = new window.Image();
+      img.src = lodge.image;
+      img.onload = () => handleImageLoaded(index);
+    });
+  }, []);
 
   return (
     <section id="lodges" className="py-20 sm:py-32 relative overflow-hidden">
@@ -80,14 +95,23 @@ export default function Lodges() {
           <div className="mt-16 max-w-6xl mx-auto">
             <div className="relative rounded-xl overflow-hidden shadow-xl safari-image group">
               <div className="aspect-[16/9] relative">
+                {/* Placeholder gradient that shows while image is loading */}
+                <div className={`absolute inset-0 bg-gradient-to-b from-[#725540] to-[#3a2a1d] transition-opacity duration-500 ${
+                  imagesLoaded[activeIndex] ? 'opacity-0' : 'opacity-100'
+                }`}></div>
+                
                 <Image
                   src={lodges[activeIndex].image}
                   alt={lodges[activeIndex].name}
                   fill
                   quality={95}
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  className={`object-cover transition-all duration-1000 group-hover:scale-105 ${
+                    imagesLoaded[activeIndex] ? 'opacity-100' : 'opacity-0'
+                  }`}
                   sizes="(max-width: 768px) 100vw, 1200px"
-                  priority
+                  priority={activeIndex === 0}
+                  loading={activeIndex === 0 ? "eager" : "lazy"}
+                  onLoadingComplete={() => handleImageLoaded(activeIndex)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                 
@@ -186,12 +210,21 @@ export default function Lodges() {
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
                 >
+                  {/* Thumbnail placeholder */}
+                  <div className={`absolute inset-0 bg-gradient-to-b from-[#725540] to-[#3a2a1d] transition-opacity duration-500 ${
+                    imagesLoaded[index] ? 'opacity-0' : 'opacity-100'
+                  }`}></div>
+                
                   <Image
                     src={lodge.image}
                     alt={lodge.name}
                     fill
-                    className={`object-cover transition-all duration-500 ${activeIndex === index ? 'scale-105' : ''}`}
+                    className={`object-cover transition-all duration-500 ${
+                      activeIndex === index ? 'scale-105' : ''
+                    } ${imagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
                     sizes="(max-width: 768px) 50vw, 33vw"
+                    loading="lazy"
+                    onLoadingComplete={() => handleImageLoaded(index)}
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 ${activeIndex === index ? 'opacity-70' : 'opacity-60'}`}></div>
                   
