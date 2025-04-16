@@ -199,11 +199,11 @@ export default function Lodges() {
           </div>
 
           {/* Lodge Thumbnails with enhanced active indicator */}
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 max-w-4xl mx-auto">
             {lodges.map((lodge, index) => (
               <Animation key={lodge.id} type="fade-up" delay={300 + (index * 100)}>
                 <button 
-                  className={`relative rounded-lg overflow-hidden aspect-[4/3] shadow-md transition-all duration-500 ${
+                  className={`relative rounded-lg overflow-hidden aspect-video sm:aspect-[4/3] shadow-md transition-all duration-500 ${
                     activeIndex === index ? 'ring-2 ring-primary scale-[1.03] z-10' : 'opacity-80 hover:opacity-100 hover:shadow-xl'
                   } premium-card`}
                   onClick={() => setActiveIndex(index)}
@@ -222,7 +222,7 @@ export default function Lodges() {
                     className={`object-cover transition-all duration-500 ${
                       activeIndex === index ? 'scale-105' : ''
                     } ${imagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
-                    sizes="(max-width: 768px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     loading="lazy"
                     onLoadingComplete={() => handleImageLoaded(index)}
                   />
@@ -239,7 +239,7 @@ export default function Lodges() {
                   <div className={`absolute bottom-0 left-0 right-0 p-3 transition-all duration-300 ${
                     hoverIndex === index ? 'translate-y-0' : 'translate-y-6'
                   }`}>
-                    <h4 className="text-white text-shadow-sm text-sm font-medium truncate">
+                    <h4 className="text-white text-shadow-sm text-sm sm:text-base font-medium truncate">
                       {lodge.name}
                     </h4>
                     <p className={`text-white/80 text-xs truncate transition-opacity duration-300 ${
