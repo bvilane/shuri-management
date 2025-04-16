@@ -93,28 +93,28 @@ export default function Header() {
         }`}
       >
         <div className="min-h-full flex flex-col">
-          {/* Mobile menu header with logo */}
-          <div className="border-b border-primary/20 py-3 px-4 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
+          {/* Mobile menu header with logo - Reduced height */}
+          <div className="border-b border-primary/20 py-2 px-4 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="relative h-9 w-9 mr-2 overflow-visible">
+                <div className="relative h-8 w-8 mr-2 overflow-visible">
                   <div className="absolute inset-0 bg-primary/10 rounded-md blur-md transform -rotate-3 scale-110"></div>
                   <Image 
                     src="/images/logo.jpeg" 
                     alt="Shuri Logo" 
-                    width={40} 
-                    height={40} 
+                    width={36} 
+                    height={36} 
                     className="object-contain rounded-md shadow-sm relative scale-110"
                   />
                 </div>
-                <span className="font-serif text-xl font-bold text-primary">Shuri</span>
+                <span className="font-serif text-lg font-bold text-primary">Shuri</span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-lg bg-primary shadow-md hover:shadow-lg transition-all duration-300 h-9 w-9 flex items-center justify-center"
+                className="p-1.5 rounded-lg bg-primary shadow-md hover:shadow-lg transition-all duration-300 h-8 w-8 flex items-center justify-center"
                 aria-label="Close menu"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -122,10 +122,10 @@ export default function Header() {
             </div>
           </div>
           
-          {/* Mobile menu links */}
+          {/* Mobile menu links - Reduced spacing */}
           <nav className="flex-1 overflow-y-auto py-2 px-4 bg-white">
-            <div className="flex flex-col gap-2">
-              <div className="py-1 px-2 font-medium text-xs uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
+            <div className="flex flex-col gap-1 pb-14">
+              <div className="py-0.5 px-2 font-medium text-xs uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
               <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)} icon="info">
                 About
               </MobileNavLink>
@@ -139,8 +139,8 @@ export default function Header() {
                 Testimonials
               </MobileNavLink>
               
-              <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent my-1"></div>
-              <div className="py-1 px-2 font-medium text-xs uppercase tracking-wider text-primary/70 font-sans">Company</div>
+              <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent my-0.5"></div>
+              <div className="py-0.5 px-2 font-medium text-xs uppercase tracking-wider text-primary/70 font-sans">Company</div>
               
               <MobileNavLink href="#expertise" onClick={() => setMobileMenuOpen(false)} icon="users">
                 Our Team
@@ -154,14 +154,11 @@ export default function Header() {
             </div>
           </nav>
           
-          {/* Mobile menu footer */}
-          <div className="border-t border-primary/20 p-3 bg-gradient-to-t from-primary/15 via-primary/10 to-white relative z-10">
-            <div className="mx-auto max-w-md">
-              <p className="text-center text-primary/70 mb-2 font-medium font-sans text-sm">Ready to transform your property management?</p>
-              <GetStartedButton className="w-full py-2.5 text-center text-base shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98] relative z-20">
-                Book a Call
-              </GetStartedButton>
-            </div>
+          {/* Mobile menu footer - Fixed to bottom */}
+          <div className="border-t border-primary/20 py-2 px-4 bg-white sticky bottom-0 left-0 right-0 shadow-md z-20">
+            <GetStartedButton className="w-full py-2 text-center text-base shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]">
+              Book a Call
+            </GetStartedButton>
           </div>
         </div>
       </div>
@@ -245,32 +242,29 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="group mb-1"
+      className="group mb-0.5"
     >
-      <div className="relative overflow-hidden rounded-xl bg-white/70 border border-primary/10 shadow-md hover:shadow-lg transition-all duration-300">
+      <div className="relative overflow-hidden rounded-lg bg-white/70 border border-primary/10 shadow-sm hover:shadow-md transition-all duration-300">
         
-        <div className="relative p-2 flex items-center gap-2">
+        <div className="relative p-1 flex items-center gap-2">
           {/* Icon container with glow effect */}
           <div className="relative">
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-md transform scale-110"></div>
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
+            <div className="relative flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
               {icons[icon as keyof typeof icons]}
             </div>
           </div>
           
           {/* Text container */}
           <div className="flex flex-col flex-1">
-            <span className="text-lg font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide">
+            <span className="text-sm font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide">
               {children}
             </span>
-            <div className="mt-0.5 relative h-0.5 w-full overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/50 to-primary/10 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 rounded-full"></div>
-            </div>
           </div>
           
           {/* Right arrow indicator */}
           <div className="text-primary/40 group-hover:text-primary/70 transition-colors duration-300 transform translate-x-0 group-hover:translate-x-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 18l6-6-6-6"/>
             </svg>
           </div>
