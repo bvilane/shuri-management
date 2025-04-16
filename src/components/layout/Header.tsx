@@ -155,10 +155,10 @@ export default function Header() {
           </nav>
           
           {/* Mobile menu footer */}
-          <div className="border-t border-primary/20 py-8 px-6 bg-gradient-to-t from-primary/15 via-primary/10 to-white backdrop-blur-md">
+          <div className="border-t border-primary/20 py-6 px-4 bg-gradient-to-t from-primary/15 via-primary/10 to-white backdrop-blur-md">
             <div className="mx-auto max-w-md">
-              <p className="text-center text-primary/70 mb-5 font-medium font-sans">Ready to transform your property management?</p>
-              <GetStartedButton className="w-full py-4 text-center text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
+              <p className="text-center text-primary/70 mb-4 font-medium font-sans">Ready to transform your property management?</p>
+              <GetStartedButton className="w-full py-3.5 text-center text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98] mb-safe">
                 Book a Call
               </GetStartedButton>
             </div>
