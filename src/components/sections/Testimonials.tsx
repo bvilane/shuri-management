@@ -328,7 +328,7 @@ export default function Testimonials() {
                 can help your property thrive.
               </p>
               <GetStartedButton className="shadow-md hover:shadow-lg px-5 py-2.5 md:px-8 md:py-3 text-sm md:text-base">
-                Schedule a Consultation
+                Book a Free Call
               </GetStartedButton>
             </Animation>
           </div>

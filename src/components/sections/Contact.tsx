@@ -105,18 +105,20 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-muted/30 relative overflow-hidden">
+      {/* Main gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f8f4ed] to-[#e5d8c5] z-0"></div>
+      
       {/* Enhanced Background elements */}
-      <div className="absolute left-0 bottom-0 w-1/3 h-1/3 bg-primary/5 blur-3xl"></div>
-      <div className="absolute right-0 top-0 w-1/3 h-1/3 bg-accent/5 blur-3xl"></div>
-      <div className="absolute right-1/4 bottom-1/4 w-32 h-32 bg-primary/5 rounded-full blur-xl"></div>
+      <div className="absolute left-0 bottom-0 w-1/3 h-1/3 bg-primary/5 blur-3xl z-[1]"></div>
+      <div className="absolute right-0 top-0 w-1/3 h-1/3 bg-accent/5 blur-3xl z-[1]"></div>
+      <div className="absolute right-1/4 bottom-1/4 w-32 h-32 bg-primary/5 rounded-full blur-xl z-[1]"></div>
       
       {/* Safari texture overlay */}
-      <div className="absolute inset-0 bg-pattern-dots opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background/40 to-transparent"></div>
+      <div className="absolute inset-0 bg-pattern-dots opacity-[0.03] mix-blend-overlay pointer-events-none z-[1]"></div>
       
       {/* Safari-themed decorative elements */}
-      <div className="absolute -left-8 top-1/3 w-16 h-16 pattern-animal-tracks opacity-[0.08] transform rotate-12"></div>
-      <div className="absolute right-12 bottom-24 w-20 h-20 pattern-animal-tracks opacity-[0.08] transform -rotate-12"></div>
+      <div className="absolute -left-8 top-1/3 w-16 h-16 pattern-animal-tracks opacity-[0.08] transform rotate-12 z-[1]"></div>
+      <div className="absolute right-12 bottom-24 w-20 h-20 pattern-animal-tracks opacity-[0.08] transform -rotate-12 z-[1]"></div>
       
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
@@ -282,7 +284,7 @@ export default function Contact() {
                           onChange={handleChange}
                           required
                           placeholder="Your name"
-                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
                         />
                       </div>
 
@@ -301,7 +303,7 @@ export default function Contact() {
                           onChange={handleChange}
                           required
                           placeholder="Your email address"
-                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
                         />
                       </div>
                     </div>
@@ -310,7 +312,7 @@ export default function Contact() {
                       <div className="space-y-1 md:space-y-2">
                         <label
                           htmlFor="phone"
-                          className="block text-xs md:text-sm font-medium text-foreground"
+                          className="block text-xs md:text-sm font-medium text-foreground flex items-center"
                         >
                           Phone
                         </label>
@@ -321,7 +323,7 @@ export default function Contact() {
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="Your phone number"
-                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
                         />
                       </div>
 
@@ -340,7 +342,7 @@ export default function Contact() {
                           onChange={handleChange}
                           required
                           placeholder="Country where your lodge is located"
-                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
                         />
                       </div>
                     </div>
@@ -358,16 +360,14 @@ export default function Contact() {
                           name="lodgeType"
                           value={formData.lodgeType}
                           onChange={handleChange}
-                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none bg-select-arrow bg-no-repeat bg-[position:right_1rem_center]"
+                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none"
                         >
                           <option value="existing">Existing Lodge</option>
-                          <option value="new">New Lodge Development</option>
-                          <option value="campsite">Luxury Campsite</option>
-                          <option value="resort">Safari Resort</option>
-                          <option value="other">Other Property Type</option>
+                          <option value="new">New Development</option>
+                          <option value="renovation">Renovation/Rebranding</option>
                         </select>
                       </div>
-                      
+
                       <div className="space-y-1 md:space-y-2">
                         <label
                           htmlFor="lodgeSize"
@@ -380,16 +380,16 @@ export default function Contact() {
                           name="lodgeSize"
                           value={formData.lodgeSize}
                           onChange={handleChange}
-                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none bg-select-arrow bg-no-repeat bg-[position:right_1rem_center]"
+                          className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none"
                         >
                           <option value="">Select size (if applicable)</option>
-                          <option value="small">Small (1-10 rooms)</option>
-                          <option value="medium">Medium (11-25 rooms)</option>
-                          <option value="large">Large (26+ rooms)</option>
+                          <option value="small">Small (1-5 rooms)</option>
+                          <option value="medium">Medium (6-15 rooms)</option>
+                          <option value="large">Large (16+ rooms)</option>
                         </select>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-1 md:space-y-2">
                       <label
                         htmlFor="serviceNeeded"
@@ -402,12 +402,12 @@ export default function Contact() {
                         name="serviceNeeded"
                         value={formData.serviceNeeded}
                         onChange={handleChange}
-                        className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none bg-select-arrow bg-no-repeat bg-[position:right_1rem_center]"
+                        className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none"
                       >
                         <option value="">Select a service category</option>
-                        {serviceCategories.map(category => (
-                          <option key={category.value} value={category.value}>
-                            {category.label}
+                        {serviceCategories.map((service) => (
+                          <option key={service.value} value={service.value}>
+                            {service.label}
                           </option>
                         ))}
                       </select>
@@ -423,45 +423,47 @@ export default function Contact() {
                       <textarea
                         id="message"
                         name="message"
-                        rows={3}
                         value={formData.message}
                         onChange={handleChange}
                         required
+                        rows={4}
                         placeholder="Tell us about your specific needs or questions..."
-                        className="w-full px-3 md:px-4 py-2.5 md:py-3 text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
-                      ></textarea>
+                        className="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors resize-y min-h-[100px]"
+                      />
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={formStatus === 'submitting'}
-                      className="w-full px-4 md:px-6 py-3 md:py-3.5 bg-primary text-white rounded-lg hover:bg-primary/90 active:bg-primary/90 transition-all duration-300 font-medium shadow-md hover:shadow-lg flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed text-base"
-                    >
-                      {formStatus === 'submitting' ? (
-                        <>
-                          <svg className="animate-spin -ml-1 mr-2 md:mr-3 h-4 w-4 md:h-5 md:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          Sending Message...
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                          </svg>
-                          Send Message
-                        </>
-                      )}
-                    </button>
-                    
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-3 md:mt-4 text-xs text-foreground/60 gap-2 md:gap-0">
-                      <p>
-                        <span className="text-primary">*</span> Required fields
-                      </p>
-                      <p className="text-xs">
-                        By submitting, you agree to our <a href="/privacy" className="underline hover:text-primary transition-colors">Privacy Policy</a>
-                      </p>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-foreground/70 pt-2">
+                      <div className="mb-4 sm:mb-0 flex items-start gap-2">
+                        <span>* Required fields</span>
+                      </div>
+                      <div className="text-right">
+                        By submitting, you agree to our <a href="#" className="text-primary hover:underline">Privacy Policy</a>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={formStatus === 'submitting'}
+                        className="w-full flex items-center justify-center px-8 py-3 font-medium text-white bg-primary rounded-lg focus:outline-none ring-offset-2 focus:ring-2 focus:ring-primary/50 transition-colors hover:bg-primary/90 disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {formStatus === 'submitting' ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M20 4H4C3.45 4 3 4.45 3 5V19C3 19.55 3.45 20 4 20H20C20.55 20 21 19.55 21 19V5C21 4.45 20.55 4 20 4ZM19 19H5V7L12 13L19 7V19ZM19 5.76L12 11.76L5 5.76V5H19V5.76Z" fill="currentColor"/>
+                            </svg>
+                            Send Message
+                          </>
+                        )}
+                      </button>
                     </div>
                   </form>
                 </div>

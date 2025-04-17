@@ -66,11 +66,14 @@ export default function WhyShuri() {
   return (
     <section
       id="why-shuri"
-      className="py-24 bg-white relative overflow-hidden"
+      className="py-16 md:py-20 bg-white relative overflow-hidden"
     >
+      {/* Main gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f8f4ee] to-[#e5d7c3] z-0"></div>
+      
       {/* Background accents */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-[1]"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 z-[1]"></div>
 
       <div className="container relative z-10">
         <Animation type="fade-up">
@@ -86,10 +89,10 @@ export default function WhyShuri() {
         </Animation>
 
         {/* Comparison Table Section */}
-        <div className="mt-16 max-w-6xl mx-auto">
+        <div className="mt-12 max-w-6xl mx-auto">
           <Animation type="fade-up" delay={100}>
             {/* Mobile Comparison Cards - Visible only on small screens */}
-            <div className="block md:hidden space-y-6">
+            <div className="block md:hidden space-y-4">
               {keyDifferences.map((difference, index) => (
                 <div key={difference.id} className="bg-white rounded-xl overflow-hidden shadow-md border border-primary/5">
                   <div className="bg-primary text-white p-4 flex items-center gap-3">
@@ -179,9 +182,9 @@ export default function WhyShuri() {
         </div>
 
         {/* Additional Benefits */}
-        <div className="mt-16 md:mt-24 max-w-6xl mx-auto">
+        <div className="mt-12 md:mt-16 max-w-6xl mx-auto">
           <Animation type="fade-up" delay={300}>
-            <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-8 md:mb-12">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-6 md:mb-8">
               Additional Benefits
             </h3>
             
@@ -212,18 +215,18 @@ export default function WhyShuri() {
 
         {/* Testimonial Highlight */}
         <Animation type="fade-up" delay={400}>
-          <div className="mt-16 md:mt-24 max-w-5xl mx-auto bg-primary/5 rounded-2xl p-6 md:p-10 relative overflow-hidden">
+          <div className="mt-12 md:mt-16 max-w-5xl mx-auto bg-primary/5 rounded-2xl p-6 md:p-10 relative overflow-hidden">
             {/* Quote decorations */}
             <div className="absolute top-3 left-3 md:top-5 md:left-5 text-primary/20 text-5xl md:text-8xl font-serif">❝</div>
             <div className="absolute bottom-3 right-3 md:bottom-5 md:right-5 text-primary/20 text-5xl md:text-8xl font-serif">❞</div>
             
             <div className="relative">
               <blockquote className="text-lg md:text-2xl font-serif text-center italic text-foreground/90 mb-4 md:mb-6">
-                "The Shuri team transformed our lodge from struggling with occupancy to consistently booked. Their hands-on approach and safari-specific expertise made all the difference."
+                "It takes a village to run a legendary lodge. We started the Shuri Management Group to be that village for ambitious lodge owners."
               </blockquote>
               <div className="text-center">
-                <p className="font-bold">Lodge Owner</p>
-                <p className="text-sm text-foreground/70">Luxury Safari Property</p>
+                <p className="font-bold">Bavukile Vilane</p>
+                <p className="text-sm text-foreground/70">Managing Director, SMG</p>
               </div>
             </div>
           </div>
@@ -231,8 +234,8 @@ export default function WhyShuri() {
 
         {/* Why Clients Choose Us */}
         <Animation type="fade-up" delay={500}>
-          <div className="mt-16 md:mt-24 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-6 md:mb-10">
+          <div className="mt-12 md:mt-16 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-6 md:mb-8">
               Why Lodge Owners Choose Shuri
             </h3>
             
@@ -293,7 +296,7 @@ export default function WhyShuri() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                   <GetStartedButton className="w-full sm:w-auto shadow-lg hover:shadow-xl text-base md:text-lg px-6 md:px-8 py-3">
-                    Schedule Free Consultation
+                    Book a Free Call
                   </GetStartedButton>
                   <a 
                     href="#case-studies"

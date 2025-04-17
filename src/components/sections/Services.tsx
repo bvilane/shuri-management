@@ -154,15 +154,17 @@ export default function Services() {
 
   return (
     <section id="services" className="py-16 md:py-24 bg-muted relative overflow-hidden">
+      {/* Main gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f7f2ea] to-[#e2d5c0] z-0"></div>
+      
       {/* Enhanced Background elements */}
-      <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-background to-transparent"></div>
-      <div className="absolute -left-20 top-40 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute -right-20 bottom-40 w-60 h-60 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute -left-20 top-40 w-40 h-40 bg-primary/5 rounded-full blur-3xl z-[1]"></div>
+      <div className="absolute -right-20 bottom-40 w-60 h-60 bg-primary/5 rounded-full blur-3xl z-[1]"></div>
       
       {/* Safari-themed decorative patterns */}
-      <div className="absolute left-10 top-1/4 w-12 h-12 pattern-animal-track transform rotate-12 opacity-5"></div>
-      <div className="absolute right-10 bottom-1/3 w-16 h-16 pattern-animal-track transform -rotate-15 opacity-5"></div>
-      <div className="absolute top-1/3 right-1/4 w-20 h-20 pattern-dots opacity-5"></div>
+      <div className="absolute left-10 top-1/4 w-12 h-12 pattern-animal-track transform rotate-12 opacity-5 z-[1]"></div>
+      <div className="absolute right-10 bottom-1/3 w-16 h-16 pattern-animal-track transform -rotate-15 opacity-5 z-[1]"></div>
+      <div className="absolute top-1/3 right-1/4 w-20 h-20 pattern-dots opacity-5 z-[1]"></div>
       
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
@@ -280,15 +282,8 @@ export default function Services() {
                     </p>
                     
                     <div className="mt-6 md:mt-8 flex flex-wrap gap-3 md:gap-4">
-                      <Button className="text-sm md:text-base bg-primary/10 text-primary hover:bg-primary/20 active:bg-primary/30 border-none">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                        </svg>
-                        Learn More
-                      </Button>
-                      
                       <GetStartedButton className="text-sm md:text-base shadow-md">
-                        Request This Service
+                        Book a Free Call
                       </GetStartedButton>
                     </div>
                     
@@ -372,10 +367,10 @@ export default function Services() {
                         <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        Schedule Free Call
+                        Book a Call
                       </GetStartedButton>
                       <p className="mt-3 md:mt-4 text-xs text-foreground/60 max-w-[200px] mx-auto">
-                        Join 35+ safari lodges already growing with Shuri Management
+                        Join our network of growing safari properties
                       </p>
                     </div>
                   </div>

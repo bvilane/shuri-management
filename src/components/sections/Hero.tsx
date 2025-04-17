@@ -24,7 +24,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Enhanced Hero Image Background with Improved Loading */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full overflow-hidden">
@@ -62,7 +62,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white flex justify-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white flex justify-center mt-8 sm:mt-0">
         <div className="max-w-3xl text-center">
           <div className="relative p-4 sm:p-6 md:p-8">
             <span 
@@ -78,8 +78,10 @@ export default function Hero() {
                 isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'
               }`}
             >
-              <span className="block text-white">We Manage & Market</span>
-              <span className="block mt-2 text-primary">Safari Lodges</span>
+              <div className="flex flex-col items-center justify-center">
+                <span className="whitespace-nowrap text-white">We Manage & Market</span>
+                <span className="text-white mt-2">Safari Lodges</span>
+              </div>
             </h1>
 
             <p
@@ -111,8 +113,8 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-white text-xs sm:text-sm mb-2 font-medium text-shadow-sm">Explore More</span>
+      <div className="absolute bottom-16 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-20">
+        <span className="text-white text-xs sm:text-sm mb-2 font-medium text-shadow-sm drop-shadow-lg">Explore More</span>
         <svg
           width="20"
           height="20"

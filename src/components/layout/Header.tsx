@@ -8,12 +8,21 @@ import GetStartedButton from '@/components/ui/GetStartedButton';
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+      
+      // Check if scrolled past hero section (screen height)
+      if (window.scrollY > window.innerHeight - 100) {
+        setScrolledPastHero(true);
+      } else {
+        setScrolledPastHero(false);
       }
     };
 
@@ -32,29 +41,24 @@ export default function Header() {
   }, [scrolled, mobileMenuOpen]);
 
   return (
-    <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        mobileMenuOpen 
-          ? 'bg-white' 
-          : scrolled 
-            ? 'bg-background/90 backdrop-blur-sm shadow-md py-2' 
-            : 'bg-background/20 backdrop-blur-[2px] py-4'
-      }`}
+    <header 
+      className={`sticky top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'py-2 shadow-md' : 'py-4'
+      } bg-white`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <Link href="/" className="inline-flex items-center">
           <div className="flex items-center">
-            <div className={`relative h-11 w-11 sm:h-14 sm:w-14 mr-2 sm:mr-3 transition-all duration-300 ${scrolled ? 'scale-95' : ''}`}>
+            <div className={`relative h-11 w-auto sm:h-12 sm:w-auto transition-all duration-300 ${scrolled ? 'scale-95' : ''}`}>
               <Image 
-                src="/images/logo.jpeg" 
-                alt="Shuri Logo" 
-                width={45} 
-                height={45} 
-                className="object-contain rounded-md shadow-sm"
+                src="/images/smg.png" 
+                alt="SMG Logo" 
+                width={120}
+                height={35} 
+                className="object-contain"
                 priority
               />
             </div>
-            <span className={`font-serif text-2xl sm:text-3xl font-bold hidden sm:inline ${mobileMenuOpen ? 'text-primary' : scrolled ? 'text-foreground' : 'text-white'}`}>Shuri</span>
           </div>
         </Link>
 
@@ -63,7 +67,6 @@ export default function Header() {
           <NavLink href="#about" light={!scrolled}>About</NavLink>
           <NavLink href="#services" light={!scrolled}>Services</NavLink>
           <NavLink href="#lodges" light={!scrolled}>Our Lodges</NavLink>
-          <NavLink href="#testimonials" light={!scrolled}>Testimonials</NavLink>
           <NavLink href="#expertise" light={!scrolled}>Our Team</NavLink>
           <NavLink href="#resources" light={!scrolled}>Resources</NavLink>
           <NavLink href="#contact" light={!scrolled}>Contact</NavLink>
@@ -97,17 +100,15 @@ export default function Header() {
           <div className="border-b border-primary/20 py-3 px-5 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="relative h-11 w-11 mr-3 overflow-visible">
-                  <div className="absolute inset-0 bg-primary/10 rounded-md blur-md transform -rotate-3 scale-110"></div>
+                <div className="relative h-11 w-auto">
                   <Image 
-                    src="/images/logo.jpeg" 
-                    alt="Shuri Logo" 
-                    width={48} 
-                    height={48} 
-                    className="object-contain rounded-md shadow-sm relative scale-110"
+                    src="/images/smg.png" 
+                    alt="SMG Logo" 
+                    width={110}
+                    height={32} 
+                    className="object-contain"
                   />
                 </div>
-                <span className="font-serif text-xl font-bold text-primary">Shuri</span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
@@ -123,7 +124,7 @@ export default function Header() {
           </div>
           
           {/* Mobile menu links - Reduced spacing */}
-          <nav className="flex-1 overflow-y-auto py-3 px-5 bg-white">
+          <nav className="flex-1 overflow-y-auto py-3 px-4 sm:px-5 bg-white">
             <div className="flex flex-col gap-2 mb-1">
               <div className="py-1 px-2 font-medium text-sm uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
               <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)} icon="info">
@@ -134,9 +135,6 @@ export default function Header() {
               </MobileNavLink>
               <MobileNavLink href="#lodges" onClick={() => setMobileMenuOpen(false)} icon="home">
                 Our Lodges
-              </MobileNavLink>
-              <MobileNavLink href="#testimonials" onClick={() => setMobileMenuOpen(false)} icon="testimonials">
-                Testimonials
               </MobileNavLink>
               
               <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent my-1"></div>
@@ -153,9 +151,9 @@ export default function Header() {
               </MobileNavLink>
               
               {/* Call to action button - Positioned within scrollable area */}
-              <div className="mt-8 mb-4 px-2">
-                <div className="border-t border-primary/20 pt-5 pb-2">
-                  <GetStartedButton className="w-full py-3 text-center text-lg shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]">
+              <div className="mt-6 mb-4 px-2">
+                <div className="border-t border-primary/20 pt-4 pb-2">
+                  <GetStartedButton className="w-full py-3 text-center text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]">
                     Book a Call
                   </GetStartedButton>
                 </div>
@@ -182,7 +180,7 @@ function NavLink({
       href={href}
       className={`font-medium transition duration-300 hover:underline underline-offset-4 decoration-2 decoration-primary/50 ${
         light 
-          ? 'text-white hover:text-white/90' 
+          ? 'text-[#5a4029] hover:text-[#3d2b1c]' 
           : 'text-foreground hover:text-primary'
       }`}
     >
@@ -244,28 +242,28 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="group mb-2"
+      className="group mb-1.5"
     >
       <div className="relative overflow-hidden rounded-xl bg-white/70 border border-primary/10 shadow-md hover:shadow-lg transition-all duration-300">
         
-        <div className="relative p-3 flex items-center gap-4">
+        <div className="relative p-2.5 sm:p-3 flex items-center gap-3 sm:gap-4">
           {/* Icon container with glow effect */}
-          <div className="relative">
+          <div className="relative flex-shrink-0">
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-md transform scale-110"></div>
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
+            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
               {icons[icon as keyof typeof icons]}
             </div>
           </div>
           
           {/* Text container */}
-          <div className="flex flex-col flex-1">
-            <span className="text-lg font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide">
+          <div className="flex flex-col flex-1 min-w-0">
+            <span className="text-base sm:text-lg font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide truncate">
               {children}
             </span>
           </div>
           
           {/* Right arrow indicator */}
-          <div className="text-primary/40 group-hover:text-primary/70 transition-colors duration-300 transform translate-x-0 group-hover:translate-x-1">
+          <div className="text-primary/40 group-hover:text-primary/70 transition-colors duration-300 transform translate-x-0 group-hover:translate-x-1 flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 18l6-6-6-6"/>
             </svg>

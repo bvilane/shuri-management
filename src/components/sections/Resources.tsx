@@ -35,12 +35,15 @@ const resources = [
 export default function Resources() {
   return (
     <section id="resources" className="py-24 bg-background relative overflow-hidden">
+      {/* Main gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f7f2ea] to-[#e2d5c0] z-0"></div>
+      
       {/* Background elements */}
-      <div className="absolute left-0 top-1/4 w-1/4 h-1/3 bg-primary/5 blur-3xl"></div>
-      <div className="absolute right-0 bottom-1/3 w-1/3 h-1/3 bg-accent/5 blur-3xl"></div>
+      <div className="absolute left-0 top-1/4 w-1/4 h-1/3 bg-primary/5 blur-3xl z-[1]"></div>
+      <div className="absolute right-0 bottom-1/3 w-1/3 h-1/3 bg-accent/5 blur-3xl z-[1]"></div>
       
       {/* Background texture */}
-      <div className="absolute inset-0 texture-bg opacity-5 z-0"></div>
+      <div className="absolute inset-0 texture-bg opacity-5 mix-blend-overlay pointer-events-none z-[1]"></div>
 
       <div className="container relative z-10">
         <Animation type="fade-up">
@@ -111,7 +114,7 @@ export default function Resources() {
               </div>
               <div className="md:w-1/3 flex justify-center">
                 <GetStartedButton className="whitespace-nowrap shadow-md px-8 py-3">
-                  Book a Strategy Call
+                  Book a Free Call
                 </GetStartedButton>
               </div>
             </div>

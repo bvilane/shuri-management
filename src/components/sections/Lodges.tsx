@@ -9,36 +9,14 @@ import GetStartedButton from '@/components/ui/GetStartedButton';
 const lodges = [
   {
     id: 1,
-    name: "Savanna Horizon Lodge",
+    name: "Coming Soon...",
     location: "Eastern Africa",
     image: "/images/lodge-2.jpg",
     rating: 4.9,
     reviewCount: 128,
-    description: "A luxury lodge overlooking vast savannas with unparalleled wildlife viewing in Africa's premier reserve.",
-    capacity: "16 Luxury Suites",
-    highlights: ["Game Drives", "Infinity Pool", "Fine Dining", "Spa Services"]
-  },
-  {
-    id: 2,
-    name: "Riverside Safari Retreat",
-    location: "Central Africa",
-    image: "/images/lodge-4.jpg",
-    rating: 4.8,
-    reviewCount: 94,
-    description: "Nestled on the banks of a mighty river, offering exceptional water and land safaris in pristine wilderness.",
-    capacity: "12 Tented Suites",
-    highlights: ["River Cruises", "Spa Treatments", "Bush Dining", "Night Safari"]
-  },
-  {
-    id: 3,
-    name: "Okavango Wilderness Camp",
-    location: "Southern Africa",
-    image: "/images/lodge-5.jpg",
-    rating: 4.7,
-    reviewCount: 76,
-    description: "An intimate tented camp in the heart of Africa's delta waterways, showcasing the continent's most pristine wetland.",
-    capacity: "8 Tented Rooms",
-    highlights: ["Mokoro Excursions", "Wildlife Tracking", "Star Gazing", "Bird Watching"]
+    description: "Be among the first to join our exclusive collection of premium safari properties. Contact us to learn more about our management services.",
+    capacity: "Luxury Safari Properties",
+    highlights: ["Premium Management", "Marketing Support", "Operations Excellence", "Staff Training"]
   }
 ];
 
@@ -47,12 +25,17 @@ export default function Lodges() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [imagesLoaded, setImagesLoaded] = useState<{[key: number]: boolean}>({});
 
-  const nextLodge = () => {
-    setActiveIndex((prevIndex) => (prevIndex === lodges.length - 1 ? 0 : prevIndex + 1));
-  };
-
-  const prevLodge = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? lodges.length - 1 : prevIndex - 1));
+  // Ensure we have a valid lodge to display
+  const currentLodge = lodges[activeIndex] || lodges[0] || {
+    id: 0,
+    name: "Coming Soon...",
+    location: "Eastern Africa",
+    image: "/images/lodge-2.jpg",
+    rating: 4.9,
+    reviewCount: 128,
+    description: "Be among the first to join our exclusive collection of premium safari properties. Contact us to learn more about our management services.",
+    capacity: "Luxury Safari Properties",
+    highlights: ["Premium Management", "Marketing Support", "Operations Excellence", "Staff Training"]
   };
 
   const handleImageLoaded = (index: number) => {
@@ -81,7 +64,7 @@ export default function Lodges() {
         <Animation type="fade-up">
           {/* Premium section title with safari styling */}
           <div className="flex flex-col items-center mb-12">
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 sm:mb-4">EXPLORE OUR PORTFOLIO</span>
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 sm:mb-4">JOIN OUR PORTFOLIO</span>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-center max-w-3xl mx-auto leading-tight">
               Our Premier Safari Lodges
             </h2>
@@ -101,8 +84,8 @@ export default function Lodges() {
                 }`}></div>
                 
                 <Image
-                  src={lodges[activeIndex].image}
-                  alt={lodges[activeIndex].name}
+                  src={currentLodge.image}
+                  alt={currentLodge.name}
                   fill
                   quality={95}
                   className={`object-cover transition-all duration-1000 group-hover:scale-105 ${
@@ -124,43 +107,15 @@ export default function Lodges() {
                 <svg className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="text-white text-xs sm:text-sm font-medium">{lodges[activeIndex].rating}</span>
+                <span className="text-white text-xs sm:text-sm font-medium">{currentLodge.rating}</span>
                 <span className="text-white/50 text-xs sm:text-sm mx-1 hidden sm:inline">•</span>
-                <span className="text-white/80 text-xs sm:text-sm hidden sm:inline">{lodges[activeIndex].reviewCount} reviews</span>
-              </div>
-              
-              {/* Enhanced navigation arrows */}
-              <button 
-                onClick={prevLodge}
-                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110"
-                aria-label="Previous lodge"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              
-              <button 
-                onClick={nextLodge}
-                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110"
-                aria-label="Next lodge"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-              
-              {/* Status indicator */}
-              <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex items-center gap-1 bg-black/30 backdrop-blur-sm py-1 sm:py-1.5 px-2 sm:px-4 rounded-full border border-white/10">
-                <span className="text-white text-xs sm:text-sm font-medium">{activeIndex + 1}</span>
-                <span className="text-white/50 text-xs sm:text-sm">/</span>
-                <span className="text-white/50 text-xs sm:text-sm">{lodges.length}</span>
+                <span className="text-white/80 text-xs sm:text-sm hidden sm:inline">{currentLodge.reviewCount} reviews</span>
               </div>
               
               {/* Enhanced content display */}
               <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 md:p-8 text-white">
                 <h3 className="text-xl sm:text-2xl md:text-4xl font-serif font-bold text-shadow-lg mb-1 sm:mb-2 reveal-item">
-                  {lodges[activeIndex].name}
+                  {currentLodge.name}
                 </h3>
                 <div className="flex items-center reveal-item reveal-delay-1">
                   <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,11 +123,11 @@ export default function Lodges() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
                   <p className="text-white/90 font-medium text-shadow-sm text-xs sm:text-base">
-                    {lodges[activeIndex].location}
+                    {currentLodge.location}
                   </p>
                 </div>
                 <p className="mt-2 sm:mt-3 max-w-2xl text-white/80 text-shadow-sm text-xs sm:text-sm md:text-base hidden sm:block reveal-item reveal-delay-2">
-                  {lodges[activeIndex].description}
+                  {currentLodge.description}
                 </p>
                 
                 {/* Capacity badge */}
@@ -182,13 +137,13 @@ export default function Lodges() {
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                       <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    {lodges[activeIndex].capacity}
+                    {currentLodge.capacity}
                   </span>
                 </div>
                 
                 {/* Features badges - enhanced styling */}
                 <div className="mt-4 flex flex-wrap gap-2 hidden md:flex reveal-item reveal-delay-3">
-                  {lodges[activeIndex].highlights.map((feature, index) => (
+                  {currentLodge.highlights.map((feature, index) => (
                     <span key={index} className="bg-white/10 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/20 transition-colors duration-300">
                       {feature}
                     </span>
@@ -196,61 +151,6 @@ export default function Lodges() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Lodge Thumbnails with enhanced active indicator */}
-          <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 max-w-4xl mx-auto">
-            {lodges.map((lodge, index) => (
-              <Animation key={lodge.id} type="fade-up" delay={300 + (index * 100)}>
-                <button 
-                  className={`relative rounded-lg overflow-hidden aspect-video sm:aspect-[4/3] shadow-md transition-all duration-500 ${
-                    activeIndex === index ? 'ring-2 ring-primary scale-[1.03] z-10' : 'opacity-80 hover:opacity-100 hover:shadow-xl'
-                  } premium-card`}
-                  onClick={() => setActiveIndex(index)}
-                  onMouseEnter={() => setHoverIndex(index)}
-                  onMouseLeave={() => setHoverIndex(null)}
-                >
-                  {/* Thumbnail placeholder */}
-                  <div className={`absolute inset-0 bg-gradient-to-b from-[#725540] to-[#3a2a1d] transition-opacity duration-500 ${
-                    imagesLoaded[index] ? 'opacity-0' : 'opacity-100'
-                  }`}></div>
-                
-                  <Image
-                    src={lodge.image}
-                    alt={lodge.name}
-                    fill
-                    className={`object-cover transition-all duration-500 ${
-                      activeIndex === index ? 'scale-105' : ''
-                    } ${imagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    loading="lazy"
-                    onLoadingComplete={() => handleImageLoaded(index)}
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 ${activeIndex === index ? 'opacity-70' : 'opacity-60'}`}></div>
-                  
-                  {/* Safari-themed decorative overlay */}
-                  <div className="absolute inset-0 pattern-safari-stripes opacity-[0.03] mix-blend-overlay"></div>
-                  
-                  {/* Status indicator dot */}
-                  {activeIndex === index && (
-                    <div className="absolute top-2 right-2 w-3 h-3 bg-primary rounded-full shadow-lg"></div>
-                  )}
-                  
-                  <div className={`absolute bottom-0 left-0 right-0 p-3 transition-all duration-300 ${
-                    hoverIndex === index ? 'translate-y-0' : 'translate-y-6'
-                  }`}>
-                    <h4 className="text-white text-shadow-sm text-sm sm:text-base font-medium truncate">
-                      {lodge.name}
-                    </h4>
-                    <p className={`text-white/80 text-xs truncate transition-opacity duration-300 ${
-                      hoverIndex === index ? 'opacity-100' : 'opacity-0'
-                    }`}>
-                      {lodge.location}
-                    </p>
-                  </div>
-                </button>
-              </Animation>
-            ))}
           </div>
 
           {/* Enhanced CTA section */}
@@ -297,7 +197,7 @@ export default function Lodges() {
                   </div>
                 </div>
                 <div className="md:w-1/3 flex justify-center">
-                  <GetStartedButton className="whitespace-nowrap shadow-md px-8 py-3.5 text-lg">
+                  <GetStartedButton className="whitespace-nowrap shadow-md px-6 py-2.5 md:py-3 text-base">
                     Request Information
                   </GetStartedButton>
                 </div>

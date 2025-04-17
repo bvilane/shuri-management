@@ -444,7 +444,7 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
                       // router.push('/book-call');
                     }}
                   >
-                    Book a Quick Chat
+                    Book a Free Call
                   </a>
                 </p>
                 

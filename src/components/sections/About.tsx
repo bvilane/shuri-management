@@ -61,16 +61,19 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-16 md:py-24 bg-background relative overflow-hidden"
+      className="py-16 md:py-20 bg-background relative overflow-hidden"
     >
+      {/* Main gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f8f5f0] to-[#e5d9c7] z-0"></div>
+      
       {/* Enhanced background accents */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-accent/5 rounded-bl-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 rounded-tr-full blur-3xl"></div>
-      <div className="absolute top-1/4 left-0 w-24 h-24 bg-primary/5 rounded-full blur-xl"></div>
-      <div className="absolute bottom-1/4 right-0 w-32 h-32 bg-accent/5 rounded-full blur-xl"></div>
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-accent/5 rounded-bl-full blur-3xl z-[1]"></div>
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 rounded-tr-full blur-3xl z-[1]"></div>
+      <div className="absolute top-1/4 left-0 w-24 h-24 bg-primary/5 rounded-full blur-xl z-[1]"></div>
+      <div className="absolute bottom-1/4 right-0 w-32 h-32 bg-accent/5 rounded-full blur-xl z-[1]"></div>
 
       {/* Safari texture overlay */}
-      <div className="absolute inset-0 texture-bg opacity-5 mix-blend-overlay pointer-events-none"></div>
+      <div className="absolute inset-0 texture-bg opacity-5 mix-blend-overlay pointer-events-none z-[1]"></div>
 
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
@@ -89,14 +92,14 @@ export default function About() {
           <div className="mt-8 md:mt-12 max-w-4xl mx-auto bg-primary/10 py-6 md:py-8 px-6 md:px-12 rounded-xl text-center">
             <h3 className="text-lg md:text-2xl font-serif font-bold text-primary mb-2 md:mb-3">Our Mission</h3>
             <p className="text-base md:text-lg italic">
-              "To transform African safari lodges into thriving, sustainable destinations that deliver exceptional guest experiences while preserving natural habitats and uplifting local communities."
+              "To build Africa's most talked-about, most profitable safari lodges by combining smart operations, bold marketing, and unforgettable guest experiences while protecting nature and uplifting local communities."
             </p>
           </div>
         </Animation>
 
-        <div className="mt-12 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
           <Animation type="slide-in-left">
-            <div className="relative h-[250px] sm:h-[300px] md:h-[500px] rounded-xl overflow-hidden shadow-xl group">
+            <div className="relative h-[250px] sm:h-[300px] md:h-[450px] rounded-xl overflow-hidden shadow-xl group">
               {/* Image gallery with two images */}
               <div className="absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100 group-hover:opacity-0">
                 <Image 
@@ -130,7 +133,7 @@ export default function About() {
           </Animation>
 
           <Animation type="fade-up" delay={200}>
-            <div className="space-y-4 md:space-y-6">
+            <div className="space-y-3 md:space-y-4">
               <h3 className="text-xl md:text-2xl font-serif font-bold text-primary">Our Story</h3>
               <p className="text-base md:text-lg">
                 Shuri Management was founded by a team of safari lodge veterans
@@ -149,11 +152,11 @@ export default function About() {
                 strategies that respect both the delicate ecosystems and local communities
                 while creating unforgettable, authentic experiences for guests.
               </p>
-              <div className="pt-4 md:pt-6">
-                <h4 className="font-semibold mb-3 md:mb-4 text-base md:text-lg text-primary">
+              <div className="pt-3 md:pt-4">
+                <h4 className="font-semibold mb-2 md:mb-3 text-base md:text-lg text-primary">
                   Our approach is guided by four core principles:
                 </h4>
-                <ul className="space-y-2 md:space-y-3">
+                <ul className="space-y-1.5 md:space-y-2">
                   <AboutListItem>
                     <span className="font-medium">Deep industry expertise</span> - Decades of hands-on safari lodge management experience
                   </AboutListItem>
@@ -172,200 +175,56 @@ export default function About() {
           </Animation>
         </div>
         
-        {/* Enhanced Creative Timeline section with interactive elements */}
-        <div className="mt-16 md:mt-24 relative">
-          <Animation type="fade-up">
-            <div className="flex flex-col items-center mb-8 md:mb-12">
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-3 md:mb-4">OUR JOURNEY</span>
-              <h3 className="text-xl sm:text-2xl md:text-4xl font-serif font-bold text-center">Safari Through Time</h3>
-              <p className="text-foreground/70 text-center max-w-xl mx-auto mt-3 md:mt-4 text-sm md:text-base">
-                Following the tracks of our growth through Africa's lodge management landscape
-              </p>
+        {/* Core Competencies */}
+        <Animation type="fade-up" delay={150}>
+          <div className="mt-12 max-w-5xl mx-auto">
+            <div className="flex justify-center">
+              <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">CAPABILITIES</span>
             </div>
-            
-            {/* Mobile Timeline (Accordion Style) - Only visible on smaller screens */}
-            <div className="block md:hidden">
-              <div className="space-y-3 max-w-md mx-auto">
-                {timeline.map((item, index) => (
-                  <div 
-                    key={index} 
-                    className={`border rounded-xl transition-all duration-300 overflow-hidden ${
-                      activeTimelineItem === index 
-                        ? 'border-primary/30 bg-primary/5 shadow-md' 
-                        : 'border-border/30 bg-card/30'
-                    }`}
-                  >
-                    <button 
-                      className="w-full px-4 py-3 flex items-center justify-between text-left"
-                      onClick={() => setActiveTimelineItem(index)}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-9 h-9 rounded-full flex items-center justify-center ${
-                          activeTimelineItem === index ? 'bg-primary text-white' : 'bg-primary/10 text-primary'
-                        }`}>
-                          <span className="font-bold text-sm">{item.year}</span>
-                        </div>
-                        <h4 className="font-serif font-bold text-base">{item.title}</h4>
+            <h3 className="text-2xl font-serif font-bold text-center mb-6">
+              Core Competencies
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                {
+                  title: "Lodge Management",
+                  experience: "30+ years",
+                  description: "Property operations, staff supervision, financial management, and guest relations"
+                },
+                {
+                  title: "Safari Guiding",
+                  experience: "20+ years",
+                  description: "Wildlife expertise, guest safety, storytelling, and educational programming"
+                },
+                {
+                  title: "Digital Marketing",
+                  experience: "10+ years",
+                  description: "Social media, SEO, content creation, and targeted advertising for luxury properties"
+                },
+                {
+                  title: "Staff Training",
+                  experience: "8+ years",
+                  description: "Service standards, hospitality training, and professional development programs"
+                }
+              ].map((competency, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-md p-6 border-t-4 border-primary hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-xl font-serif font-bold">{competency.title}</h4>
+                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">{competency.experience}</span>
                       </div>
-                      <svg 
-                        className={`w-5 h-5 transition-transform duration-300 ${activeTimelineItem === index ? 'rotate-180' : ''}`} 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                    
-                    <div className={`grid grid-cols-1 overflow-hidden transition-all duration-300 ${
-                      activeTimelineItem === index ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-                    }`}>
-                      <div className="px-4 pb-4">
-                        <p className="text-foreground/70 mb-3 text-sm">{item.description}</p>
-                        <div className="h-32 relative rounded-lg overflow-hidden">
-                          <Image 
-                            src={item.image} 
-                            alt={item.title} 
-                            fill 
-                            className="object-cover"
-                          />
-                        </div>
-                      </div>
+                      <p className="text-foreground/80">{competency.description}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Desktop Timeline - Only visible on larger screens */}
-            <div className="hidden md:block relative">
-              {/* Interactive timeline visualization */}
-              <div className="relative max-w-6xl mx-auto">
-                {/* Enhanced safari-themed center line with animal track textures */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-2 bg-gradient-to-b from-primary/10 via-primary/40 to-primary/10"></div>
-                
-                {/* Create animal tracks along the timeline */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 top-1/4 w-4 h-4 pattern-animal-tracks opacity-30 -ml-12"></div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 top-1/2 w-4 h-4 pattern-animal-tracks opacity-30 ml-12"></div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 top-3/4 w-4 h-4 pattern-animal-tracks opacity-30 -ml-8"></div>
-                
-                {/* Timeline items with premium styling and hover effects */}
-                {timeline.map((item, index) => (
-                  <div 
-                    key={index} 
-                    className={`mb-24 relative group ${index === timeline.length - 1 ? 'mb-12' : ''}`}
-                    onMouseEnter={() => setActiveTimelineItem(index)}
-                  >
-                    {/* Year marker with animated hover effect */}
-                    <div className={`
-                      absolute left-1/2 transform -translate-x-1/2 w-16 h-16 
-                      rounded-full flex items-center justify-center z-10 
-                      transition-all duration-500 ease-out
-                      ${activeTimelineItem === index 
-                        ? 'bg-primary text-white scale-110 shadow-lg' 
-                        : 'bg-primary/20 text-primary hover:bg-primary/40'}
-                    `}>
-                      <div className="text-center">
-                        <span className="font-bold text-lg">{item.year}</span>
-                      </div>
-                    </div>
-                    
-                    {/* Animal tracks around the active year marker */}
-                    {activeTimelineItem === index && (
-                      <>
-                        <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 ml-10 mt-3 w-6 h-6 pattern-animal-tracks opacity-20"></div>
-                        <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 -ml-10 mt-3 w-6 h-6 pattern-animal-tracks opacity-20"></div>
-                      </>
-                    )}
-                    
-                    {/* Content cards - alternate left and right with premium styling */}
-                    <div className={`
-                      relative ${index % 2 === 0 ? 'ml-auto pl-10 pr-4' : 'mr-auto pr-10 pl-4'} 
-                      w-full sm:w-[46%] ${index % 2 === 0 ? 'sm:ml-[54%]' : ''} mt-5
-                    `}>
-                      <div className={`
-                        rounded-xl overflow-hidden transition-all duration-500
-                        ${activeTimelineItem === index 
-                          ? 'shadow-xl translate-y-0 opacity-100 scale-100 bg-card border border-primary/20' 
-                          : 'shadow-md opacity-80 translate-y-2 scale-98 bg-card/80 border border-border/30'
-                        }
-                      `}>
-                        {/* Timeline item content with image */}
-                        <div className="relative h-48 w-full">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                          
-                          {/* Year overlay on the image */}
-                          <div className="absolute top-4 right-4 px-3 py-1 bg-black/30 backdrop-blur-sm rounded-full text-white/90 text-sm">
-                            {item.year}
-                          </div>
-                          
-                          {/* Title overlay on image */}
-                          <div className="absolute bottom-0 left-0 w-full p-4">
-                            <h4 className="text-white font-serif font-bold text-xl">{item.title}</h4>
-                          </div>
-                        </div>
-                        
-                        <div className="p-5">
-                          <p className="text-foreground/80">{item.description}</p>
-                          
-                          {/* Connecting element back to the timeline */}
-                          <div className={`absolute top-8 ${index % 2 === 0 ? 'left-0' : 'right-0'} w-10 h-[2px] bg-gradient-to-${index % 2 === 0 ? 'r' : 'l'} from-primary/80 to-primary/20`}></div>
-                        </div>
-                        
-                        {/* Timeline icon */}
-                        <div className={`absolute ${index % 2 === 0 ? 'left-2 bottom-2' : 'right-2 bottom-2'} w-8 h-8 text-primary/30`}>
-                          {item.icon}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                
-                {/* Final destination marker */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-6 h-6 bg-primary rounded-full border-4 border-white shadow-lg flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
                 </div>
-              </div>
+              ))}
             </div>
-          </Animation>
-        </div>
-        
-        {/* Value stats section - Mobile optimized */}
-        <div className="mt-12 sm:mt-16 md:mt-24">
-          <Animation type="fade-up">
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
-              <div className="bg-card/50 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-1 md:mb-2">25+</div>
-                <h4 className="font-medium text-xs sm:text-sm md:text-base mb-1 md:mb-2">Years Experience</h4>
-                <p className="text-xs sm:text-sm text-foreground/70 line-clamp-2">Combined expertise in African safari lodge management</p>
-              </div>
-              
-              <div className="bg-card/50 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-1 md:mb-2">12</div>
-                <h4 className="font-medium text-xs sm:text-sm md:text-base mb-1 md:mb-2">Countries</h4>
-                <p className="text-xs sm:text-sm text-foreground/70 line-clamp-2">Operations across major safari destinations in Africa</p>
-              </div>
-              
-              <div className="bg-card/50 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-1 md:mb-2">35+</div>
-                <h4 className="font-medium text-xs sm:text-sm md:text-base mb-1 md:mb-2">Lodges Managed</h4>
-                <p className="text-xs sm:text-sm text-foreground/70 line-clamp-2">From boutique camps to luxury safari properties</p>
-              </div>
-              
-              <div className="bg-card/50 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl shadow-sm border border-border/10 text-center hover:shadow-md transition-shadow duration-300 hover:-translate-y-1 hover:bg-card">
-                <div className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-1 md:mb-2">1.5M+</div>
-                <h4 className="font-medium text-xs sm:text-sm md:text-base mb-1 md:mb-2">Happy Guests</h4>
-                <p className="text-xs sm:text-sm text-foreground/70 line-clamp-2">Unforgettable safari experiences delivered globally</p>
-              </div>
-            </div>
-          </Animation>
-        </div>
+          </div>
+        </Animation>
       </div>
     </section>
   );
