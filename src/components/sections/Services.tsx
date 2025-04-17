@@ -169,9 +169,9 @@ export default function Services() {
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
           <div className="flex justify-center">
-            <span className="px-2 py-0.5 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium inline-block">OUR EXPERTISE</span>
+            <span className="px-3 py-0.5 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-1 inline-block">OUR EXPERTISE</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-center mt-1">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center">
             Services & Solutions
           </h2>
           <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-1 md:mt-2"></div>

@@ -103,7 +103,6 @@ export default function Home() {
       {/* Newsletter section - with consistent gradient */}
       <section className="bg-section-2 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-muted/60 z-0"></div>
-        <div className="absolute bottom-0 inset-x-0 h-16 sm:h-24 pattern-waves z-[1]"></div>
         <Newsletter useSubstack={true} />
       </section>
       

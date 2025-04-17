@@ -78,7 +78,7 @@ export default function About() {
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
           <span className="block text-center text-primary text-xs md:text-sm font-medium mb-3">DISCOVER OUR STORY</span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center">
             About Shuri Management
           </h2>
           <p className="mt-4 md:mt-6 text-center max-w-3xl mx-auto text-foreground/80 text-base md:text-lg">
@@ -178,12 +178,12 @@ export default function About() {
         {/* Core Competencies */}
         <Animation type="fade-up" delay={150}>
           <div className="mt-12 max-w-5xl mx-auto">
-            <div className="flex justify-center">
-              <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">CAPABILITIES</span>
+            <div className="flex justify-center mb-1">
+              <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">ABOUT US</span>
             </div>
-            <h3 className="text-2xl font-serif font-bold text-center mb-6">
-              Core Competencies
-            </h3>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center">
+              Award-Winning Lodge Management
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {

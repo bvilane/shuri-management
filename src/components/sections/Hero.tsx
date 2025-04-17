@@ -62,7 +62,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white flex justify-center mt-8 sm:mt-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white flex justify-center -mt-20 sm:-mt-16">
         <div className="max-w-3xl text-center">
           <div className="relative p-4 sm:p-6 md:p-8">
             <span 

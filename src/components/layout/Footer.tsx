@@ -5,7 +5,6 @@ export default function Footer() {
   return (
     <footer className="bg-muted/80 pt-12 sm:pt-16 pb-8 sm:pb-10 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 texture-bg opacity-5 z-0"></div>
       <div className="absolute left-0 bottom-0 w-1/3 h-1/3 bg-primary/5 blur-3xl"></div>
       <div className="absolute right-0 top-0 w-1/4 h-1/4 bg-accent/5 blur-3xl"></div>
 
