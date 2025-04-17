@@ -151,9 +151,9 @@ export default function Team() {
         {/* Partner logos section */}
         <Animation type="fade-up" delay={300}>
           <div className="mt-16 max-w-5xl mx-auto">
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">EXPERIENCE</span>
-            </div>
+            </div> */}
             <h3 className="text-2xl font-serif font-bold text-center mb-6">
               150+ Years of Combined Lodge & Travel Experience
             </h3>
