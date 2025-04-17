@@ -24,7 +24,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
+    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Enhanced Hero Image Background with Improved Loading */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full overflow-hidden">

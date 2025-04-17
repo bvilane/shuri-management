@@ -42,9 +42,9 @@ export default function Header() {
 
   return (
     <header 
-      className={`sticky top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'py-2 shadow-md' : 'py-4'
-      } bg-white`}
+      className={`fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300 ${
+        scrolled ? 'py-2 bg-white/80 backdrop-blur-sm shadow-md' : 'py-4'
+      }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <Link href="/" className="inline-flex items-center">
@@ -55,7 +55,7 @@ export default function Header() {
                 alt="SMG Logo" 
                 width={120}
                 height={35} 
-                className="object-contain"
+                className={`object-contain ${!scrolled ? 'brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]' : ''}`}
                 priority
               />
             </div>
@@ -70,14 +70,14 @@ export default function Header() {
           <NavLink href="#expertise" light={!scrolled}>Our Team</NavLink>
           <NavLink href="#resources" light={!scrolled}>Resources</NavLink>
           <NavLink href="#contact" light={!scrolled}>Contact</NavLink>
-          <GetStartedButton className="whitespace-nowrap shadow-md ml-1">
+          <GetStartedButton className={`whitespace-nowrap shadow-lg ml-1 font-sans ${!scrolled ? 'bg-[#8B6C4F] hover:bg-[#7A5E44] text-white border border-white/30' : ''}`}>
             Book a Call
           </GetStartedButton>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden relative z-[60] transition-all duration-300 p-2.5 rounded-lg bg-primary shadow-md hover:shadow-lg flex items-center justify-center ${mobileMenuOpen ? 'opacity-0' : ''} ${scrolled ? 'h-11 w-11' : 'h-11 w-11'}`}
+          className={`md:hidden relative z-[60] transition-all duration-300 p-2.5 rounded-lg ${scrolled ? 'bg-primary' : 'bg-[#8B6C4F]'} shadow-lg hover:shadow-xl flex items-center justify-center ${mobileMenuOpen ? 'opacity-0' : ''} ${scrolled ? 'h-11 w-11' : 'h-11 w-11'}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -91,13 +91,13 @@ export default function Header() {
 
       {/* Full-screen Mobile Navigation Menu */}
       <div
-        className={`md:hidden fixed inset-0 w-screen h-screen bg-white shadow-xl transition-all duration-500 ease-in-out z-[55] overflow-auto ${
+        className={`md:hidden fixed inset-0 w-screen h-screen bg-white/90 backdrop-blur-md shadow-xl transition-all duration-500 ease-in-out z-[55] overflow-auto ${
           mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
       >
         <div className="min-h-full flex flex-col">
           {/* Mobile menu header with logo - Increased height to match menu */}
-          <div className="border-b border-primary/20 py-3 px-5 bg-gradient-to-r from-primary/15 via-primary/5 to-white backdrop-blur-md">
+          <div className="border-b border-primary/20 py-3 px-5 bg-gradient-to-r from-primary/15 via-primary/10 to-transparent backdrop-blur-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="relative h-11 w-auto">
@@ -124,7 +124,7 @@ export default function Header() {
           </div>
           
           {/* Mobile menu links - Reduced spacing */}
-          <nav className="flex-1 overflow-y-auto py-3 px-4 sm:px-5 bg-white">
+          <nav className="flex-1 overflow-y-auto py-3 px-4 sm:px-5 bg-white/80 backdrop-blur-md">
             <div className="flex flex-col gap-2 mb-1">
               <div className="py-1 px-2 font-medium text-sm uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
               <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)} icon="info">
@@ -153,7 +153,7 @@ export default function Header() {
               {/* Call to action button - Positioned within scrollable area */}
               <div className="mt-6 mb-4 px-2">
                 <div className="border-t border-primary/20 pt-4 pb-2">
-                  <GetStartedButton className="w-full py-3 text-center text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]">
+                  <GetStartedButton className="w-full py-3 text-center text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98] font-sans">
                     Book a Call
                   </GetStartedButton>
                 </div>
@@ -178,10 +178,10 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`font-medium transition duration-300 hover:underline underline-offset-4 decoration-2 decoration-primary/50 ${
+      className={`font-medium transition duration-300 hover:underline underline-offset-4 decoration-2 font-sans ${
         light 
-          ? 'text-[#5a4029] hover:text-[#3d2b1c]' 
-          : 'text-foreground hover:text-primary'
+          ? 'text-white hover:text-white/90 decoration-white/50 drop-shadow-[0_2px_4px_rgba(0,0,0,0.75)] text-shadow' 
+          : 'text-foreground hover:text-primary decoration-primary/50'
       }`}
     >
       {children}
@@ -244,7 +244,7 @@ function MobileNavLink({
       onClick={onClick}
       className="group mb-1.5"
     >
-      <div className="relative overflow-hidden rounded-xl bg-white/70 border border-primary/10 shadow-md hover:shadow-lg transition-all duration-300">
+      <div className="relative overflow-hidden rounded-xl bg-white/60 backdrop-blur-sm border border-primary/10 shadow-md hover:shadow-lg transition-all duration-300">
         
         <div className="relative p-2.5 sm:p-3 flex items-center gap-3 sm:gap-4">
           {/* Icon container with glow effect */}
@@ -257,7 +257,7 @@ function MobileNavLink({
           
           {/* Text container */}
           <div className="flex flex-col flex-1 min-w-0">
-            <span className="text-base sm:text-lg font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-serif tracking-wide truncate">
+            <span className="text-base sm:text-lg font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans tracking-wide truncate">
               {children}
             </span>
           </div>

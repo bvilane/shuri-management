@@ -133,6 +133,11 @@ h6 {
   background-repeat: no-repeat;
 }
 
+/* Text shadow for better visibility on transparent backgrounds */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
+}
+
 /* Enhanced Section background classes with consistent light-to-dark gradients */
 .bg-section-1,
 .bg-section-2,
