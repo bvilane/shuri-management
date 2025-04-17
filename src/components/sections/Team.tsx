@@ -129,9 +129,9 @@ export default function Team() {
         <Animation type="fade-up" delay={250}>
           <div className="mt-16 max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
             <div className="p-8">
-              <div className="flex justify-center">
+              {/* <div className="flex justify-center">
                 <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">LOCATIONS</span>
-              </div>
+              </div> */}
               <h3 className="text-2xl font-serif font-bold text-center mb-8">Global Presence</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {globalPresence.map((country, index) => (
