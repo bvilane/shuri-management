@@ -495,8 +495,8 @@ h6 {
 
 /* Reduced spacing for sections */
 .reduced-spacing section {
-  padding-top: 36px;  /* Further reduced for better balance */
-  padding-bottom: 36px;
+  padding-top: 28px;  /* Further reduced for better balance */
+  padding-bottom: 28px;
   position: relative; /* Ensure position context for gradients */
   z-index: 1;
 }

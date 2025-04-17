@@ -153,7 +153,7 @@ export default function Services() {
   const currentCategory = serviceCategories.find(cat => cat.id === expandedCategory) || serviceCategories[0];
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-muted relative overflow-hidden">
+    <section id="services" className="-mt-30 bg-muted relative overflow-hidden">
       {/* Main gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f7f2ea] to-[#e2d5c0] z-0"></div>
       
@@ -169,20 +169,20 @@ export default function Services() {
       <div className="container px-4 sm:px-6 md:px-8 relative z-10">
         <Animation type="fade-up">
           <div className="flex justify-center">
-            <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">OUR EXPERTISE</span>
+            <span className="px-2 py-0.5 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium inline-block">OUR EXPERTISE</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-center mt-1">
             Services & Solutions
           </h2>
-          <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-4 md:mt-6"></div>
-          <p className="mt-4 md:mt-6 text-center max-w-3xl mx-auto text-foreground/80 text-base md:text-lg">
+          <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-1 md:mt-2"></div>
+          <p className="mt-1 md:mt-2 text-center max-w-3xl mx-auto text-foreground/80 text-base md:text-lg">
             Everything it takes to keep your lodge running smoothly—behind the
             scenes and on the ground—while maximizing bookings and guest satisfaction.
           </p>
         </Animation>
 
         {/* Enhanced Service Category Tabs with Illustrations */}
-        <div className="mt-10 md:mt-16 max-w-6xl mx-auto">
+        <div className="mt-4 md:mt-6 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full">
             {serviceCategories.map((category) => (
               <Animation key={category.id} type="fade-up" delay={100}>

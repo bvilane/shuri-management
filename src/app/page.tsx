@@ -3,7 +3,7 @@ import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Services from '@/components/sections/Services';
-import WhyShuri from '@/components/sections/WhyShuri';
+import WhySMG from '@/components/sections/WhySMG';
 import Team from '@/components/sections/Team';
 import Process from '@/components/sections/Process';
 import Contact from '@/components/sections/Contact';
@@ -41,14 +41,8 @@ export default function Home() {
         <Services />
       </section>
       
-      {/* Why Shuri section - with consistent gradient and texture */}
-      <section className="bg-section-textured-1 relative overflow-hidden section-separator">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-[#f8f4ee] to-[#e5d7c3] z-0"></div>
-        <div className="absolute inset-y-0 right-0 w-full sm:w-1/3 pattern-hexagons z-[1]"></div>
-        <div className="relative z-10">
-          <WhyShuri />
-        </div>
-      </section>
+      {/* Why SMG Section */}
+      <WhySMG />
       
       {/* Lodges section - with consistent gradient */}
       <section className="bg-section-3 relative overflow-hidden section-separator">

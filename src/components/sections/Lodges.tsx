@@ -53,7 +53,7 @@ export default function Lodges() {
   }, []);
 
   return (
-    <section id="lodges" className="py-20 sm:py-32 relative overflow-hidden">
+    <section id="lodges" className="-mt-30 py-16 sm:py-28 relative overflow-hidden">
       {/* Safari-themed decorative elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl opacity-50 -z-10 transform translate-x-1/2 -translate-y-1/4"></div>
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-2xl opacity-50 -z-10 transform -translate-x-1/3 translate-y-1/4"></div>
@@ -63,8 +63,8 @@ export default function Lodges() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Animation type="fade-up">
           {/* Premium section title with safari styling */}
-          <div className="flex flex-col items-center mb-12">
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 sm:mb-4">JOIN OUR PORTFOLIO</span>
+          <div className="flex flex-col items-center mb-8 md:mb-10">
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 mt-1">JOIN OUR PORTFOLIO</span>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-center max-w-3xl mx-auto leading-tight">
               Our Premier Safari Lodges
             </h2>
