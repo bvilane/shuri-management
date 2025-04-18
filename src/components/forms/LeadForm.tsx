@@ -173,7 +173,7 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
         },
         body: JSON.stringify({
           areasOfInterest: Object.entries(formData.areas)
-            .filter(([_, value]) => value)
+            .filter(([key, value]) => value)
             .map(([key]) => key),
           lodgeName: formData.lodgeName,
           location: formData.location,
@@ -246,12 +246,16 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
         setFormStatus('error');
         setValidationErrors([data.message || 'There was an error submitting your form. Please try again later.']);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Form submission error:', error);
       setFormStatus('error');
       
-      if (error.name === 'AbortError') {
-        setValidationErrors(['Request timed out. Please check your internet connection and try again.']);
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          setValidationErrors(['Request timed out. Please check your internet connection and try again.']);
+        } else {
+          setValidationErrors([error.message || 'There was an error submitting your form. Please try again later.']);
+        }
       } else {
         setValidationErrors(['There was an error submitting your form. Please try again later.']);
       }

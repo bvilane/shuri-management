@@ -137,16 +137,20 @@ export default function Contact() {
         setTimeout(() => {
           setFormStatus('idle');
         }, 5000);
-      } catch (fetchError: any) {
+      } catch (fetchError: unknown) {
         clearTimeout(timeoutId);
         
-        if (fetchError.name === 'AbortError') {
-          throw new Error('Request timed out. Please try again.');
+        if (fetchError instanceof Error) {
+          if (fetchError.name === 'AbortError') {
+            throw new Error('Request timed out. Please try again.');
+          }
+          
+          throw fetchError;
         }
         
-        throw fetchError;
+        throw new Error('An unknown error occurred');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting form:', error);
       setFormStatus('error');
       

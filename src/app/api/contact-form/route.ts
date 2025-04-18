@@ -7,13 +7,42 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+// Define the interface for contact form data
+interface ContactFormData {
+  fullName: string;
+  email: string;
+  phone?: string;
+  country: string;
+  message: string;
+  lodgeType?: string;
+  serviceNeeded?: string;
+  lodgeSize?: string;
+  [key: string]: string | undefined; // Allow for additional properties
+}
+
 /**
  * POST handler for contact form submissions
  */
 export async function POST(request: NextRequest) {
   try {
     // Parse the request body
-    const data = await request.json();
+    const data = await request.json() as ContactFormData;
+    
+    // Validate required fields
+    const requiredFields = ['fullName', 'email', 'country', 'message'];
+    const missingFields = requiredFields.filter(field => !data[field] || String(data[field]).trim() === '');
+    
+    if (missingFields.length > 0) {
+      console.log('Missing required fields:', missingFields);
+      console.log('Received form data:', data);
+      return Response.json(
+        { 
+          success: false, 
+          error: `Missing required fields: ${missingFields.join(', ')}` 
+        },
+        { status: 400 }
+      );
+    }
     
     // Create response object to return later
     const successResponse = {
@@ -56,7 +85,7 @@ export async function OPTIONS() {
 /**
  * Process form submission asynchronously (doesn't block response)
  */
-async function processSubmission(data: any) {
+async function processSubmission(data: ContactFormData) {
   try {
     let sheetSuccess = false;
     let emailSuccess = false;

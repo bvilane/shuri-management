@@ -7,13 +7,31 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+// Define interface for lead form data
+interface LeadFormData {
+  fullName: string;
+  email: string;
+  whatsapp?: string;
+  preferredContact?: string;
+  lodgeName?: string;
+  location?: string;
+  biggestChallenge?: string;
+  existingServices?: string;
+  timeline?: string;
+  areasOfInterest?: string[];
+  areas?: {
+    [key: string]: boolean;
+  };
+  [key: string]: string | string[] | boolean | { [key: string]: boolean } | undefined;
+}
+
 /**
  * POST handler for lead form submissions
  */
 export async function POST(request: NextRequest) {
   try {
     // Parse the request body
-    const data = await request.json();
+    const data = await request.json() as LeadFormData;
     
     // Basic validation for required fields
     const requiredFields = ['fullName', 'email'];
@@ -67,7 +85,7 @@ export async function OPTIONS() {
 /**
  * Process lead submission asynchronously (doesn't block response)
  */
-async function processLeadSubmission(data: any) {
+async function processLeadSubmission(data: LeadFormData) {
   try {
     let sheetSuccess = false;
     let emailSuccess = false;
