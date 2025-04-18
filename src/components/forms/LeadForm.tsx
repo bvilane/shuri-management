@@ -11,6 +11,8 @@ interface LeadFormProps {
 
 export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
   const [step, setStep] = useState(1);
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     // Step 1: Areas of help
     areas: {
@@ -58,23 +60,202 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
   };
 
   const nextStep = () => {
-    setStep(step + 1);
+    // Clear previous validation errors
+    setValidationErrors([]);
+    
+    // Validate current step before proceeding
+    let isValid = false;
+    
+    switch (step) {
+      case 1:
+        isValid = validateStep1();
+        break;
+      case 2:
+        isValid = validateStep2();
+        break;
+      case 3:
+        isValid = validateStep3();
+        break;
+      case 4:
+        isValid = validateStep4();
+        break;
+      default:
+        isValid = true;
+    }
+    
+    if (isValid) {
+      setStep(step + 1);
+    }
   };
 
   const prevStep = () => {
+    // Clear validation errors when going back
+    setValidationErrors([]);
     setStep(step - 1);
+  };
+
+  // Validation functions for each step
+  const validateStep1 = () => {
+    // At least one area of interest should be selected
+    const selectedAreas = Object.values(formData.areas).filter(Boolean);
+    if (selectedAreas.length === 0) {
+      setValidationErrors(['Please select at least one area you need help with']);
+      return false;
+    }
+    return true;
+  };
+
+  const validateStep2 = () => {
+    const errors: string[] = [];
+    if (!formData.lodgeName.trim()) {
+      errors.push('Lodge Name is required');
+    }
+    if (!formData.location.trim()) {
+      errors.push('Location is required');
+    }
+    
+    if (errors.length > 0) {
+      setValidationErrors(errors);
+      return false;
+    }
+    return true;
+  };
+
+  const validateStep3 = () => {
+    const errors: string[] = [];
+    if (!formData.fullName.trim()) {
+      errors.push('Full Name is required');
+    }
+    if (!formData.email.trim()) {
+      errors.push('Email is required');
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      errors.push('Please enter a valid email address');
+    }
+    
+    if (formData.preferredContact === 'whatsapp' && !formData.whatsapp.trim()) {
+      errors.push('WhatsApp number is required when selected as preferred contact method');
+    }
+    
+    if (errors.length > 0) {
+      setValidationErrors(errors);
+      return false;
+    }
+    return true;
+  };
+
+  const validateStep4 = () => {
+    if (!formData.timeline) {
+      setValidationErrors(['Please select a timeline']);
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend or a form service
-    console.log('Form submitted:', formData);
     
-    // Move to success screen
-    setStep(5);
+    // Final validation before submission
+    if (step === 4 && !validateStep4()) {
+      return;
+    }
     
-    // You could also send this data to a service like Typeform or Tally
-    // Example: await fetch('/api/submit-form', { method: 'POST', body: JSON.stringify(formData) });
+    setFormStatus('submitting');
+    
+    // Create an AbortController to manage request timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+    
+    try {
+      const response = await fetch('/api/lead-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          areasOfInterest: Object.entries(formData.areas)
+            .filter(([_, value]) => value)
+            .map(([key]) => key),
+          lodgeName: formData.lodgeName,
+          location: formData.location,
+          biggestChallenge: formData.biggestChallenge,
+          existingServices: formData.existingServices,
+          fullName: formData.fullName,
+          email: formData.email,
+          whatsapp: formData.whatsapp,
+          preferredContact: formData.preferredContact,
+          timeline: formData.timeline
+        }),
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
+      // Get response as text first
+      const responseText = await response.text();
+      let data;
+      
+      try {
+        // Try to parse JSON response if there is content
+        if (responseText) {
+          data = JSON.parse(responseText);
+        } else {
+          throw new Error('Empty response');
+        }
+      } catch (parseError) {
+        console.error('Error parsing response:', parseError);
+        throw new Error('Invalid server response');
+      }
+      
+      if (!response.ok) {
+        console.error('Form submission error:', data || response.statusText);
+        setFormStatus('error');
+        setValidationErrors([data?.error || 'There was an error submitting your form. Please try again later.']);
+        return;
+      }
+      
+      if (data.success) {
+        setFormStatus('success');
+        // Move to the success step
+        setStep(5);
+        
+        // Reset form for if they open it again
+        setFormData({
+          areas: {
+            lodgeOperations: false,
+            bookingSystems: false,
+            staffTraining: false,
+            photoVideo: false,
+            socialMedia: false,
+            websiteSetup: false,
+            paidAds: false,
+            guestExperience: false,
+            monthlyStrategy: false,
+            notSure: false,
+          },
+          lodgeName: '',
+          location: '',
+          biggestChallenge: '',
+          existingServices: '',
+          fullName: '',
+          email: '',
+          whatsapp: '',
+          preferredContact: 'email',
+          timeline: '',
+        });
+      } else {
+        setFormStatus('error');
+        setValidationErrors([data.message || 'There was an error submitting your form. Please try again later.']);
+      }
+    } catch (error: any) {
+      console.error('Form submission error:', error);
+      setFormStatus('error');
+      
+      if (error.name === 'AbortError') {
+        setValidationErrors(['Request timed out. Please check your internet connection and try again.']);
+      } else {
+        setValidationErrors(['There was an error submitting your form. Please try again later.']);
+      }
+    }
   };
 
   if (!isOpen) return null;
@@ -113,7 +294,7 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
           </button>
         </div>
 
-        <div className="p-4 sm:p-6 md:p-8">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-8">
           {/* Progress indicator - now positioned properly below the header */}
           {step < 5 && (
             <div className="flex justify-between items-center mb-6 sm:mb-8">
@@ -372,129 +553,123 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
 
             {step === 4 && (
               <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-center">Let's Talk Timeline</h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-center">What is your timeline?</h2>
                 
-                <div className="space-y-3 sm:space-y-4 mt-4 sm:mt-6">
-                  <div className="flex flex-col space-y-2 sm:space-y-3">
-                    <label className="inline-flex items-center p-2 sm:p-3 border border-border rounded-md hover:bg-muted/30 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="timeline"
-                        value="immediate"
-                        checked={formData.timeline === 'immediate'}
-                        onChange={handleInputChange}
-                        className="mr-2 sm:mr-3 text-primary focus:ring-primary h-4 w-4"
-                      />
-                      <span className="text-sm sm:text-base font-medium">Ready to start immediately</span>
+                <div className="space-y-4 sm:space-y-5 mt-4 sm:mt-6">
+                  <div className="space-y-2 sm:space-y-3">
+                    <label className="block text-sm sm:text-base font-medium text-foreground">
+                      How soon are you looking to get started?
                     </label>
-                    <label className="inline-flex items-center p-2 sm:p-3 border border-border rounded-md hover:bg-muted/30 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="timeline"
-                        value="planning"
-                        checked={formData.timeline === 'planning'}
-                        onChange={handleInputChange}
-                        className="mr-2 sm:mr-3 text-primary focus:ring-primary h-4 w-4"
-                      />
-                      <span className="text-sm sm:text-base font-medium">Planning ahead, just exploring</span>
-                    </label>
-                    <label className="inline-flex items-center p-2 sm:p-3 border border-border rounded-md hover:bg-muted/30 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="timeline"
-                        value="deciding"
-                        checked={formData.timeline === 'deciding'}
-                        onChange={handleInputChange}
-                        className="mr-2 sm:mr-3 text-primary focus:ring-primary h-4 w-4"
-                      />
-                      <span className="text-sm sm:text-base font-medium">Still deciding, want more info first</span>
-                    </label>
+                    
+                    <div className="space-y-2">
+                      {["ASAP (within days)", "Within a month", "1-3 months from now", "Just researching options"].map((option) => (
+                        <RadioItem 
+                          key={option}
+                          id={`timeline-${option}`}
+                          name="timeline"
+                          value={option}
+                          checked={formData.timeline === option}
+                          onChange={handleInputChange}
+                          label={option}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             )}
 
             {step === 5 && (
-              <div className="space-y-4 sm:space-y-6 text-center py-6 sm:py-8">
-                <div className="flex justify-center">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
+              <div className="text-center py-8">
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
+                  <svg className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
-                
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold mt-3 sm:mt-4">
-                  Thanks! We'll take it from here.
-                </h2>
-                
-                <p className="text-sm sm:text-base text-foreground/70 max-w-md mx-auto">
+                <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-4">Thanks! We'll take it from here.</h2>
+                <p className="text-base sm:text-lg text-foreground/70 max-w-lg mx-auto">
                   We'll review your needs and get back to you within 24–48 hours with a tailored proposal.
                 </p>
-                
-                <p className="text-sm sm:text-base text-foreground/70 italic mt-4 sm:mt-6">
+                <p className="text-base sm:text-lg font-medium text-primary mt-6">
                   P.S. If you'd rather jump on a call,{' '}
                   <a 
-                    href="#" 
-                    className="text-primary hover:underline"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // You would add a booking link here
-                      onClose();
-                      // router.push('/book-call');
-                    }}
+                    href="https://calendly.com/shurimanagement/30min" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="underline hover:text-primary/80 transition-colors"
                   >
-                    Book a Free Call
+                    Book a Quick Chat
                   </a>
                 </p>
-                
-                <button
-                  onClick={onClose}
-                  className="mt-4 sm:mt-6 inline-flex bg-primary text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md hover:bg-primary/90 transition font-medium shadow-sm text-sm sm:text-base"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-
-            {step < 5 && (
-              <div className="mt-8 sm:mt-10 flex justify-between">
-                {step > 1 ? (
+                <div className="mt-8">
                   <button
-                    onClick={prevStep}
-                    className="px-4 sm:px-6 py-2 sm:py-2.5 border border-border rounded hover:bg-card/80 transition flex items-center gap-1 text-sm sm:text-base"
+                    type="button"
+                    onClick={onClose}
+                    className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Back
+                    Close
                   </button>
-                ) : (
-                  <div></div>
-                )}
-                
-                {step < 4 ? (
-                  <button
-                    onClick={nextStep}
-                    className="px-4 sm:px-6 py-2 sm:py-2.5 bg-primary text-white rounded hover:bg-primary/90 transition shadow-sm flex items-center gap-1 text-sm sm:text-base"
-                  >
-                    Continue
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleSubmit}
-                    className="px-4 sm:px-6 py-2 sm:py-2.5 bg-primary text-white rounded hover:bg-primary/90 transition shadow-sm text-sm sm:text-base"
-                  >
-                    Submit
-                  </button>
-                )}
+                </div>
               </div>
             )}
           </Animation>
-        </div>
+
+          {/* Error message displayed when form submission fails */}
+          {formStatus === 'error' && (
+            <div className="mt-4 bg-red-50 border-l-4 border-red-500 p-4 rounded dark:bg-red-950/30 dark:border-red-500/50">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-medium text-red-800 dark:text-red-300">Form submission failed</span>
+              </div>
+              <p className="mt-2 text-sm text-red-700 dark:text-red-400">
+                {validationErrors.join('\n')}
+              </p>
+            </div>
+          )}
+
+          {/* Form navigation buttons */}
+          {step < 5 && (
+            <div className="flex justify-between mt-8 sm:mt-10">
+              <button
+                type="button"
+                onClick={step === 1 ? onClose : prevStep}
+                className="px-4 sm:px-6 py-2 sm:py-3 border border-border rounded-md hover:bg-background transition-colors"
+              >
+                {step === 1 ? 'Cancel' : 'Back'}
+              </button>
+              
+              {step < 4 ? (
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className="px-4 sm:px-6 py-2 sm:py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium"
+                >
+                  Continue
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={formStatus === 'submitting'}
+                  className="px-4 sm:px-6 py-2 sm:py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium disabled:opacity-70 flex items-center"
+                >
+                  {formStatus === 'submitting' ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit'
+                  )}
+                </button>
+              )}
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );
@@ -521,6 +696,65 @@ function CheckboxItem({ id, checked, onChange, label }: CheckboxItemProps) {
         <input
           type="checkbox"
           id={id}
+          checked={checked}
+          onChange={onChange}
+          className="sr-only"
+        />
+        <div 
+          className={`w-4 h-4 sm:w-5 sm:h-5 rounded border ${
+            checked 
+              ? 'bg-primary border-primary' 
+              : 'border-foreground/30 bg-background'
+          }`}
+        >
+          {checked && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 sm:h-5 sm:w-5 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          )}
+        </div>
+      </div>
+      <span className={`text-sm sm:text-base ${checked ? 'font-medium' : 'font-normal'}`}>{label}</span>
+    </label>
+  );
+}
+
+interface RadioItemProps {
+  id: string;
+  name: string;
+  value: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+}
+
+function RadioItem({ id, name, value, checked, onChange, label }: RadioItemProps) {
+  return (
+    <label 
+      htmlFor={id} 
+      className={`flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg cursor-pointer transition-all ${
+        checked 
+          ? 'bg-primary/10 border border-primary/20 shadow-sm' 
+          : 'bg-background hover:bg-muted/50 border border-border'
+      }`}
+    >
+      <div className="relative">
+        <input
+          type="radio"
+          id={id}
+          name={name}
+          value={value}
           checked={checked}
           onChange={onChange}
           className="sr-only"

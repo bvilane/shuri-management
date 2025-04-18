@@ -73,34 +73,88 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
     
-    // Simulate form submission with a delay
-    setTimeout(() => {
-      // Here you would typically submit the form to your backend or a service like Formspree
-      console.log('Form submitted:', formData);
+    try {
+      // Prepare form data
+      const dataToSend = { ...formData };
       
-      // Reset form after successful submission
-      setFormData({ 
-        fullName: '', 
-        email: '', 
-        phone: '', 
-        country: '', 
-        message: '',
-        lodgeType: 'existing',
-        serviceNeeded: '',
-        lodgeSize: '',
-      });
+      // Make the fetch request with a timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
       
-      setFormStatus('success');
+      try {
+        // Use the contact form API endpoint
+        const response = await fetch('/api/contact-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataToSend),
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
+        
+        // Get response as text first
+        const responseText = await response.text();
+        
+        // Only try to parse if we have content
+        if (!responseText) {
+          throw new Error('Server returned an empty response');
+        }
+        
+        let result;
+        try {
+          // Parse the JSON response
+          result = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error('JSON parse error:', parseError);
+          throw new Error('Invalid response format from server');
+        }
+        
+        if (!response.ok) {
+          throw new Error(result?.error || `Server error (${response.status})`);
+        }
+        
+        // Reset form after successful submission
+        setFormData({ 
+          fullName: '', 
+          email: '', 
+          phone: '', 
+          country: '', 
+          message: '',
+          lodgeType: 'existing',
+          serviceNeeded: '',
+          lodgeSize: '',
+        });
+        
+        setFormStatus('success');
+        
+        // Reset status after showing success message
+        setTimeout(() => {
+          setFormStatus('idle');
+        }, 5000);
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        
+        if (fetchError.name === 'AbortError') {
+          throw new Error('Request timed out. Please try again.');
+        }
+        
+        throw fetchError;
+      }
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      setFormStatus('error');
       
-      // Reset status after showing success message
+      // Reset error status after a delay
       setTimeout(() => {
         setFormStatus('idle');
       }, 5000);
-    }, 1000);
+    }
   };
 
   return (
@@ -262,6 +316,21 @@ export default function Contact() {
                       </div>
                       <p className="mt-2 text-sm text-green-700 dark:text-green-400">
                         Thank you for reaching out. We'll be in touch shortly.
+                      </p>
+                    </div>
+                  )}
+                  
+                  {/* Error message displayed after form submission failure */}
+                  {formStatus === 'error' && (
+                    <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded dark:bg-red-950/30 dark:border-red-500/50">
+                      <div className="flex items-center">
+                        <svg className="w-5 h-5 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="font-medium text-red-800 dark:text-red-300">Form submission failed</span>
+                      </div>
+                      <p className="mt-2 text-sm text-red-700 dark:text-red-400">
+                        Something went wrong while submitting your message. Please try again or contact us directly via email.
                       </p>
                     </div>
                   )}
