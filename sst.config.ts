@@ -11,6 +11,6 @@ export default $config({
     };
   },
   async run() {
-    new sst.aws.Nextjs('Shuri Management');
+    new sst.aws.Nextjs('ShuriManagement');
   },
 });
