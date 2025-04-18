@@ -128,10 +128,10 @@ export default function Team() {
         {/* Global Presence */}
         <Animation type="fade-up" delay={250}>
           <div className="mt-16 max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            {/* <div className="flex justify-center">
+              <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">LOCATIONS</span>
+            </div> */}
             <div className="p-8">
-              {/* <div className="flex justify-center">
-                <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">LOCATIONS</span>
-              </div> */}
               <h3 className="text-2xl font-serif font-bold text-center mb-8">Global Presence</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {globalPresence.map((country, index) => (
@@ -154,8 +154,8 @@ export default function Team() {
             {/* <div className="flex justify-center">
               <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">EXPERIENCE</span>
             </div> */}
-            <h3 className="text-2xl font-serif font-bold text-center mb-6">
-              150+ Years of Combined Lodge & Travel Experience
+            <h3 className="text-xl font-serif text-center mb-6 text-foreground/80">
+              Our Team
             </h3>
             <p className="text-center text-foreground/70 mb-8 max-w-3xl mx-auto">
               Our team and advisor network includes lodge managers, guides, hospitality consultants, and brand strategists who've helped shape some of the most iconic safari experiences on the continent.
@@ -172,9 +172,6 @@ export default function Team() {
                 </div>
               ))}
             </div>
-            <p className="text-center text-foreground/70 max-w-3xl mx-auto italic">
-              – across the Sabi Sands and throughout Africa's premier safari destinations.
-            </p>
             <p className="text-center text-foreground/80 mt-6 max-w-3xl mx-auto font-medium">
               Now we bring that knowledge to lodges like yours so you don't just keep up, you set the new standard.
             </p>

@@ -179,10 +179,10 @@ export default function About() {
         <Animation type="fade-up" delay={150}>
           <div className="mt-12 max-w-5xl mx-auto">
             <div className="flex justify-center mb-1">
-              <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">ABOUT US</span>
+              <span className="px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 text-primary font-medium mb-4 inline-block">Capabilities</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center">
-              Award-Winning Lodge Management
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-6">
+              Core Competencies
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[

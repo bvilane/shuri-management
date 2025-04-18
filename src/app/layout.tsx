@@ -15,9 +15,10 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Shuri Safari Lodge Management',
+  title: 'Safari Lodge Management & Marketing | Shuri Management Group',
   description:
-    'Premium safari lodge management services for an unforgettable experience',
+    'We help safari lodges across Africa grow bookings and improve guest experience using smart operations, marketing, staff training, and booking systems.',
+  keywords: 'safari lodge management, lodge marketing, safari lodge operations, hospitality marketing, touring Africa, safari lodge consultants, lodge booking systems, lodge staff training, lodge media production, African lodge growth, Shuri Management Group, luxury lodge consulting, guest experience, hospitality consulting',
   icons: [
     { rel: 'icon', url: '/images/logo.jpeg' },
     { rel: 'apple-touch-icon', url: '/images/logo.jpeg' },

@@ -37,7 +37,7 @@ const contactMethods = [
     ),
     title: "Remote Consultations",
     info: "Zoom, Teams, or WhatsApp",
-    link: "#",
+    link: "https://calendly.com/shurimanagement/30min",
     hoverColor: "hover:bg-amber-50 hover:border-amber-100 dark:hover:bg-amber-950/20 dark:hover:border-amber-900/30"
   }
 ];

@@ -23,13 +23,9 @@ export default function Newsletter({ useSubstack = true }) {
         <div className="max-w-3xl mx-auto">
           <Animation type="fade-up">
             <h3 className="text-2xl md:text-3xl font-serif font-bold text-center">
-              Subscribe to The Lodge Dispatch
+              Subscribe to Our Newsletter
             </h3>
             <p className="mt-4 text-center text-foreground/80">
-              Field-tested insights, lodge growth strategies, and real
-              stories—delivered straight to your inbox.
-            </p>
-            <p className="mt-2 text-center text-foreground/80">
               👉 Join other lodge professionals already learning how to grow
               smarter, not harder.
             </p>
@@ -42,8 +38,13 @@ export default function Newsletter({ useSubstack = true }) {
                   <iframe
                     src="https://lodgedispatch.substack.com/embed"
                     width="480"
-                    height="150"
-                    style={{ border: '1px solid #EEE', background: 'white' }}
+                    height="320"
+                    style={{ 
+                      border: '1px solid #e2d5c0', 
+                      background: '#f8f5f0',
+                      borderRadius: '0.5rem',
+                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                    }}
                     frameBorder="0"
                     scrolling="no"
                     title="Lodge Dispatch Newsletter"
