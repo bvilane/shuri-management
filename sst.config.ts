@@ -11,6 +11,14 @@ export default $config({
     };
   },
   async run() {
-    new sst.aws.Nextjs('ShuriManagement');
+    new sst.aws.Nextjs('ShuriManagement', {
+      domain: {
+        name: 'shurimanagement.com',
+        redirects: ['www.shurimanagement.com'],
+        dns: sst.cloudflare.dns({
+          zone: '6d867e91e68d8b8ab2827c1803a23f93',
+        }),
+      },
+    });
   },
 });
