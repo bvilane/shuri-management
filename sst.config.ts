@@ -19,6 +19,16 @@ export default $config({
           zone: '6d867e91e68d8b8ab2827c1803a23f93',
         }),
       },
+      environment: {
+        GOOGLE_SERVICE_ACCOUNT_EMAIL: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        GOOGLE_PRIVATE_KEY: process.env.GOOGLE_PRIVATE_KEY,
+        GOOGLE_SHEET_ID: process.env.GOOGLE_SHEET_ID,
+        SMTP_SERVER: process.env.SMTP_SERVER,
+        SMTP_PORT: process.env.SMTP_PORT,
+        SMTP_USERNAME: process.env.SMTP_USERNAME,
+        SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+        RECIPIENT_EMAIL: process.env.RECIPIENT_EMAIL,
+      },
     });
   },
 });
