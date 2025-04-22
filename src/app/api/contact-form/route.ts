@@ -26,45 +26,42 @@ interface ContactFormData {
 export async function POST(request: NextRequest) {
   try {
     // Parse the request body
-    const data = await request.json() as ContactFormData;
-    
+    const data = (await request.json()) as ContactFormData;
+
     // Validate required fields
     const requiredFields = ['fullName', 'email', 'country', 'message'];
-    const missingFields = requiredFields.filter(field => !data[field] || String(data[field]).trim() === '');
-    
+    const missingFields = requiredFields.filter(
+      (field) => !data[field] || String(data[field]).trim() === ''
+    );
+
     if (missingFields.length > 0) {
       console.log('Missing required fields:', missingFields);
       console.log('Received form data:', data);
       return Response.json(
-        { 
-          success: false, 
-          error: `Missing required fields: ${missingFields.join(', ')}` 
+        {
+          success: false,
+          error: `Missing required fields: ${missingFields.join(', ')}`,
         },
         { status: 400 }
       );
     }
-    
+
     // Create response object to return later
     const successResponse = {
       success: true,
-      message: 'Form submission received successfully'
+      message: 'Form submission received successfully',
     };
-    
+
     // Process form submission in the background
-    processSubmission(data).catch(err => {
-      console.error('Background submission processing error:', err);
-    });
-    
+    await processSubmission(data);
+
     // Return immediate success to the client
     return Response.json(successResponse);
   } catch (error) {
     console.error('Error processing contact form submission:', error);
-    
+
     // Return error response
-    return Response.json(
-      { success: false, error: 'Server error processing your request' },
-      { status: 500 }
-    );
+    return Response.json({ success: false, error }, { status: 500 });
   }
 }
 
@@ -89,7 +86,7 @@ async function processSubmission(data: ContactFormData) {
   try {
     let sheetSuccess = false;
     let emailSuccess = false;
-    
+
     // Try to save to Google Sheets
     try {
       const serviceAccountAuth = new JWT({
@@ -97,27 +94,27 @@ async function processSubmission(data: ContactFormData) {
         key: process.env.GOOGLE_PRIVATE_KEY?.split(String.raw`\n`).join('\n'),
         scopes: ['https://www.googleapis.com/auth/spreadsheets'],
       });
-      
+
       const doc = new GoogleSpreadsheet(
         process.env.GOOGLE_SHEET_ID!,
         serviceAccountAuth
       );
-      
+
       await doc.loadInfo();
-      
+
       const sheet = doc.sheetsByIndex[0];
       const submissionDate = new Date().toISOString();
-      
+
       await sheet.addRow({
         ...data,
         submissionDate,
       });
-      
+
       sheetSuccess = true;
     } catch (sheetError) {
       console.error('Error saving to Google Sheets:', sheetError);
     }
-    
+
     // Try to send email
     try {
       const mailer = nodemailer.createTransport({
@@ -129,7 +126,7 @@ async function processSubmission(data: ContactFormData) {
           pass: process.env.SMTP_PASSWORD,
         },
       });
-      
+
       await mailer.sendMail({
         from: process.env.SMTP_USERNAME,
         to: process.env.RECIPIENT_EMAIL || 'theshuricollection@gmail.com',
@@ -156,10 +153,18 @@ async function processSubmission(data: ContactFormData) {
           <p><strong>Full Name:</strong> ${data.fullName || 'Not provided'}</p>
           <p><strong>Email:</strong> ${data.email || 'Not provided'}</p>
           <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
-          <p><strong>Country/Region:</strong> ${data.country || 'Not provided'}</p>
-          <p><strong>Lodge Type:</strong> ${data.lodgeType || 'Not specified'}</p>
-          <p><strong>Lodge Size:</strong> ${data.lodgeSize || 'Not specified'}</p>
-          <p><strong>Service Needed:</strong> ${data.serviceNeeded || 'Not specified'}</p>
+          <p><strong>Country/Region:</strong> ${
+            data.country || 'Not provided'
+          }</p>
+          <p><strong>Lodge Type:</strong> ${
+            data.lodgeType || 'Not specified'
+          }</p>
+          <p><strong>Lodge Size:</strong> ${
+            data.lodgeSize || 'Not specified'
+          }</p>
+          <p><strong>Service Needed:</strong> ${
+            data.serviceNeeded || 'Not specified'
+          }</p>
           
           <p><strong>Message:</strong><br>
           ${(data.message || 'No message provided').replace(/\n/g, '<br>')}</p>
@@ -167,16 +172,18 @@ async function processSubmission(data: ContactFormData) {
           <p><em>Submitted on: ${new Date().toLocaleString()}</em></p>
         `,
       });
-      
+
       emailSuccess = true;
     } catch (emailError) {
       console.error('Error sending email notification:', emailError);
     }
-    
-    console.log(`Form processing results: Sheets: ${sheetSuccess}, Email: ${emailSuccess}`);
+
+    console.log(
+      `Form processing results: Sheets: ${sheetSuccess}, Email: ${emailSuccess}`
+    );
     return { sheetSuccess, emailSuccess };
   } catch (error) {
     console.error('Error in background processing:', error);
     throw error;
   }
-} 
+}
