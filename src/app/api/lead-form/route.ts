@@ -99,13 +99,13 @@ async function processLeadSubmission(data: LeadFormData) {
       });
       
       const doc = new GoogleSpreadsheet(
-        process.env.LEAD_FORM_SHEET_ID || process.env.GOOGLE_SHEET_ID!,
+        process.env.GOOGLE_SHEET_ID!,
         serviceAccountAuth
       );
       
       await doc.loadInfo();
       
-      const sheet = doc.sheetsByIndex[0];
+      const sheet = doc.sheetsByIndex[1];
       const submissionDate = new Date().toISOString();
       
       // Format areas of interest
