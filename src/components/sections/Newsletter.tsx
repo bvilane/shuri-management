@@ -7,14 +7,38 @@ export default function Newsletter({ useSubstack = true }) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Newsletter subscription:', { firstName, email });
-    setIsSubmitted(true);
-    setEmail('');
-    setFirstName('');
-    // Here you would typically submit to your newsletter service
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstName, email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        setEmail('');
+        setFirstName('');
+      } else {
+        setError(data.error || 'Failed to subscribe. Please try again.');
+      }
+    } catch (err) {
+      console.error('Newsletter subscription error:', err);
+      setError('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -39,11 +63,12 @@ export default function Newsletter({ useSubstack = true }) {
                     src="https://lodgedispatch.substack.com/embed"
                     width="480"
                     height="320"
-                    style={{ 
-                      border: '1px solid #e2d5c0', 
+                    style={{
+                      border: '1px solid #e2d5c0',
                       background: '#f8f5f0',
                       borderRadius: '0.5rem',
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                      boxShadow:
+                        '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
                     }}
                     frameBorder="0"
                     scrolling="no"
@@ -88,6 +113,7 @@ export default function Newsletter({ useSubstack = true }) {
                           onChange={(e) => setFirstName(e.target.value)}
                           required
                           className="w-full px-4 py-3 bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="flex-1">
@@ -98,15 +124,22 @@ export default function Newsletter({ useSubstack = true }) {
                           onChange={(e) => setEmail(e.target.value)}
                           required
                           className="w-full px-4 py-3 bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                          disabled={isSubmitting}
                         />
                       </div>
                       <button
                         type="submit"
-                        className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium whitespace-nowrap"
+                        className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium whitespace-nowrap disabled:opacity-70"
+                        disabled={isSubmitting}
                       >
-                        Subscribe
+                        {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                       </button>
                     </form>
+                  )}
+                  {error && (
+                    <p className="mt-3 text-red-500 text-sm text-center">
+                      {error}
+                    </p>
                   )}
                 </div>
               </Animation>
@@ -124,12 +157,36 @@ export function NewsletterPopup() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Newsletter subscription:', { firstName, email });
-    setIsSubmitted(true);
-    // Here you would typically submit to your newsletter service
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstName, email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+      } else {
+        setError(data.error || 'Failed to subscribe. Please try again.');
+      }
+    } catch (err) {
+      console.error('Newsletter subscription error:', err);
+      setError('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Show popup after 30 seconds
@@ -207,6 +264,7 @@ export function NewsletterPopup() {
               onChange={(e) => setFirstName(e.target.value)}
               required
               className="w-full px-4 py-2 bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+              disabled={isSubmitting}
             />
             <input
               type="email"
@@ -215,13 +273,18 @@ export function NewsletterPopup() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-4 py-2 bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+              disabled={isSubmitting}
             />
             <button
               type="submit"
-              className="w-full px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium"
+              className="w-full px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium disabled:opacity-70"
+              disabled={isSubmitting}
             >
-              Subscribe
+              {isSubmitting ? 'Subscribing...' : 'Subscribe'}
             </button>
+            {error && (
+              <p className="mt-1 text-red-500 text-sm text-center">{error}</p>
+            )}
           </form>
         )}
       </div>
