@@ -9,37 +9,52 @@ import GetStartedButton from '@/components/ui/GetStartedButton';
 const lodges = [
   {
     id: 1,
-    name: "Coming Soon...",
-    location: "Eastern Africa",
-    image: "/images/lodge-2.jpg",
+    name: 'Coming Soon...',
+    location: 'Eastern Africa',
+    image: '/images/lodge-2.jpg',
     rating: 4.9,
     reviewCount: 128,
-    description: "Be among the first to join our exclusive collection of premium safari properties. Contact us to learn more about our management services.",
-    capacity: "Luxury Safari Properties",
-    highlights: ["Premium Management", "Marketing Support", "Operations Excellence", "Staff Training"]
-  }
+    description:
+      'Be among the first to join our exclusive collection of premium safari properties. Contact us to learn more about our management services.',
+    capacity: 'Luxury Safari Properties',
+    highlights: [
+      'Premium Management',
+      'Marketing Support',
+      'Operations Excellence',
+      'Staff Training',
+    ],
+  },
 ];
 
 export default function Lodges() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [imagesLoaded, setImagesLoaded] = useState<{[key: number]: boolean}>({});
+  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   // Ensure we have a valid lodge to display
-  const currentLodge = lodges[activeIndex] || lodges[0] || {
-    id: 0,
-    name: "Coming Soon...",
-    location: "Eastern Africa",
-    image: "/images/lodge-2.jpg",
-    rating: 4.9,
-    reviewCount: 128,
-    description: "Be among the first to join our exclusive collection of premium safari properties. Contact us to learn more about our management services.",
-    capacity: "Luxury Safari Properties",
-    highlights: ["Premium Management", "Marketing Support", "Operations Excellence", "Staff Training"]
-  };
+  const currentLodge = lodges[activeIndex] ||
+    lodges[0] || {
+      id: 0,
+      name: 'Coming Soon...',
+      location: 'Eastern Africa',
+      image: '/images/lodge-2.jpg',
+      rating: 4.9,
+      reviewCount: 128,
+      description:
+        'Be among the first to join our exclusive collection of premium safari properties. Contact us to learn more about our management services.',
+      capacity: 'Luxury Safari Properties',
+      highlights: [
+        'Premium Management',
+        'Marketing Support',
+        'Operations Excellence',
+        'Staff Training',
+      ],
+    };
 
   const handleImageLoaded = (index: number) => {
-    setImagesLoaded(prev => ({...prev, [index]: true}));
+    setImagesLoaded((prev) => ({ ...prev, [index]: true }));
   };
 
   // Preload all lodge images to prevent transition issues
@@ -53,36 +68,66 @@ export default function Lodges() {
   }, []);
 
   return (
-    <section id="lodges" className="-mt-30 py-16 sm:py-28 relative overflow-hidden">
+    <section
+      id="lodges"
+      className="-mt-30 py-16 sm:py-28 relative overflow-hidden"
+    >
       {/* Safari-themed decorative elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl opacity-50 -z-10 transform translate-x-1/2 -translate-y-1/4"></div>
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-2xl opacity-50 -z-10 transform -translate-x-1/3 translate-y-1/4"></div>
       <div className="absolute top-1/3 left-1/4 w-12 h-12 pattern-animal-track transform rotate-12 opacity-50"></div>
       <div className="absolute bottom-1/3 right-1/4 w-16 h-16 pattern-animal-track transform -rotate-15 opacity-30"></div>
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Animation type="fade-up">
           {/* Premium section title with safari styling */}
           <div className="flex flex-col items-center mb-8 md:mb-10">
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 mt-1">JOIN OUR PORTFOLIO</span>
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 mt-1">
+              JOIN OUR PORTFOLIO
+            </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center max-w-3xl mx-auto leading-tight">
               Our Premier Safari Lodges
             </h2>
             <span className="block w-16 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-primary to-transparent mt-4 sm:mt-6"></span>
             <p className="mt-4 sm:mt-6 text-center max-w-2xl mx-auto text-foreground/70 text-sm sm:text-lg">
-              Discover our handpicked collection of luxury safari lodges, each offering a unique blend of comfort, adventure, and authentic African experiences.
+              Discover our handpicked collection of luxury safari lodges, each
+              offering a unique blend of comfort, adventure, and authentic
+              African experiences.
             </p>
+            <a
+              href="https://theshuricollection.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block px-6 py-3 bg-primary text-white font-medium rounded-md overflow-hidden transition-all duration-300 hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Explore The Shuri Collection
+              <svg
+                className="w-5 h-5 ml-2 inline transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </a>
           </div>
-          
+
           {/* Featured Lodge - Enhanced with premium effects */}
           <div className="mt-8 sm:mt-16 max-w-6xl mx-auto">
             <div className="relative rounded-xl overflow-hidden shadow-xl safari-image group">
               <div className="aspect-[16/10] sm:aspect-[16/9] relative">
                 {/* Placeholder gradient that shows while image is loading */}
-                <div className={`absolute inset-0 bg-gradient-to-b from-[#725540] to-[#3a2a1d] transition-opacity duration-500 ${
-                  imagesLoaded[activeIndex] ? 'opacity-0' : 'opacity-100'
-                }`}></div>
-                
+                <div
+                  className={`absolute inset-0 bg-gradient-to-b from-[#725540] to-[#3a2a1d] transition-opacity duration-500 ${
+                    imagesLoaded[activeIndex] ? 'opacity-0' : 'opacity-100'
+                  }`}
+                ></div>
+
                 <Image
                   src={currentLodge.image}
                   alt={currentLodge.name}
@@ -93,24 +138,39 @@ export default function Lodges() {
                   }`}
                   sizes="(max-width: 768px) 100vw, 1200px"
                   priority={activeIndex === 0}
-                  loading={activeIndex === 0 ? "eager" : "lazy"}
+                  loading={activeIndex === 0 ? 'eager' : 'lazy'}
                   onLoadingComplete={() => handleImageLoaded(activeIndex)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                
+
                 {/* Safari-themed decorative overlay */}
                 <div className="absolute inset-0 pattern-safari-stripes opacity-[0.03] mix-blend-overlay"></div>
               </div>
-              
+
               {/* Enhanced content display */}
               <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 md:p-8 text-white">
                 <h3 className="text-xl sm:text-2xl md:text-4xl font-serif font-bold text-shadow-lg mb-1 sm:mb-2 reveal-item">
                   {currentLodge.name}
                 </h3>
                 <div className="flex items-center reveal-item reveal-delay-1">
-                  <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <svg
+                    className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    ></path>
                   </svg>
                   <p className="text-white/90 font-medium text-shadow-sm text-xs sm:text-base">
                     {currentLodge.location}
@@ -119,22 +179,33 @@ export default function Lodges() {
                 <p className="mt-2 sm:mt-3 max-w-2xl text-white/80 text-shadow-sm text-xs sm:text-sm md:text-base hidden sm:block reveal-item reveal-delay-2">
                   {currentLodge.description}
                 </p>
-                
+
                 {/* Capacity badge */}
                 <div className="mt-3 hidden md:block">
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-white text-sm font-medium reveal-item reveal-delay-2">
-                    <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      className="w-4 h-4 mr-1.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                       <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     {currentLodge.capacity}
                   </span>
                 </div>
-                
+
                 {/* Features badges - enhanced styling */}
                 <div className="mt-4 flex flex-wrap gap-2 hidden md:flex reveal-item reveal-delay-3">
                   {currentLodge.highlights.map((feature, index) => (
-                    <span key={index} className="bg-white/10 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/20 transition-colors duration-300">
+                    <span
+                      key={index}
+                      className="bg-white/10 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/20 transition-colors duration-300"
+                    >
                       {feature}
                     </span>
                   ))}
@@ -150,22 +221,30 @@ export default function Lodges() {
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
               <div className="absolute top-0 left-0 w-full h-full pattern-dots opacity-[0.03]"></div>
-              
+
               {/* Paw print accent */}
               <div className="absolute bottom-4 right-4 w-16 h-16 text-primary/5">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><circle cx="16" cy="15" r="2"/><circle cx="8" cy="15" r="2"/><circle cx="21" cy="18" r="2"/><circle cx="3" cy="18" r="2"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z" />
+                  <circle cx="16" cy="15" r="2" />
+                  <circle cx="8" cy="15" r="2" />
+                  <circle cx="21" cy="18" r="2" />
+                  <circle cx="3" cy="18" r="2" />
+                </svg>
               </div>
-              
+
               <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
                 <div className="md:w-2/3">
                   <h3 className="text-xl md:text-2xl font-serif font-bold mb-4 text-foreground">
                     Interested in our lodge management services?
                   </h3>
                   <p className="text-foreground/80">
-                    Each lodge in our portfolio is selected for its exceptional quality, location, and commitment to sustainable tourism. 
-                    We provide tailored management and marketing solutions to maximize occupancy and guest satisfaction.
+                    Each lodge in our portfolio is selected for its exceptional
+                    quality, location, and commitment to sustainable tourism. We
+                    provide tailored management and marketing solutions to
+                    maximize occupancy and guest satisfaction.
                   </p>
-                  
+
                   {/* Quick highlights */}
                   <div className="mt-4 grid grid-cols-2 gap-3">
                     <div className="flex items-center text-sm text-foreground/80">
@@ -198,4 +277,4 @@ export default function Lodges() {
       </div>
     </section>
   );
-} 
+}
