@@ -141,9 +141,9 @@ async function processLeadSubmission(data: LeadFormData) {
     // Try to send email
     try {
       const mailer = nodemailer.createTransport({
-        host: process.env.SMTP_SERVER,
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        secure: process.env.SMTP_PORT === '465',
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT),
+        secure: Number(process.env.SMTP_PORT) === 465,
         auth: {
           user: process.env.SMTP_USERNAME,
           pass: process.env.SMTP_PASSWORD,
@@ -157,8 +157,9 @@ async function processLeadSubmission(data: LeadFormData) {
         .join(', ');
 
       await mailer.sendMail({
-        from: process.env.SMTP_USERNAME,
+        from: `"${process.env.SMTP_NAME}" <${process.env.SMTP_MAIL}>`,
         to: process.env.RECIPIENT_EMAIL || 'theshuricollection@gmail.com',
+        replyTo: process.env.SMTP_REPLY_TO,
         subject: 'New Shuri Management Lead Form Submission',
         text: `
           New Lead Form Submission from Shuri Management Website
