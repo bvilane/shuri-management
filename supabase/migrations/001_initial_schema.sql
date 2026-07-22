@@ -36,3 +36,8 @@ create table newsletter_subscribers (
 alter table contact_submissions enable row level security;
 alter table lead_submissions enable row level security;
 alter table newsletter_subscribers enable row level security;
+
+grant all on contact_submissions to service_role;
+grant all on lead_submissions to service_role;
+grant all on newsletter_subscribers to service_role;
+grant usage, select on all sequences in schema public to service_role;
