@@ -6,19 +6,15 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "lint": "next lint",
-    "start": "next start",
-    "deploy": "npx sst deploy --stage prod"
+    "start": "next start"
   },
   "dependencies": {
-    "@types/nodemailer": "^6.4.17",
-    "google-auth-library": "^9.15.1",
-    "google-spreadsheet": "^4.1.4",
+    "@supabase/supabase-js": "^2.110.0",
     "lucide-react": "^0.488.0",
-    "next": "15.2.4",
-    "nodemailer": "^6.10.1",
+    "next": "16.2.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sst": "3.13.14"
+    "resend": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -27,7 +23,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.2.4",
+    "eslint-config-next": "16.2.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
