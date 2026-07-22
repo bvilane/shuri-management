@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { resend, FROM_EMAIL, RECIPIENT_EMAIL } from '@/lib/resend';
+import { resend, FROM_ENQUIRY, RECIPIENT_EMAIL } from '@/lib/resend';
 import { getSupabase } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     await resend.emails.send({
-      from: FROM_EMAIL,
+      from: FROM_ENQUIRY,
       to: RECIPIENT_EMAIL,
       replyTo: data.email,
       subject: 'New Shuri Management Contact Form Submission',
