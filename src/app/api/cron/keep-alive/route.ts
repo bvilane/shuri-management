@@ -17,10 +17,16 @@ export async function GET(request: NextRequest) {
     return Response.json({ ok: false, error: 'Supabase not configured' }, { status: 500 });
   }
 
-  const { error } = await supabase.from('contact_submissions').select('id').limit(1);
-  if (error) {
-    console.error('Keep-alive query failed:', error);
-    return Response.json({ ok: false, error: error.message }, { status: 502 });
+  // One read per table: a single tiny query a day was not enough for Supabase to
+  // count the project as active (pause warning 2026-11-12).
+  const tables = ['contact_submissions', 'lead_submissions', 'newsletter_subscribers'];
+  const results = await Promise.all(
+    tables.map((table) => supabase.from(table).select('id').limit(1))
+  );
+  const failed = results.flatMap((r, i) => (r.error ? [`${tables[i]}: ${r.error.message}`] : []));
+  if (failed.length > 0) {
+    console.error('Keep-alive query failed:', failed);
+    return Response.json({ ok: false, errors: failed }, { status: 502 });
   }
 
   return Response.json({ ok: true, at: new Date().toISOString() });
