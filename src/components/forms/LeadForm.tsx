@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Animation from '@/components/ui/Animation';
 import Image from 'next/image';
+import { Check } from 'lucide-react';
 
 interface LeadFormProps {
   isOpen: boolean;
@@ -36,6 +37,8 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
       paidAds: false,
       guestExperience: false,
       monthlyStrategy: false,
+      reserveManagement: false,
+      safariTech: false,
       notSure: false,
     },
     // Step 2: Lodge info
@@ -191,8 +194,10 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          // The API reads `areas`; `areasOfInterest` is kept for compatibility
+          areas: formData.areas,
           areasOfInterest: Object.entries(formData.areas)
-            .filter(([key, value]) => value)
+            .filter(([, value]) => value)
             .map(([key]) => key),
           lodgeName: formData.lodgeName,
           location: formData.location,
@@ -252,6 +257,8 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
             paidAds: false,
             guestExperience: false,
             monthlyStrategy: false,
+            reserveManagement: false,
+            safariTech: false,
             notSure: false,
           },
           lodgeName: '',
@@ -355,7 +362,7 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
                     className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mb-1 sm:mb-2 transition-all duration-300 text-xs sm:text-base
                       ${i < step ? 'bg-primary text-white' : i === step ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-muted text-foreground/50'}`}
                   >
-                    {i < step ? '✓' : i}
+                    {i < step ? <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" /> : i}
                   </div>
                   <div className="relative w-full h-1">
                     <div
@@ -435,10 +442,22 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
                     label="Monthly Strategy Support"
                   />
                   <CheckboxItem
+                    id="reserveManagement"
+                    checked={formData.areas.reserveManagement}
+                    onChange={() => handleAreaChange('reserveManagement')}
+                    label="Reserve Management"
+                  />
+                  <CheckboxItem
+                    id="safariTech"
+                    checked={formData.areas.safariTech}
+                    onChange={() => handleAreaChange('safariTech')}
+                    label="Safari Tech (connectivity, security, tracking, software)"
+                  />
+                  <CheckboxItem
                     id="notSure"
                     checked={formData.areas.notSure}
                     onChange={() => handleAreaChange('notSure')}
-                    label="Not sure yet – I just want to chat"
+                    label="Not sure yet, I just want to chat"
                   />
                 </div>
               </div>
@@ -693,10 +712,10 @@ export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
                   </svg>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-4">
-                  Thanks! We'll take it from here.
+                  Thank you. We'll take it from here.
                 </h2>
                 <p className="text-base sm:text-lg text-foreground/70 max-w-lg mx-auto">
-                  We'll review your needs and get back to you within 24–48 hours
+                  We'll review your needs and get back to you within 24 hours
                   with a tailored proposal.
                 </p>
                 <p className="text-base sm:text-lg font-medium text-primary mt-6">
