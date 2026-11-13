@@ -1,6 +1,14 @@
 import { Resend } from 'resend';
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
+// Created on first use, not at import: the Resend constructor throws without a
+// key, which broke builds in environments that have none (Vercel previews).
+let _resend: Resend | null = null;
+export const resend = {
+  get emails() {
+    _resend ??= new Resend(process.env.RESEND_API_KEY);
+    return _resend.emails;
+  },
+};
 
 const SEND_DOMAIN = process.env.SEND_DOMAIN || 'send.shurimanagement.com';
 
