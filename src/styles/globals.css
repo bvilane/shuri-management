@@ -1,52 +1,48 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #fcfcfa;
-  --foreground: #171717;
+  /* Brand palette: warm ivory and sand, deep brown and earth */
+  --background: #faf6ef;
+  --foreground: #231b15;
   --primary: #825c40;
+  --primary-dark: #6b4a33;
   --secondary: #a78b71;
   --accent: #e5b167;
-  --muted: #f5f5f0;
-  --card: #ffffff;
-  --border: #e5e5e5;
-  
-  /* Enhanced alternating section background colors with stronger contrasts */
-  --bg-primary-light: #fefdfb;       /* Light cream/ivory - lighter - intensified */
-  --bg-primary-dark: #e1dbc9;        /* Light cream/ivory - darker - intensified */
-  
-  --bg-secondary-light: #faf8f5;     /* Soft warm beige - lighter - intensified */
-  --bg-secondary-mid: #e9dbc3;       /* Soft warm beige - middle tone - intensified */
-  --bg-secondary-dark: #d8c9ac;      /* Soft warm beige - darker - intensified */
-  
-  --bg-tertiary-light: #fcfaf8;      /* Warm eggshell - lighter - intensified */
-  --bg-tertiary-mid: #eeddc9;        /* Warm eggshell - middle tone - intensified */
-  --bg-tertiary-dark: #dfc8ad;       /* Warm eggshell - darker - intensified */
-  
-  --bg-accent-light: #faf7f0;        /* Sandy tan - lighter - intensified */
-  --bg-accent-dark: #d7c19d;         /* Sandy tan - darker - intensified */
-  
-  --bg-highlight-light: #fbfbf5;     /* Light khaki - lighter - intensified */
-  --bg-highlight-mid: #eae5d0;       /* Light khaki - middle tone - intensified */
-  --bg-highlight-dark: #d8d0b2;      /* Light khaki - darker - intensified */
+  --muted: #f3ece0;
+  --sand: #ece1cf;
+  --earth: #2e221a;
+  --card: #fffdf9;
+  --border: #e3d8c6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
+  --color-sand: var(--sand);
+  --color-earth: var(--earth);
   --color-card: var(--card);
   --color-border: var(--border);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-x: hidden;
 }
 
 h1,
@@ -56,596 +52,105 @@ h4,
 h5,
 h6 {
   font-family: var(--font-serif);
-  font-weight: 700;
-  line-height: 1.2;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
-.container {
+/* Offset in-page anchors for the sticky header */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Override Tailwind's breakpoint container with one fixed max width */
+@utility container {
   width: 100%;
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: 1rem;
-}
 
-@media (max-width: 640px) {
-  .container {
-    padding-inline: 1rem;
-  }
-  
-  h1 {
-    font-size: calc(1.75rem + 1vw);
-    line-height: 1.2;
-  }
-  
-  h2 {
-    font-size: calc(1.5rem + 0.5vw);
-    line-height: 1.25;
-  }
-  
-  h3 {
-    font-size: calc(1.25rem + 0.25vw);
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .container {
+  @media (min-width: 640px) {
     padding-inline: 1.5rem;
   }
-}
 
-@media (min-width: 769px) {
-  .container {
+  @media (min-width: 1024px) {
     padding-inline: 2rem;
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Long-form text (privacy policy, articles) */
+.prose-smg {
+  max-width: 44rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+.prose-smg > * + * {
+  margin-top: 1.1em;
 }
 
-.animate-delay-100 {
-  animation-delay: 100ms;
+.prose-smg h2 {
+  font-size: 1.6rem;
+  margin-top: 2.2em;
 }
 
-.animate-delay-200 {
-  animation-delay: 200ms;
+.prose-smg h3 {
+  font-size: 1.25rem;
+  margin-top: 1.8em;
 }
 
-.animate-delay-300 {
-  animation-delay: 300ms;
+.prose-smg ul {
+  list-style: disc;
+  padding-left: 1.25rem;
 }
 
-.texture-bg {
-  background-image: url('/images/texture-bg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.prose-smg ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
 }
 
-/* Text shadow for better visibility on transparent backgrounds */
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
+.prose-smg li + li {
+  margin-top: 0.4em;
 }
 
-/* Enhanced Section background classes with consistent light-to-dark gradients */
-.bg-section-1,
-.bg-section-2,
-.bg-section-3,
-.bg-section-4,
-.bg-section-5,
-.bg-section-textured-1,
-.bg-section-textured-2 {
-  background: linear-gradient(to bottom, 
-    rgba(255, 255, 255, 0.7) 0%, 
-    rgba(229, 217, 199, 0.8) 100%
-  );
+.prose-smg a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.bg-section-textured-1,
-.bg-section-textured-2 {
-  position: relative;
+.prose-smg blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
 }
 
-.bg-section-textured-1::after,
-.bg-section-textured-2::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('/images/texture-bg.png');
-  background-blend-mode: soft-light;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Modern Pattern Decorations */
-
-/* Subtle Diagonal Lines - Enhanced contrast */
-.pattern-diagonal-lines {
-  background-color: var(--background);
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(130, 92, 64, 0.8) 0,
-    rgba(130, 92, 64, 0.8) 1px,
-    transparent 0,
-    transparent 10px
-  );
-  background-size: 15px 15px;
-  background-repeat: repeat;
-}
-
-/* Dots Pattern */
-.pattern-dots {
-  background-color: transparent;
-  background-image: radial-gradient(
-    var(--primary) 1px,
-    transparent 1px
-  );
-  background-size: 20px 20px;
-  opacity: 0.1;
-}
-
-/* Safari Stripes */
-.pattern-safari-stripes {
-  background: repeating-linear-gradient(
-    -45deg,
-    var(--secondary) 0,
-    var(--secondary) 1px, 
-    transparent 1px,
-    transparent 6px
-  );
-  opacity: 0.06;
-}
-
-/* Hexagon Grid Pattern */
-.pattern-hexagons {
-  background-color: transparent;
-  background-image: 
-    linear-gradient(30deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
-    linear-gradient(150deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
-    linear-gradient(30deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
-    linear-gradient(150deg, var(--accent) 12%, transparent 12.5%, transparent 87%, var(--accent) 87.5%, var(--accent)),
-    linear-gradient(60deg, rgba(225, 177, 103, 0.25) 25%, transparent 25.5%, transparent 75%, rgba(225, 177, 103, 0.25) 75%, rgba(225, 177, 103, 0.25)),
-    linear-gradient(60deg, rgba(225, 177, 103, 0.25) 25%, transparent 25.5%, transparent 75%, rgba(225, 177, 103, 0.25) 75%, rgba(225, 177, 103, 0.25));
-  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
-  background-size: 40px 70px;
-  opacity: 0.05;
-}
-
-/* Crosses Pattern */
-.pattern-crosses {
-  background-color: transparent;
-  background-image: 
-    linear-gradient(var(--primary) 1px, transparent 1px),
-    linear-gradient(to right, var(--primary) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.05;
-}
-
-/* Safari Pattern - Animal Tracks */
-.pattern-animal-tracks {
-  background-color: transparent;
-  background-image: radial-gradient(
-    var(--primary) 2px,
-    transparent 2px
-  );
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 20px;
-  opacity: 0.04;
-}
-
-/* Modern Wave Pattern - Enhanced contrast */
-.pattern-waves {
-  background: linear-gradient(
-    45deg, 
-    transparent 48%, 
-    rgba(130, 92, 64, 0.9) 49%, 
-    rgba(130, 92, 64, 0.9) 51%, 
-    transparent 52%
-  );
-  background-size: 20px 20px;
-}
-
-/* Decorative corner patterns */
-.corner-pattern {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  pointer-events: none;
-}
-
-.corner-pattern-top-right {
-  top: 0;
-  right: 0;
-  background-image: radial-gradient(circle at top right, var(--primary) 2px, transparent 2px);
-  background-size: 30px 30px;
-  opacity: 0.07;
-  mask-image: linear-gradient(135deg, transparent 50%, black 50%);
-}
-
-.corner-pattern-bottom-left {
-  bottom: 0;
-  left: 0;
-  background-image: radial-gradient(circle at bottom left, var(--accent) 2px, transparent 2px);
-  background-size: 30px 30px;
-  opacity: 0.07;
-  mask-image: linear-gradient(315deg, transparent 50%, black 50%);
-}
-
-/* Horizontal line decorations */
-.line-pattern-horizontal {
-  position: relative;
-}
-
-.line-pattern-horizontal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(to right, transparent, var(--primary), transparent);
-}
-
-.line-pattern-horizontal::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(to right, transparent, var(--accent), transparent);
-}
-
-/* Safari-themed decorative elements */
-.safari-accent-border {
-  position: relative;
-  overflow: hidden;
-}
-
-.safari-accent-border::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 2px solid transparent;
-  border-image: linear-gradient(45deg, var(--primary), transparent 70%);
-  border-image-slice: 1;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Enhanced section transitions */
-.section-transition-top {
-  position: relative;
-  z-index: 2;
-}
-
-.section-transition-top::before {
-  content: "";
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f5f5f4' d='M0,32L80,42.7C160,53,320,75,480,74.7C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover;
-  background-position: center;
-}
-
-/* Safari-style reveal animations */
-@keyframes reveal-from-savanna {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.reveal-item {
-  animation: reveal-from-savanna 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-.reveal-delay-1 {
-  animation-delay: 0.1s;
-}
-
-.reveal-delay-2 {
-  animation-delay: 0.2s;
-}
-
-.reveal-delay-3 {
-  animation-delay: 0.3s;
-}
-
-/* Safari-themed scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--card);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--primary), var(--primary-dark, var(--primary)));
-  border-radius: 10px;
-  border: 2px solid var(--card);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
-/* Enhanced focus styles */
 *:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--primary-light, var(--primary)/20);
 }
 
-/* Immersive image effects */
-.safari-image {
-  position: relative;
-  overflow: hidden;
-  transform: perspective(1000px);
-  transition: transform 0.5s ease;
-}
-
-.safari-image:hover {
-  transform: perspective(1000px) rotateY(2deg) rotateX(1deg);
-}
-
-.safari-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
-  pointer-events: none;
-}
-
-/* Premium components styling */
-.premium-card {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--card) 0%, var(--card-dark, var(--card)) 100%);
-  border: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 
-    0 4px 6px -1px rgba(0,0,0,0.1),
-    0 2px 4px -2px rgba(0,0,0,0.05),
-    0 0 0 1px rgba(255,255,255,0.05) inset;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.premium-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 10px 15px -3px rgba(0,0,0,0.1),
-    0 4px 6px -4px rgba(0,0,0,0.05),
-    0 0 0 1px rgba(255,255,255,0.1) inset;
-}
-
-/* Safari-themed decorative patterns */
-.pattern-savanna-dots {
-  background-image: radial-gradient(var(--primary) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.05;
-}
-
-.pattern-animal-track {
-  position: relative;
-}
-
-.pattern-animal-track::before {
-  content: "";
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23663c00' opacity='0.1'%3E%3Cpath d='M12 1c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z'/%3E%3Ccircle cx='16' cy='15' r='2'/%3E%3Ccircle cx='8' cy='15' r='2'/%3E%3Ccircle cx='21' cy='18' r='2'/%3E%3Ccircle cx='3' cy='18' r='2'/%3E%3C/svg%3E");
-  opacity: 0.1;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Section separators */
-.section-separator {
-  position: relative;
-  margin-bottom: 0; /* Remove margin as we'll use the background gradient for visual separation */
-}
-
-/* Reduced spacing for sections */
-.reduced-spacing section {
-  padding-top: 28px;  /* Further reduced for better balance */
-  padding-bottom: 28px;
-  position: relative; /* Ensure position context for gradients */
-  z-index: 1;
-}
-
-.reduced-spacing .section-separator {
-  margin-bottom: 0; /* Remove default margin when using reduced-spacing */
-}
-
-/* Fix for gradient backgrounds with reduced spacing */
-.reduced-spacing .bg-section-1,
-.reduced-spacing .bg-section-2,
-.reduced-spacing .bg-section-3,
-.reduced-spacing .bg-section-4,
-.reduced-spacing .bg-section-5 {
-  position: relative;
-  z-index: 0;
-}
-
-.reduced-spacing .bg-section-1::before,
-.reduced-spacing .bg-section-2::before,
-.reduced-spacing .bg-section-3::before,
-.reduced-spacing .bg-section-4::before,
-.reduced-spacing .bg-section-5::before,
-.reduced-spacing .bg-section-textured-1::before,
-.reduced-spacing .bg-section-textured-2::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, 
-    rgba(255, 255, 255, 1) 0%, 
-    rgba(245, 240, 230, 0.9) 50%,
-    rgba(229, 217, 199, 0.8) 100%
-  );
-  z-index: 0;
-}
-
-.reduced-spacing .bg-section-textured-1,
-.reduced-spacing .bg-section-textured-2 {
-  position: relative;
-}
-
-.reduced-spacing .bg-section-textured-1::after,
-.reduced-spacing .bg-section-textured-2::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('/images/texture-bg.png');
-  background-blend-mode: soft-light;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Ensure component content is above gradients and patterns */
-.reduced-spacing section > div.container {
-  position: relative;
-  z-index: 10;
-}
-
-/* Ensure decorative elements appear above the gradient but below content */
-.reduced-spacing section [class*="pattern-"] {
-  z-index: 1;
-}
-
-.reduced-spacing section .corner-pattern {
-  z-index: 1;
-}
-
-/* Adjust internal spacing for elements within sections */
-.reduced-spacing .mt-24 {
-  margin-top: 64px; /* Reduce from 96px to 64px */
-}
-
-.reduced-spacing .mt-16 {
-  margin-top: 40px; /* Reduce from 64px to 40px */
-}
-
-.reduced-spacing .mt-12 {
-  margin-top: 28px; /* Reduce from 48px to 28px */
-}
-
-.reduced-spacing .py-24 {
-  padding-top: 36px;
-  padding-bottom: 36px;
-}
-
-/* Enhanced mobile optimization */
-@media (max-width: 480px) {
-  .reduced-spacing section {
-    padding-top: 28px;
-    padding-bottom: 28px;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  
-  .reduced-spacing .py-24 {
-    padding-top: 28px;
-    padding-bottom: 28px;
-  }
-  
-  .reduced-spacing .mt-24 {
-    margin-top: 48px;
-  }
-  
-  .reduced-spacing .mt-16 {
-    margin-top: 32px;
-  }
-  
-  .reduced-spacing .mt-12 {
-    margin-top: 24px;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Better small screen support for decorative elements */
+/* Prevent iOS zoom on form focus */
 @media (max-width: 640px) {
-  .corner-pattern {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .pattern-animal-tracks,
-  .pattern-dots,
-  .pattern-safari-stripes {
-    opacity: 0.05; /* Reduce pattern intensity on small screens */
-  }
-}
-
-/* Responsive fixes for image display */
-.responsive-image {
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* Improved vertical spacing for mobile */
-@media (max-width: 768px) {
-  .space-y-mobile > * + * {
-    margin-top: 1rem;
-  }
-  
-  .space-y-mobile-lg > * + * {
-    margin-top: 1.5rem;
-  }
-}
-
-/* Improved display for form elements on mobile */
-@media (max-width: 640px) {
-  input, 
-  select, 
-  textarea,
-  button[type="submit"] {
-    font-size: 16px !important; /* Prevent zoom on iOS */
-    padding: 0.75rem !important;
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }

@@ -1,275 +1,161 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import GetStartedButton from '@/components/ui/GetStartedButton';
+import { usePathname } from 'next/navigation';
+import { Menu, X, Mail, Phone } from 'lucide-react';
+import BookCallButton from '@/components/site/BookCallButton';
+import { NAV, EMAIL, PHONES } from '@/lib/site';
+
+function isActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export default function Header() {
+  const pathname = usePathname();
+  // The menu is open only for the path it was opened on, so navigating closes it
+  const [openedOn, setOpenedOn] = useState<string | null>(null);
+  const open = openedOn === pathname;
+  const setOpen = (next: boolean | ((v: boolean) => boolean)) => {
+    const value = typeof next === 'function' ? next(open) : next;
+    setOpenedOn(value ? pathname : null);
+  };
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolledPastHero, setScrolledPastHero] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-      
-      // Check if scrolled past hero section (screen height)
-      if (window.scrollY > window.innerHeight - 100) {
-        setScrolledPastHero(true);
-      } else {
-        setScrolledPastHero(false);
-      }
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenedOn(null);
     };
-
-    // Disable body scroll when mobile menu is open
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    window.addEventListener('scroll', handleScroll);
+    if (open) document.addEventListener('keydown', onKey);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
     };
-  }, [scrolled, mobileMenuOpen]);
+  }, [open]);
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300 ${
-        scrolled ? 'py-2 bg-white/80 backdrop-blur-sm shadow-md' : 'py-4'
+    <header
+      className={`sticky top-0 z-50 border-b bg-background transition-shadow ${
+        scrolled ? 'border-border shadow-[0_1px_12px_rgba(46,34,26,0.08)]' : 'border-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <Link href="/" className="inline-flex items-center">
-          <div className="flex items-center">
-            <div className={`relative h-11 w-auto sm:h-12 sm:w-auto transition-all duration-300 ${scrolled ? 'scale-95' : ''}`}>
-              <Image 
-                src="/images/smg.png" 
-                alt="SMG Logo" 
-                width={120}
-                height={35} 
-                className={`object-contain ${!scrolled ? 'brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]' : ''}`}
-                priority
-              />
-            </div>
-          </div>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[70] focus:bg-earth focus:px-4 focus:py-2 focus:text-white"
+      >
+        Skip to content
+      </a>
+      <div className="container flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+        <Link href="/" className="flex min-h-11 shrink-0 items-center" aria-label="Shuri Management Group home">
+          <Image
+            src="/images/smg.png"
+            alt="Shuri Management Group"
+            width={1250}
+            height={377}
+            priority
+            sizes="140px"
+            className="h-9 w-auto lg:h-10"
+          />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
-          <NavLink href="#about" light={!scrolled}>About</NavLink>
-          <NavLink href="#services" light={!scrolled}>Services</NavLink>
-          <NavLink href="#lodges" light={!scrolled}>Our Lodges</NavLink>
-          <NavLink href="#expertise" light={!scrolled}>Our Team</NavLink>
-          <NavLink href="#resources" light={!scrolled}>Resources</NavLink>
-          <NavLink href="#contact" light={!scrolled}>Contact</NavLink>
-          <GetStartedButton className={`whitespace-nowrap shadow-lg ml-1 font-sans ${!scrolled ? 'bg-[#8B6C4F] hover:bg-[#7A5E44] text-white border border-white/30' : ''}`}>
-            Book a Call
-          </GetStartedButton>
+        <nav aria-label="Main" className="hidden xl:block">
+          <ul className="flex items-center gap-6">
+            {NAV.map((item) => {
+              const active = isActive(pathname, item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={`inline-flex min-h-11 items-center border-b-2 text-[0.93rem] font-medium transition-colors ${
+                      active
+                        ? 'border-primary text-primary'
+                        : 'border-transparent text-foreground/80 hover:text-primary'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className={`md:hidden relative z-[60] transition-all duration-300 p-2.5 rounded-lg ${scrolled ? 'bg-primary' : 'bg-[#8B6C4F]'} shadow-lg hover:shadow-xl flex items-center justify-center ${mobileMenuOpen ? 'opacity-0' : ''} ${scrolled ? 'h-11 w-11' : 'h-11 w-11'}`}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <div className={`w-6 h-5 flex flex-col justify-between relative transition-all duration-300 ${scrolled ? 'scale-90' : ''}`}>
-            <span className="block h-0.5 w-full bg-white transition-all duration-300 origin-left"></span>
-            <span className="block h-0.5 w-3/4 bg-white transition-all duration-300"></span>
-            <span className="block h-0.5 w-1/2 bg-white transition-all duration-300 origin-right ml-auto"></span>
-          </div>
-        </button>
+        <div className="flex items-center gap-2">
+          <BookCallButton className="hidden sm:inline-flex">Book a call</BookCallButton>
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-earth hover:bg-sand xl:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
-      {/* Full-screen Mobile Navigation Menu */}
+      {/* Mobile and tablet menu */}
       <div
-        className={`md:hidden fixed inset-0 w-screen h-screen bg-white/90 backdrop-blur-md shadow-xl transition-all duration-500 ease-in-out z-[55] overflow-auto ${
-          mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`}
+        id="mobile-menu"
+        hidden={!open}
+        className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t border-border bg-background lg:top-[4.5rem] xl:hidden"
       >
-        <div className="min-h-full flex flex-col">
-          {/* Mobile menu header with logo - Increased height to match menu */}
-          <div className="border-b border-primary/20 py-3 px-5 bg-gradient-to-r from-primary/15 via-primary/10 to-transparent backdrop-blur-md">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="relative h-11 w-auto">
-                  <Image 
-                    src="/images/smg.png" 
-                    alt="SMG Logo" 
-                    width={110}
-                    height={32} 
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-lg bg-primary shadow-md hover:shadow-lg transition-all duration-300 h-11 w-11 flex items-center justify-center"
-                aria-label="Close menu"
+        <nav aria-label="Mobile" className="container py-6">
+          <ul className="divide-y divide-border border-y border-border">
+            <li>
+              <Link
+                href="/"
+                aria-current={pathname === '/' ? 'page' : undefined}
+                className={`flex min-h-14 items-center font-serif text-xl ${
+                  pathname === '/' ? 'text-primary' : 'text-earth'
+                }`}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
+                Home
+              </Link>
+            </li>
+            {NAV.map((item) => {
+              const active = isActive(pathname, item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={`flex min-h-14 items-center font-serif text-xl ${
+                      active ? 'text-primary' : 'text-earth'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <BookCallButton className="mt-8 w-full" onClick={() => setOpen(false)}>
+            Book a call
+          </BookCallButton>
+          <div className="mt-8 space-y-1 text-foreground/80">
+            <a href={`mailto:${EMAIL}`} className="flex min-h-11 items-center gap-3">
+              <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
+              {EMAIL}
+            </a>
+            <a href={PHONES[0].href} className="flex min-h-11 items-center gap-3">
+              <Phone className="h-4 w-4 text-primary" aria-hidden="true" />
+              {PHONES[0].display}
+            </a>
           </div>
-          
-          {/* Mobile menu links - Reduced spacing */}
-          <nav className="flex-1 overflow-y-auto py-3 px-4 sm:px-5 bg-white/80 backdrop-blur-md">
-            <div className="flex flex-col gap-2 mb-1">
-              <div className="py-1 px-2 font-medium text-sm uppercase tracking-wider text-primary/70 font-sans">Main Navigation</div>
-              <MobileNavLink href="#about" onClick={() => setMobileMenuOpen(false)} icon="info">
-                About
-              </MobileNavLink>
-              <MobileNavLink href="#services" onClick={() => setMobileMenuOpen(false)} icon="services">
-                Services
-              </MobileNavLink>
-              <MobileNavLink href="#lodges" onClick={() => setMobileMenuOpen(false)} icon="home">
-                Our Lodges
-              </MobileNavLink>
-              
-              <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent my-1"></div>
-              <div className="py-1 px-2 font-medium text-sm uppercase tracking-wider text-primary/70 font-sans">Company</div>
-              
-              <MobileNavLink href="#expertise" onClick={() => setMobileMenuOpen(false)} icon="users">
-                Our Team
-              </MobileNavLink>
-              <MobileNavLink href="#resources" onClick={() => setMobileMenuOpen(false)} icon="book">
-                Resources
-              </MobileNavLink>
-              <MobileNavLink href="#contact" onClick={() => setMobileMenuOpen(false)} icon="mail">
-                Contact
-              </MobileNavLink>
-              
-              {/* Call to action button - Positioned within scrollable area */}
-              <div className="mt-6 mb-4 px-2">
-                <div className="border-t border-primary/20 pt-4 pb-2">
-                  <GetStartedButton className="w-full py-3 text-center text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98] font-sans">
-                    Book a Call
-                  </GetStartedButton>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+        </nav>
       </div>
     </header>
-  );
-}
-
-function NavLink({
-  href,
-  children,
-  light = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  light?: boolean;
-}) {
-  return (
-    <Link
-      href={href}
-      className={`font-medium transition duration-300 hover:underline underline-offset-4 decoration-2 font-sans ${
-        light 
-          ? 'text-white hover:text-white/90 decoration-white/50 drop-shadow-[0_2px_4px_rgba(0,0,0,0.75)] text-shadow' 
-          : 'text-foreground hover:text-primary decoration-primary/50'
-      }`}
-    >
-      {children}
-    </Link>
-  );
-}
-
-function MobileNavLink({
-  href,
-  onClick,
-  children,
-  icon,
-}: {
-  href: string;
-  onClick: () => void;
-  children: React.ReactNode;
-  icon: string;
-}) {
-  const icons = {
-    info: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    services: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    home: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-      </svg>
-    ),
-    testimonials: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-      </svg>
-    ),
-    users: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    ),
-    book: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    ),
-    mail: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-  };
-
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="group mb-1.5"
-    >
-      <div className="relative overflow-hidden rounded-xl bg-white/60 backdrop-blur-sm border border-primary/10 shadow-md hover:shadow-lg transition-all duration-300">
-        
-        <div className="relative p-2.5 sm:p-3 flex items-center gap-3 sm:gap-4">
-          {/* Icon container with glow effect */}
-          <div className="relative flex-shrink-0">
-            <div className="absolute inset-0 bg-primary/20 rounded-full blur-md transform scale-110"></div>
-            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner text-primary/90 group-hover:text-primary transition-colors duration-300 border border-primary/20">
-              {icons[icon as keyof typeof icons]}
-            </div>
-          </div>
-          
-          {/* Text container */}
-          <div className="flex flex-col flex-1 min-w-0">
-            <span className="text-base sm:text-lg font-medium text-primary inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans tracking-wide truncate">
-              {children}
-            </span>
-          </div>
-          
-          {/* Right arrow indicator */}
-          <div className="text-primary/40 group-hover:text-primary/70 transition-colors duration-300 transform translate-x-0 group-hover:translate-x-1 flex-shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </Link>
   );
 }
